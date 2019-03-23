@@ -1,7 +1,7 @@
 module.exports = {
     base: '/',
-    title: 'Jack Wen Blog',
-    description: 'Jack Wen Blog',
+    title: '温万龙的博客',
+    description: '前期追深度，否则会华而不实,后期追广度，否则会坐井观天',
     head: [
         ['link', {rel: 'icon', href: `/favicon.png`}]
     ],
