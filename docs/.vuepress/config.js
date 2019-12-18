@@ -11,7 +11,7 @@ module.exports = {
         sidebar: {
             '/notes/': getNotesSidebar('博文索引','程序员内功','技术栈博文'),
             '/change-logs/': getLogsSidebar("Changelog"),
-            '/notes/java/': getNotesJavaBaseSidebar('基础','进阶','框架')
+            '/java-base/': getJavaBaseSidebar('Java-基础篇'),
         }
     }                      
 }
@@ -39,7 +39,7 @@ function getNotesSidebar (groupA,groupB,groupC) {
             collapsable: false,
             sidebarDepth: 2,
             children: [
-                '/notes/temp/'
+              '/notes/temp/'
             ]
         }
       ]
@@ -59,32 +59,16 @@ function getLogsSidebar (groupA) {
     ]
 }
 
-function getNotesJavaBaseSidebar (groupA,groupB,groupC) {
+function getJavaBaseSidebar (groupA) {
     return [
         {
           title: groupA,
           collapsable: false,
           sidebarDepth: 2,
           children: [
-            '/base/00_helloworld',
-            '/base/01_关键字、标识符、注释'
+            'helloworld',
+            '关键字、标识符、注释'
           ]
-        },
-        {
-            title: groupB,
-            collapsable: false,
-            sidebarDepth: 2,
-            children: [
-              '/notes/temp/'
-            ]
-        },
-        {
-            title: groupC,
-            collapsable: false,
-            sidebarDepth: 2,
-            children: [
-                '/notes/temp/'
-            ]
         }
       ]
 }

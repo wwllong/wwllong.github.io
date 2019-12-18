@@ -13,7 +13,7 @@
 - [设计模式](./temp/)
 
 ## 技术栈
-- [Java](./java/base/00_helloworld.html)
+- [Java](../java-base/index.html)
 - [Python](./temp/)
 - [JavaScript](./temp/)
 - [Nodojs](./temp/)
