@@ -52,8 +52,8 @@ function getLogsSidebar (groupA) {
             collapsable: false,
             sidebarDepth: 2,
             children: [
-            '2019-03',
-            '2019-09'
+            '2019',
+            '2020'
             ]
         },
     ]
