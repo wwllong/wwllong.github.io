@@ -7,18 +7,18 @@
 
 ## 程序员内功
 
-- [数据结构与算法](./temp/)
+- [数据结构与算法](./datastru-algs/)
 - [计算机网络](./temp/)
 - [编程思想](./temp/)
 - [设计模式](./temp/)
 
 ## 技术栈
-- [Java](../java-base/index.html)
+- [Java](./java/)
 - [Python](./temp/)
 - [JavaScript](./temp/)
 - [Nodojs](./temp/)
 
-## 软技能
+## 其他
 
 
 

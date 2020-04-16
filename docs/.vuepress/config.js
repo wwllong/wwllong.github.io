@@ -9,14 +9,14 @@ module.exports = {
         nav: require('./nav/zh'),
         lastUpdated: '上次更新',
         sidebar: {
-            '/notes/': getNotesSidebar('博文索引','程序员内功','技术栈博文'),
+            '/notes/': getNotesSidebar('博文索引','程序员内功','技术栈','其他'),
             '/change-logs/': getLogsSidebar("Changelog"),
-            '/java-base/': getJavaBaseSidebar('Java-基础篇'),
+            '/java-base/': getJavaBaseSidebar('Java-基础篇（上）'),
         }
     }                      
 }
 
-function getNotesSidebar (groupA,groupB,groupC) {
+function getNotesSidebar (groupA,groupB,groupC,groupD) {
     return [
         {
           title: groupA,
@@ -31,7 +31,7 @@ function getNotesSidebar (groupA,groupB,groupC) {
             collapsable: false,
             sidebarDepth: 2,
             children: [
-              '/notes/temp/'
+              '/notes/datastru-algs/'
             ]
         },
         {
@@ -39,9 +39,18 @@ function getNotesSidebar (groupA,groupB,groupC) {
             collapsable: false,
             sidebarDepth: 2,
             children: [
+              '/notes/java/'
+            ]
+        },
+        {
+            title: groupD,
+            collapsable: false,
+            sidebarDepth: 2,
+            children: [
               '/notes/temp/'
             ]
         }
+        
       ]
 }
 
