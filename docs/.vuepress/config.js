@@ -9,14 +9,15 @@ module.exports = {
         nav: require('./nav/zh'),
         lastUpdated: '上次更新',
         sidebar: {
-            '/notes/': getNotesSidebar('博文索引','程序员内功','技术栈','其他'),
+            '/notes-guide/': getnotesGuideSidebar('博文索引','程序员内功','技术栈','其他'),
             '/change-logs/': getLogsSidebar("Changelog"),
-            '/java-base/': getJavaBaseSidebar('Java-基础篇（上）'),
+            '/java-base/': getJavaBaseSidebar("Java-基础篇（上）"),
+            '/git/': getGitSidebar("Git")
         }
     }                      
 }
 
-function getNotesSidebar (groupA,groupB,groupC,groupD) {
+function getnotesGuideSidebar (groupA,groupB,groupC,groupD) {
     return [
         {
           title: groupA,
@@ -31,7 +32,7 @@ function getNotesSidebar (groupA,groupB,groupC,groupD) {
             collapsable: false,
             sidebarDepth: 2,
             children: [
-              '/notes/datastru-algs/'
+              '/notes-guide/datastru-algs/'
             ]
         },
         {
@@ -39,7 +40,8 @@ function getNotesSidebar (groupA,groupB,groupC,groupD) {
             collapsable: false,
             sidebarDepth: 2,
             children: [
-              '/notes/java/'
+              '/notes-guide/java/',
+              '/notes-guide/git/'
             ]
         },
         {
@@ -47,7 +49,7 @@ function getNotesSidebar (groupA,groupB,groupC,groupD) {
             collapsable: false,
             sidebarDepth: 2,
             children: [
-              '/notes/temp/'
+              '/notes-guide/temp/'
             ]
         }
         
@@ -80,5 +82,21 @@ function getJavaBaseSidebar (groupA) {
           ]
         }
       ]
+}
+
+
+function getGitSidebar (groupA) {
+  return [
+      {
+        title: groupA,
+        collapsable: false,
+        sidebarDepth: 3,
+        children: [
+          '代码版本控制',
+          'Git简介和安装',
+          'Git WorkFlow'
+        ]
+      }
+    ]
 }
 

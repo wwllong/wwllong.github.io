@@ -1,7 +1,7 @@
 module.exports = [
   {
     text: '博文索引',
-    link: '/notes/',
+    link: '/notes-guide/',
   },
   {
     text: '在线资源',
