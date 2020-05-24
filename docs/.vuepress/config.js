@@ -12,7 +12,8 @@ module.exports = {
             '/notes-guide/': getnotesGuideSidebar('博文索引','程序员内功','技术栈','其他'),
             '/change-logs/': getLogsSidebar("Changelog"),
             '/java-base/': getJavaBaseSidebar("Java-基础篇（上）"),
-            '/git/': getGitSidebar("Git")
+            '/git/': getGitSidebar("Git"),
+            '/microservices/': getMicroservicesSidebar("微服务简介")
         }
     }                      
 }
@@ -41,7 +42,8 @@ function getnotesGuideSidebar (groupA,groupB,groupC,groupD) {
             sidebarDepth: 2,
             children: [
               '/notes-guide/java/',
-              '/notes-guide/git/'
+              '/notes-guide/git/',
+              '/notes-guide/microservices/'
             ]
         },
         {
@@ -84,7 +86,6 @@ function getJavaBaseSidebar (groupA) {
       ]
 }
 
-
 function getGitSidebar (groupA) {
   return [
       {
@@ -100,3 +101,18 @@ function getGitSidebar (groupA) {
     ]
 }
 
+
+function getMicroservicesSidebar(groupA){
+  return [
+    {
+      title: groupA,
+      collapsable: false,
+      sidebarDepth: 3,
+      children: [
+        '微服务简介',
+        'CAP定理和BASE理论',
+        '如何应对高并发'
+      ]
+    }
+  ]
+}
