@@ -13,7 +13,8 @@ module.exports = {
             '/change-logs/': getLogsSidebar("Changelog"),
             '/java-base/': getJavaBaseSidebar("Java-基础篇（上）"),
             '/git/': getGitSidebar("Git"),
-            '/microservices/': getMicroservicesSidebar("微服务简介")
+            '/microservices/': getMicroservicesSidebar("微服务简介"),
+            '/linux/': getLinuxSidebar("Linux")
         }
     }                      
 }
@@ -116,3 +117,17 @@ function getMicroservicesSidebar(groupA){
     }
   ]
 }
+
+function getLinuxSidebar(groupA){
+  return [
+    {
+      title: groupA,
+      collapsable: false,
+      sidebarDepth: 3,
+      children: [
+        'Linux简介'
+      ]
+    }
+  ]
+}
+
