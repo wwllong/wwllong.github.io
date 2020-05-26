@@ -44,7 +44,8 @@ function getnotesGuideSidebar (groupA,groupB,groupC,groupD) {
             children: [
               '/notes-guide/java/',
               '/notes-guide/git/',
-              '/notes-guide/microservices/'
+              '/notes-guide/microservices/',
+              '/notes-guide/linux/'
             ]
         },
         {
