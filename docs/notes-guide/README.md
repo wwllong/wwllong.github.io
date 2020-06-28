@@ -10,7 +10,7 @@
 - [数据结构与算法](./datastru-algs/)
 - [计算机网络](./temp/)
 - [编程思想](./temp/)
-- [设计模式](./temp/)
+- [设计模式](./design-patterns/)
 
 ## 技术栈
 - [Java](./java/)

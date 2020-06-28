@@ -9,17 +9,18 @@ module.exports = {
         nav: require('./nav/zh'),
         lastUpdated: '上次更新',
         sidebar: {
-            '/notes-guide/': getnotesGuideSidebar('博文索引','程序员内功','技术栈','其他'),
+            '/notes-guide/': getNotesGuideSidebar('博文索引','程序员内功','技术栈','其他'),
             '/change-logs/': getLogsSidebar("Changelog"),
             '/java-base/': getJavaBaseSidebar("Java-基础篇（上）"),
             '/git/': getGitSidebar("Git"),
             '/microservices/': getMicroservicesSidebar("微服务简介"),
-            '/linux/': getLinuxSidebar("Linux")
+            '/linux/': getLinuxSidebar("Linux"),
+            '/design-patterns/': getDesignPatternsSidebar("设计模式")
         }
     }                      
 }
 
-function getnotesGuideSidebar (groupA,groupB,groupC,groupD) {
+function getNotesGuideSidebar (groupA,groupB,groupC,groupD) {
     return [
         {
           title: groupA,
@@ -131,4 +132,18 @@ function getLinuxSidebar(groupA){
     }
   ]
 }
+
+function getDesignPatternsSidebar(groupA){
+  return [
+    {
+      title: groupA,
+      collapsable: false,
+      sidebarDepth: 3,
+      children: [
+        '1_监听模式'
+      ]
+    }
+  ]
+}
+
 
