@@ -35,7 +35,8 @@ function getNotesGuideSidebar (groupA,groupB,groupC,groupD) {
             collapsable: false,
             sidebarDepth: 2,
             children: [
-              '/notes-guide/datastru-algs/'
+              '/notes-guide/datastru-algs/',
+              '/notes-guide/design-patterns/'
             ]
         },
         {
@@ -140,7 +141,8 @@ function getDesignPatternsSidebar(groupA){
       collapsable: false,
       sidebarDepth: 3,
       children: [
-        '1_监听模式'
+        '1_监听模式',
+        '2_状态模式'
       ]
     }
   ]
