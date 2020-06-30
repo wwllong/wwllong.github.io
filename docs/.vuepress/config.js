@@ -99,6 +99,8 @@ function getGitSidebar (groupA) {
         children: [
           '代码版本控制',
           'Git简介和安装',
+          'Git配置SSH',
+          'TortoiseGit配置SSH',
           'Git WorkFlow'
         ]
       }
