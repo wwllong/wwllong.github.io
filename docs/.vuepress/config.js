@@ -144,7 +144,8 @@ function getDesignPatternsSidebar(groupA){
       sidebarDepth: 3,
       children: [
         '1_监听模式',
-        '2_状态模式'
+        '2_状态模式',
+        '3_中介模式'
       ]
     }
   ]
