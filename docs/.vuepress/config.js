@@ -15,7 +15,8 @@ module.exports = {
             '/git/': getGitSidebar("Git"),
             '/microservices/': getMicroservicesSidebar("微服务简介"),
             '/linux/': getLinuxSidebar("Linux"),
-            '/design-patterns/': getDesignPatternsSidebar("设计模式")
+            '/design-patterns/': getDesignPatternsSidebar("设计模式"),
+            '/python-base/': getPythonBaseSidebar("Python基础")
         }
     }                      
 }
@@ -47,7 +48,8 @@ function getNotesGuideSidebar (groupA,groupB,groupC,groupD) {
               '/notes-guide/java/',
               '/notes-guide/git/',
               '/notes-guide/microservices/',
-              '/notes-guide/linux/'
+              '/notes-guide/linux/',
+              '/notes-guide/python/'
             ]
         },
         {
@@ -145,10 +147,26 @@ function getDesignPatternsSidebar(groupA){
       children: [
         '1_监听模式',
         '2_状态模式',
-        '3_中介模式'
+        '3_中介模式',
+        '4_装饰模式'
       ]
     }
   ]
+}
+
+function getPythonBaseSidebar (groupA) {
+  return [
+      {
+        title: groupA,
+        collapsable: false,
+        sidebarDepth: 2,
+        children: [
+          'Python简介',
+          'Python基础语法',
+          'Python中的装饰器'
+        ]
+      }
+    ]
 }
 
 

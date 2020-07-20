@@ -15,7 +15,7 @@
 ## 技术栈
 - [Java](./java/)
 - [Git](./git/)
-- [Python](./temp/)
+- [Python](./python/)
 - [JavaScript](./temp/)
 - [Nodojs](./temp/)
 
