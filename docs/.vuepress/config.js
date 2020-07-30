@@ -148,7 +148,8 @@ function getDesignPatternsSidebar(groupA){
         '1_监听模式',
         '2_状态模式',
         '3_中介模式',
-        '4_装饰模式'
+        '4_装饰模式',
+        '5_单例模式'
       ]
     }
   ]
