@@ -2,3 +2,5 @@ node_modules
 /docs/.vuepress/dist
 y
 y.pub
+package.json
+yarn.lock
