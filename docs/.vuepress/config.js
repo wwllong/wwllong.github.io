@@ -164,7 +164,8 @@ function getPythonBaseSidebar (groupA) {
         children: [
           'Python简介',
           'Python基础语法',
-          'Python中的装饰器'
+          'Python中的装饰器',
+          'Python中new、init和call的用法'
         ]
       }
     ]
