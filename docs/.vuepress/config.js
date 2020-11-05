@@ -6,6 +6,7 @@ module.exports = {
         ['link', {rel: 'icon', href: `/favicon.png`}]
     ],
     themeConfig: {
+        logo: '/favicon.png',
         nav: require('./nav/zh'),
         lastUpdated: '上次更新',
         sidebar: {
@@ -16,17 +17,26 @@ module.exports = {
             '/microservices/': getMicroservicesSidebar("微服务简介"),
             '/linux/': getLinuxSidebar("Linux"),
             '/design-patterns/': getDesignPatternsSidebar("设计模式"),
-            '/python-base/': getPythonBaseSidebar("Python基础")
-        }
-    }                      
+        // //     '/python-base/': getPythonBaseSidebar("Python基础")
+        },
+        nextLinks: true,
+        prevLinks: false
+    }
+    // ,
+    // markdown: {
+    //   extendMarkdown: md => {
+    //     md.use(require("markdown-it-disable-url-encode"));
+    //   }
+    // }                
 }
 
+/** 首页指引 */
 function getNotesGuideSidebar (groupA,groupB,groupC,groupD) {
     return [
         {
           title: groupA,
           collapsable: false,
-          sidebarDepth: 2,
+          sidebarDepth: 1,
           children: [
             ''
           ]
@@ -34,7 +44,7 @@ function getNotesGuideSidebar (groupA,groupB,groupC,groupD) {
         {
             title: groupB,
             collapsable: false,
-            sidebarDepth: 2,
+            sidebarDepth: 1,
             children: [
               '/notes-guide/datastru-algs/',
               '/notes-guide/design-patterns/'
@@ -43,7 +53,7 @@ function getNotesGuideSidebar (groupA,groupB,groupC,groupD) {
         {
             title: groupC,
             collapsable: false,
-            sidebarDepth: 2,
+            sidebarDepth: 1,
             children: [
               '/notes-guide/java/',
               '/notes-guide/git/',
@@ -55,7 +65,7 @@ function getNotesGuideSidebar (groupA,groupB,groupC,groupD) {
         {
             title: groupD,
             collapsable: false,
-            sidebarDepth: 2,
+            sidebarDepth: 1,
             children: [
               '/notes-guide/temp/'
             ]
@@ -64,12 +74,13 @@ function getNotesGuideSidebar (groupA,groupB,groupC,groupD) {
       ]
 }
 
+/** 博客日志 */
 function getLogsSidebar (groupA) {
     return [
         {
             title: groupA,
             collapsable: false,
-            sidebarDepth: 2,
+            sidebarDepth: 1,
             children: [
             '2019',
             '2020'
@@ -78,6 +89,7 @@ function getLogsSidebar (groupA) {
     ]
 }
 
+/** java基础 */
 function getJavaBaseSidebar (groupA) {
     return [
         {
@@ -86,76 +98,80 @@ function getJavaBaseSidebar (groupA) {
           sidebarDepth: 2,
           children: [
             'helloworld',
-            '关键字、标识符、注释'
+            ['keywords-identifiers','关键字和标识符']
           ]
         }
       ]
 }
 
+/** git */
 function getGitSidebar (groupA) {
   return [
       {
         title: groupA,
         collapsable: false,
-        sidebarDepth: 3,
+        sidebarDepth: 1,
         children: [
-          '代码版本控制',
-          'Git简介和安装',
-          'Git配置SSH',
-          'TortoiseGit配置SSH',
-          'Git WorkFlow'
+          ['code-version-control','代码版本控制'],
+          ['git-introduciton-install','Git简介和安装'],
+          ['git-configure-ssh','Git配置SSH'],
+          ['tortoiseGit-configure-ssh','TortoiseGit配置SSH'],
+          'git-workFlow'
         ]
       }
     ]
 }
 
-
+/** 微服务简介 */
 function getMicroservicesSidebar(groupA){
   return [
     {
       title: groupA,
       collapsable: false,
-      sidebarDepth: 3,
+      sidebarDepth: 1,
       children: [
-        '微服务简介',
-        'CAP定理和BASE理论',
-        '如何应对高并发'
+        ['micrservice-introduction','微服务简介'],
+        ['micrservice-CAP-BASE','CAP定理和BASE理论'],
+        ['micrservice-high-concurrency','如何应对高并发']
       ]
     }
   ]
 }
 
+/** Linux */
 function getLinuxSidebar(groupA){
   return [
     {
       title: groupA,
       collapsable: false,
-      sidebarDepth: 3,
+      sidebarDepth: 1,
       children: [
-        'Linux简介'
+        ['linux-introduction','Linux简介']
       ]
     }
   ]
 }
 
+/** 设计模式 */
 function getDesignPatternsSidebar(groupA){
   return [
     {
       title: groupA,
       collapsable: false,
-      sidebarDepth: 3,
+      sidebarDepth: 1,
       children: [
-        '1_监听模式',
-        '2_状态模式',
-        '3_中介模式',
-        '4_装饰模式',
-        '5_单例模式',
-        '6_原型模式'
+        ['1_dp-monitor','监听模式'],
+        ['2_dp-state','状态模式'],
+        ['3_dp-intermediary','中介模式'],
+        ['4_dp-decorative','装饰模式'],
+        ['5_dp-singleton','单例模式'],
+        ['6_dp-clone','原型模式']
       ]
     }
   ]
 }
 
+/** python基础 */
 function getPythonBaseSidebar (groupA) {
   return [
       {
@@ -163,10 +179,10 @@ function getPythonBaseSidebar (groupA) {
         collapsable: false,
         sidebarDepth: 2,
         children: [
-          'Python简介',
-          'Python基础语法',
-          'Python中的装饰器',
-          'Python中new、init和call的用法'
+          ['py-introduction','Python简介'],
+          ['py-base-grammar','Python基础语法'],
+          ['py-decorator','Python中的装饰器'],
+          ['py-new-init-call','Python中new、init和call的用法']
         ]
       }
     ]
