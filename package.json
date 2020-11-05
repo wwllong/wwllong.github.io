@@ -4,10 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
-    "vuepress": "^1.0.0-alpha.44"
+    "vuepress": "^1.7.1"
   },
   "scripts": {
-    "docs:dev": "vuepress dev docs", 
+    "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
-  }
+  },
+  "repository": "https://github.com/wwllong/vuepress-blog.git",
+  "author": "wwllong18@163.com"
 }

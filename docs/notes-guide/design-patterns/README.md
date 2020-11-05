@@ -6,27 +6,27 @@
 
 ## 基础篇 - Python 实现
 
-- [监听模式](/design-patterns/1_监听模式.html)
+- [监听模式](/design-patterns/1_dp-monitor.html)
 
   在对象之间定义一种一对多的依赖关系，当这个对象状态发生改变时，所有依赖它的对象都会被通知并自动更新。
 
-- [状态模式](/design-patterns/2_状态模式.html)
+- [状态模式](/design-patterns/2_dp-state.html)
   
   一个对象在其内部状态发生改变的时候，其表现的行为和外在属性不一样，这个对象看上去就像改变了它的类型一样。
 
-- [中介模式](/design-patterns/3_中介模式.html)
+- [中介模式](/design-patterns/3_dp-intermediary.html)
   
   用一个中介对象来封装一系列的对象交互，中介对象使各对象不需要显式地相互引用，从而使其耦合松散，而且可以独立地改变它们之间的交互。
 
-- [装饰模式](/design-patterns/4_装饰模式.html)
+- [装饰模式](/design-patterns/4_dp-decorative.html)
   
   装饰模式能够动态地将额外的一些职责附加到一个对象。 装饰器为扩展功能提供了比生成子类的方式更灵活的选择。
 
-- [单例模式](/design-patterns/5_单例模式.html)
+- [单例模式](/design-patterns/5_dp-singleton.html)
   
   确保一个类只有一个实例，并且提供一个访问它的全局方法。
 
-- [原型模式](/design-patterns/6_原型模式.html)
+- [原型模式](/design-patterns/6_dp-clone.html)
   
   用于创建重复的对象，同时又能保证性能。
 
