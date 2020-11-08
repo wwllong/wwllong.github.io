@@ -17,7 +17,7 @@ module.exports = {
             '/microservices/': getMicroservicesSidebar("微服务简介"),
             '/linux/': getLinuxSidebar("Linux"),
             '/design-patterns/': getDesignPatternsSidebar("设计模式"),
-        // //     '/python-base/': getPythonBaseSidebar("Python基础")
+            '/python-base/': getPythonBaseSidebar("Python基础")
         },
         nextLinks: true,
         prevLinks: false

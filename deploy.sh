@@ -9,7 +9,7 @@ cd docs/.vuepress/dist
 
 #git init
 git add -A
-git commit -m '测试自动化'
+git commit -m '测试自动化2'
 
 # 如果发布到  https://<USERNAME>.github.io
 git push -f git@github.com:wwllong/wwllong.github.io.git master
