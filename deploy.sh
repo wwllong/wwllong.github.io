@@ -13,5 +13,6 @@ git commit -m '测试自动化'
 
 # 如果发布到  https://<USERNAME>.github.io
 git push -f git@github.com:wwllong/wwllong.github.io.git master
+git push -f https://gitee.com/wenwlon/wwllong.github.io.git master
 
 cd -
