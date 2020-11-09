@@ -182,7 +182,9 @@ function getPythonBaseSidebar (groupA) {
           ['py-introduction','Python简介'],
           ['py-base-grammar','Python基础语法'],
           ['py-decorator','Python中的装饰器'],
-          ['py-new-init-call','Python中new、init和call的用法']
+          ['py-new-init-call','Python中new、init和call的用法'],
+          ['py-type-isinstance','Python的内置函数type和isinstance'],
+          ['py-metaclass','Python中metaclass的原理']
         ]
       }
     ]
