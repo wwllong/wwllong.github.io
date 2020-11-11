@@ -53,7 +53,7 @@ elif [ $DEPLOY_MODEL = '-2' ] ; then
     echo "发布模式：只发布博客"
     echo "发布blog提交日志信息为：$2 ,构建生成静态文件，发布中......"
      # 构建
-    sudo yarn run docs:build
+    yarn run docs:build
     # 进入生成的构建文件夹，发布博客
     cd docs/.vuepress/dist
 
