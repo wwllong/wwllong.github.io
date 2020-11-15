@@ -167,7 +167,8 @@ function getDesignPatternsSidebar(groupA){
         ['5_dp-singleton','单例模式'],
         ['6_dp-clone','原型模式'],
         ['7_dp-duty','职责模式'],
-        ['8_dp-proxy','代理模式']
+        ['8_dp-proxy','代理模式'],
+        ['9_dp-facade','外观模式']
       ]
     }
   ]
