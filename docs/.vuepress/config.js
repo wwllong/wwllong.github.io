@@ -168,7 +168,8 @@ function getDesignPatternsSidebar(groupA){
         ['6_dp-clone','原型模式'],
         ['7_dp-duty','职责模式'],
         ['8_dp-proxy','代理模式'],
-        ['9_dp-facade','外观模式']
+        ['9_dp-facade','外观模式'],
+        ['10_dp-iterator','迭代器模式']
       ]
     }
   ]
@@ -187,7 +188,8 @@ function getPythonBaseSidebar (groupA) {
           ['py-decorator','Python中的装饰器'],
           ['py-new-init-call','Python中new、init和call的用法'],
           ['py-type-isinstance','Python的内置函数type和isinstance'],
-          ['py-metaclass','Python中metaclass的原理']
+          ['py-metaclass','Python中metaclass的原理'],
+          ['py-iterator','Python中的迭代器']
         ]
       }
     ]
