@@ -170,7 +170,8 @@ function getDesignPatternsSidebar(groupA){
         ['8_dp-proxy','代理模式'],
         ['9_dp-facade','外观模式'],
         ['10_dp-iterator','迭代器模式'],
-        ['11_dp-composite','组合模式']
+        ['11_dp-composite','组合模式'],
+        ['12_dp-builder','构建模式']
       ]
     }
   ]
