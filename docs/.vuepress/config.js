@@ -172,7 +172,8 @@ function getDesignPatternsSidebar(groupA){
         ['10_dp-iterator','迭代器模式'],
         ['11_dp-composite','组合模式'],
         ['12_dp-builder','构建模式'],
-        ['13_dp-adapter','适配模式']
+        ['13_dp-adapter','适配模式'],
+        ['13_dp-strategy','策略模式']
       ]
     }
   ]
