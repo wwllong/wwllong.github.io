@@ -174,7 +174,8 @@ function getDesignPatternsSidebar(groupA){
         ['12_dp-builder','构建模式'],
         ['13_dp-adapter','适配模式'],
         ['14_dp-strategy','策略模式'],
-        ['15_dp-factory','工厂模式']
+        ['15_dp-factory','工厂模式'],
+        ['16_dp-command','命令模式']
       ]
     }
   ]
