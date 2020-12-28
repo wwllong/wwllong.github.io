@@ -175,7 +175,8 @@ function getDesignPatternsSidebar(groupA){
         ['13_dp-adapter','适配模式'],
         ['14_dp-strategy','策略模式'],
         ['15_dp-factory','工厂模式'],
-        ['16_dp-command','命令模式']
+        ['16_dp-command','命令模式'],
+        ['17_dp-memento','备忘模式']
       ]
     }
   ]
