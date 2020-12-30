@@ -97,8 +97,9 @@ function getJavaBaseSidebar (groupA) {
           collapsable: false,
           sidebarDepth: 2,
           children: [
-            'helloworld',
-            ['keywords-identifiers','关键字和标识符']
+            '1-helloworld',
+            ['2-kws-ident-notes','关键字、标识符、注释'],
+            ['3-constant-hexconv','常量和进制的运算']
           ]
         }
       ]
