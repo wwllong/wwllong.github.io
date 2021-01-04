@@ -83,7 +83,8 @@ function getLogsSidebar (groupA) {
             sidebarDepth: 1,
             children: [
             '2019',
-            '2020'
+            '2020',
+            '2021'
             ]
         },
     ]
@@ -178,7 +179,8 @@ function getDesignPatternsSidebar(groupA){
         ['14_dp-strategy','策略模式'],
         ['15_dp-factory','工厂模式'],
         ['16_dp-command','命令模式'],
-        ['17_dp-memento','备忘模式']
+        ['17_dp-memento','备忘模式'],
+        ['18_dp-flyweight','享元模式']
       ]
     }
   ]
