@@ -180,7 +180,8 @@ function getDesignPatternsSidebar(groupA){
         ['15_dp-factory','工厂模式'],
         ['16_dp-command','命令模式'],
         ['17_dp-memento','备忘模式'],
-        ['18_dp-flyweight','享元模式']
+        ['18_dp-flyweight','享元模式'],
+        ['19_dp-visitor','访问模式']
       ]
     }
   ]
