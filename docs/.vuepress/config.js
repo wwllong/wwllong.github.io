@@ -16,7 +16,7 @@ module.exports = {
             '/git/': getGitSidebar("Git"),
             '/microservices/': getMicroservicesSidebar("微服务简介"),
             '/linux/': getLinuxSidebar("Linux"),
-            '/design-patterns/': getDesignPatternsSidebar("设计模式"),
+            '/design-patterns-base/': getDesignPatternsSidebar("设计模式"),
             '/python-base/': getPythonBaseSidebar("Python基础")
         },
         nextLinks: true,
@@ -183,7 +183,8 @@ function getDesignPatternsSidebar(groupA){
         ['18_dp-flyweight','享元模式'],
         ['19_dp-visitor','访问模式'],
         ['20_dp-template','模板模式'],
-        ['21_dp-bridge','桥接模式']
+        ['21_dp-bridge','桥接模式'],
+        ['22_dp-interpreter','解释模式']
       ]
     }
   ]
