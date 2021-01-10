@@ -199,7 +199,8 @@ function getDesignPatternsAdvancedSidebar(groupA){
       collapsable: false,
       sidebarDepth: 1,
       children: [
-        ['1_dp-filter','过滤模式']
+        ['1_dp-filter','过滤模式'],
+        ['2_dp-objectpool','对象池技术']
       ]
     }
   ]
