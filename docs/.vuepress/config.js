@@ -16,7 +16,8 @@ module.exports = {
             '/git/': getGitSidebar("Git"),
             '/microservices/': getMicroservicesSidebar("微服务简介"),
             '/linux/': getLinuxSidebar("Linux"),
-            '/design-patterns-base/': getDesignPatternsSidebar("设计模式"),
+            '/design-patterns-base/': getDesignPatternsSidebar("设计模式-基础"),
+            '/design-patterns-advanced/': getDesignPatternsAdvancedSidebar("设计模式-进阶"),
             '/python-base/': getPythonBaseSidebar("Python基础")
         },
         nextLinks: true,
@@ -155,7 +156,7 @@ function getLinuxSidebar(groupA){
   ]
 }
 
-/** 设计模式 */
+/** 设计模式-基础 */
 function getDesignPatternsSidebar(groupA){
   return [
     {
@@ -189,6 +190,21 @@ function getDesignPatternsSidebar(groupA){
     }
   ]
 }
+
+/** 设计模式-进阶 */
+function getDesignPatternsAdvancedSidebar(groupA){
+  return [
+    {
+      title: groupA,
+      collapsable: false,
+      sidebarDepth: 1,
+      children: [
+        ['1_dp-filter','过滤模式']
+      ]
+    }
+  ]
+}
+
 
 /** python基础 */
 function getPythonBaseSidebar (groupA) {

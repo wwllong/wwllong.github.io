@@ -6,13 +6,13 @@
 
 
 
-### 与职责模式的联系
-
-
-
 ## 过滤模式的核心思想
 
 过滤器模式的核心思想就是把不需要的信息过滤掉，通过指定规则来判定哪些是不需要的信息，指定的规则可以称为过滤器，它是对数据流进行操作的。
+
+### 与职责模式的联系
+
+过滤器模式与责任链模式的相似之处是处理过程都一环一环地进行，不同之处在于责任链中责任的传递一般会有一定的顺序，而过滤器通常没有这种顺序，所以**过滤器比责任链简单**。当然，过滤器也可以按照职责模式的方式来实现，这时我们认为每一次的过滤都是一种职责（一个任务），而整个过滤流程是一种特殊的链。
 
 
 
@@ -21,284 +21,245 @@
 制作一杯鲜纯细腻的豆浆:
 
 ``` python
-# 过滤模式-智能热水器
+# 过滤模式 - 制作一杯鲜纯细腻的豆浆
+class FilterScreen:
+    """过滤网"""
 
-from abc import ABCMeta, abstractmethod
-# 引入ABCMeta 和 abstractmethod 来定义抽象类和抽象方法
-
-class WaterHeater:
-    """热水器：战胜寒冬的有利武器"""
-
-    def __init__(self):
-        self.__observers = []  # 观察者，私有成员
-        self.__temperature = 25  # 温度默认25，私有成员
-
-    def getTemperature(self):
-        return self.__temperature
-
-    def setTemperature(self, temperature):
-        self.__temperature = temperature;
-        print("当前温度是：" + str(self.__temperature) + "℃")
-        self.notifies()
-
-    def addObserver(self, observer):
-        self.__observers.append(observer)
-
-    def notifies(self):
-        for o in self.__observers:
-            o.update(self)
+    def doFilter(self, rawMaterials):
+        for material in rawMaterials:
+            if (material == "豆渣"):
+                rawMaterials.remove(material)
+        return rawMaterials
 
 
-class Observer(metaclass=ABCMeta):
-    """洗澡模式和饮用模式的父类"""
-
-    @abstractmethod
-    def update(self, waterHeater):
-        pass
-
-
-class WashingMode(Observer):
-    """洗澡模式"""
-
-    def update(self, waterHeater):
-        if 50 <= waterHeater.getTemperature() < 70:
-            print("水已烧好！温度正好，可以用来洗澡了。")
+def testFilterScreen():
+    rawMaterials = ["豆浆", "豆渣"]
+    print("过滤前：", rawMaterials)
+    filter = FilterScreen()
+    filteredMaterials = filter.doFilter(rawMaterials)
+    print("过滤后：",filteredMaterials)
 
 
-class DrinkingMode(Observer):
-    """饮用模式"""
+if __name__ == '__main__':
+    testFilterScreen()
 
-    def update(self, waterHeater):
-        if waterHeater.getTemperature() >= 100:
-            print("水已烧开！可以用来饮用了。")
-
-
-# test
-def testWaterHeater():
-    heater = WaterHeater()
-    washingObser = WashingMode()
-    drinkingObser = DrinkingMode()
-    heater.addObserver(washingObser)
-    heater.addObserver(drinkingObser)
-    heater.setTemperature(40)
-    heater.setTemperature(60)
-    heater.setTemperature(100)
-
-
-if __name__ == "__main__":
-    testWaterHeater()
-
-""""
-当前温度是：40℃
-当前温度是：60℃
-水已烧好！温度正好，可以用来洗澡了。
-当前温度是：100℃
-水已烧开！可以用来饮用了。
 """
-
+过滤前： ['豆浆', '豆渣']
+过滤后： ['豆浆']
+"""
 ```
 
 除了制作豆浆，生活中还有很多例子用到过滤模式，比如在基建行业中，沙子是最重要的原材料之一。这些沙子很多是从江河中打捞上来的，但是打捞上来的不只有沙子，还有小石头和水。要得到颗粒均匀的沙子，就必须把水和石头过滤掉。
 
+使用Python自带的filter函数：
+
+```python
+# 使用python自带过滤函数
+def testFilter():
+    rawMaterials = ["豆浆", "豆渣"]
+    print("过滤前：", rawMaterials)
+    filteredMaterials = list(filter(lambda material: material == "豆浆", rawMaterials))
+    print("过滤后：", filteredMaterials)
+    
+"""
+过滤前： ['豆浆', '豆渣']
+过滤后： ['豆浆']
+"""
+```
+
+自带的filter函数不等同与过滤器模式：
+
+1. filter函数是面向过程编程，而过滤器模式是一种设计思想。
+
+2. filter函数只能对简单的数组中的对象过滤，对于一些更复杂的需求（例如对不符合要求的对象进行替换），filter函数难以应付。
+
+   
+
 ## 过滤模式的框架模型
 
-对上例的代码进行抽象，过滤模式的设计：
+对过滤模式进一步进行抽象，重构和优化得到过滤模式的设计：
 
 ### 类图和实现
 
-![监听模式](./imgs/monitoring_mode_uml.png)
+![监听模式](./imgs/filter_mode_frame.png)
 
-&emsp;&emsp;Observer是观察者的基类，它是一个抽象类；Observable是被观察者的基类，同样也是一个抽象类（不是抽象类的基类不是一个好基类）。
-- 被观察者：Observable抽取了所有被观察者的共性方法：
-  - 可以添加以及移除观察者的方法（addObserver、removeObserver）
-  - 用于当内容或者状态发生改变的时候通知被观察者的方法（notifyObserver）。
-- 观察者：Observer主要关注要执行的更新方法：
-  
-  - 只要被观察者有变化，被观察者就会自动调用update方法，所以观察者只要关注update实现即可。
+Filter：所有过滤器的抽象类，定义了统一的过滤接口doFilter（）。FilterA和FilterB是过滤器的实现类，一个类定义一个过滤规则。FilterChain：过滤器链，它可以包含多个过滤器，并管理这些过滤器，在过滤对象元素时，包含的每一个过滤器都会进行一次过滤。Target：要过滤的目标对象，一般是一个对象数组，如示例中的豆渣和豆浆。
 
 代码实现：
 ``` python
-# 过滤模式-框架模型
-
+# 过滤模式 - 代码框架
 from abc import ABCMeta, abstractmethod
-# 引入ABCMeta 和 abstractmethod 来定义抽象类和抽象方法
+# 引入ABCMeta和abstractmethod来定义抽象类和抽象方法
 
-class Observer(metaclass=ABCMeta):
-    """"观察者的基类"""
+
+class Filter(metaclass=ABCMeta):
+    """过滤器"""
 
     @abstractmethod
-    def update(self, observable, object):
+    def doFilter(self, elements):
+        """过滤方法"""
         pass
 
-class Observable:
-    """"被观察者的基类"""
+
+class FilterChain(Filter):
+    """过滤器链"""
 
     def __init__(self):
-        self.__observers = []
+        self._filters = []
 
-    def addObserver(self, observer):
-        self.__observers.append(observer)
+    def addFilter(self, filter):
+        self._filters.append(filter)
 
-    def removeObserver(self, observer):
-        self.__observers.remove(observer)
+    def removeFilter(self, filter):
+        self._filters.remove(filter)
 
-    def notifyObserver(self, object=0):
-        for o in self.__observers:
-            o.update(self, object)
+    def doFilter(self, elements):
+        for filter in self._filters:
+            elements = filter.doFilter(elements)
+        return elements
 ```
 
 
-### 基于框架实现
+### 示例基于框架实现
 ``` python
-class WaterHeater(Observable):
-    """"热水器：战胜寒冬的有利武器"""
-
-    def __init__(self):
-        super().__init__()
-        self.__temperature = 25
-
-    def setTemperature(self, temperature):
-        self.__temperature = temperature
-        print("当前温度是：" + str(self.__temperature) + "℃")
-        self.notifyObserver()
-
-    def getTemperature(self):
-        return self.__temperature
+# 过滤模式 - 制作一杯鲜纯细腻的豆浆,基于框架
+from filter_frame import Filter
 
 
-class WashingMode(Observer):
-    """该模式用于洗澡"""
+class FilterScreen(Filter):
+    """过滤网"""
 
-    def update(self, observable, object):
-        if isinstance(observable, WaterHeater) and 50 <= observable.getTemperature() < 70:
-            print("水已烧好！温度正好，可以用来洗澡了。")
+    def doFilter(self, elements):
+        for material in elements:
+            if (material == "豆渣"):
+                elements.remove(material)
+        return elements
 
 
-class DrinkingMode(Observer):
-    """饮用模式"""
 
-    def update(self, observable, object):
-        if isinstance(observable, WaterHeater) and observable.getTemperature() >= 100:
-            print("水已烧开！可以用来饮用了。")
+def testFilterScreen():
+    rawMaterials = ["豆浆", "豆渣"]
+    print("过滤前：", rawMaterials)
+    filter = FilterScreen()
+    filteredMaterials = filter.doFilter(rawMaterials)
+    print("过滤后：",filteredMaterials)
+
+
+if __name__ == '__main__':
+    testFilterScreen()
+
+"""
+过滤前： ['豆浆', '豆渣']
+过滤后： ['豆浆']
+"""
+
 ```
 
 ### 模型设计要点
 
-  在设计过滤模式的程序时候要注意以下几点：  
+过滤器模式中主要有三个角色：
 
-  - 明确谁是观察者谁是被观察者。观察者与被观察者往往是多对一的关系，一个被观察对象可以有多个过滤对象。
+1. 过滤的目标（Target）：即要被过滤的对象，通常是一个对象数组（对象列表）。
+2. 过滤器（Filter）：负责过滤不需要的对象，一般一个规则对应一个类。
+3. 过滤器链（FilterChain）：即过滤器的集合，负责管理和维护过滤器，用这个对象进行过滤时，它包含的每一个子过滤器都会进行一次过滤。这个类并不总是必要的，但如果有多个过滤器，有这个类将会带来极大的方便。
 
-  - 被观察者在发送广播通知的时候（状态改变），无须指定具体的观察者，观察者可以自己决定是否订阅主题的通知。  
+### 优缺点
 
-  - 被观察者至少要有添加过滤者、移除过滤者、通知过滤者的三个方法，观察者至少要有一个更新方法，即更新当前的内容，做出相应的处理。  
+优点：
 
-  - 添加和移除过滤者在不同的模型中可能会有不同的命名，比如：观察者模型中一般为addObserver/removeObserver；源/过滤器模型中一般为attach/detach；应用桌面编程可能是attachWindow/detachWindow或Register/UnRegister，无论名字是什么，其实他们的功能是相同的。
+1. 将对象的过滤、校验逻辑抽离出来，降低系统的复杂度。
+2. 过滤规则可实现重复利用。
 
-### 推模型和拉模型
+缺点：
 
-  根据侧重的功能，过滤模型可以分为推模型和拉模型。 
-
-  - 推模型：不管观察者是否需要，被观察者对象向观察者推送主题的详细信息，通常来说是主题对象全部或部分数据。一般在这种模型的实现中，被观察对象的部分或全部信息通过update(Object obj) 的obj参数传递 。 
-
-    > 某App的服务要在凌晨1:00开始进行维护，1:00-2:00所有服务都会暂停，这里就需要向所有的App客户端推送完整的消息通知：“本服务将在凌曾1:00开始进行维护，1:00-2:00所有服务暂停，感谢您的理解和支持！”。不管用户想不想知道，也不管用户会不会在这期间访问App，消息都需要被准确无误地发送到。
-
-  - 拉模型：被观察者在通知观察者的时候，只传递少量的信息。如果观察者需要更具体的信息，需要观察者主动从被观察者对象中拉取数据。一般在这种模型的实现中：被观察者对象的引用传递给update(Observable observable)的observable参数，观察者通过该引用获取数据。
-
-    > 如某App有新的版本推出，需要发送一个版本升级的通知消息，而这个消息通知只简单地列出版本号和下载地址，如果需要升级App，还需要调用下载接口去下载安装包完成升级。
+1. 性能较低，每个过滤器对每一个元素都会进行遍历。如果有n个元素，m个过滤器，则复杂度为O（mn）。
 
 
-&emsp;&emsp;**推模型和拉模型更多是语义和逻辑上的区别**。框架模型中的【update(self, observer, object)】同时支持推/拉模型。作为推模型，observer可以传空，推送的消息通过object传递；作为拉模型，observer和object都可以传递数据，或只传递observer，观察者需要具体信息时通过observer引用去取数据。
 
 ## 实战应用
 
-&emsp;&emsp;实战：账号异常登录检测和诊断机制。当账户异常登录时，会以短信或邮件的方式将登录信息发送给已经绑定的手机或邮箱。
-
-&emsp;&emsp;实战逻辑分析：登录异常就是登录状态的改变。服务器会记录你最近几次登录的时间、地区、IP地址，从而得知你常用的登录地址；如果哪次检测到你登录的地区与常用登录地区相差非常大，则认为是一次异常登录，而**短信和邮箱的发送机制可以认为是登录的过滤者，只要登录异常一出现就自动发送信息**。
-
-![登录异常检测机制的设计类图](./imgs/monitoring-mode-app.png)
+在互联网上发布信息时，经常被进行敏感词过滤；我们提交的表单信息以HTML的形式显示，会对一些特殊字符进行转换，这时我们就需要用过滤器模式对提交的信息进行过滤和处理。
 
 
 ``` python
-from monitoring_frame import Observable, Observer
-import time
+# 过滤模式应用 - 信息发布敏感词过滤
 
-# 导入时间处理模块
+import re
+# 引入正则表达式库
+from filter_frame import Filter, FilterChain
 
-class Account(Observable):
-    """用户账户"""
+
+class SensitiveFilter(Filter):
+    """敏感词过滤"""
 
     def __init__(self):
-        super().__init__()
-        self.__latestIp = {}  # 最后一次登陆的IP
-        self.__latestRegion = {}  # 最后一次登陆的地区
+        self.__sensitives = ["黄色", "台独", "贪污"]
 
-    def login(self, name, ip, time):
-        region = self.__getRegion(ip)
-        if self.__isLongDistance(name, region):
-            self.notifyObserver({"name": name, "ip": ip, "region": region, "time": time})
-        self.__latestRegion[name] = region
-        self.__latestIp[name] = ip
+    def doFilter(self, elements):
+        # 敏感词列表转换成正则表达式
+        regex = ""
+        for word in self.__sensitives:
+            regex += word + "|"
+        regex = regex[0: len(regex) - 1]
 
-    def __getRegion(self, ip):
-        # 由IP地址获取地区信息。这里只是模拟，真实项目中应该调用IP地址解析服务
-        ipRegions = {
-            "101.47.18.9": "浙江省杭州市",
-            "67.218.147.69": "美国洛杉矶",
-            "113.108.182.52": "广东省广州市",
+        # 对每个元素进行过滤
+        newElements = []
+        for element in elements:
+            item, num = re.subn(regex, "", element)
+            newElements.append(item)
+
+        return newElements
+
+
+class HtmlFilter(Filter):
+    """HTML特殊字符转换"""
+
+    def __init__(self):
+        self.__wordMap = {
+            "&": "&amp;",
+            "'": " &apos;",
+            ">": "&gt;",
+            "<": "&lt;",
+            "\"": " &quot;",
         }
-        region = ipRegions.get(ip)
-        return "" if region is None else region
 
-    def __isLongDistance(self, name, region):
-        # 计算本次登录与最近几次登录的地区差距。
-        # 这里只是简单地用字符串匹配来模拟，真实的项目中应该调用地理信息相关的服务
-        latestRegion = self.__latestRegion.get(name)
-        return latestRegion is not None and latestRegion != region
-
-
-class SmsSender(Observer):
-    """短信发送器"""
-
-    def update(self, observable, object):
-        print("[短信发送] " + object["name"] + "您好！检测到您的账户可能登录异常。最近一次登录信息：\n"
-              + "登录地区：" + object["region"] + "  登录ip：" + object["ip"] + "  登录时间："
-              + time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime(object["time"])))
+    def doFilter(self, elements):
+        newElements = []
+        for element in elements:
+            for key, value in self.__wordMap.items():
+                element = element.replace(key, value)
+            newElements.append(element)
+        return newElements
 
 
-class MailSender(Observer):
-    """邮件发送器"""
+def testFilterContent():
+    contents = [
+        '有人出售黄色书：<黄情味道>',
+        '有人企图搞台独活动, ——"造谣咨询"',
+    ]
+    print("过滤前的内容：", contents)
+    filterChain = FilterChain()
+    filterChain.addFilter(SensitiveFilter())
+    filterChain.addFilter(HtmlFilter())
+    newContents = filterChain.doFilter(contents)
+    print("过滤后的内容：", newContents)
 
-    def update(self, observable, object):
-        print("[邮件发送] " + object["name"] + "您好！检测到您的账户可能登录异常。最近一次登录信息：\n"
-              + "登录地区：" + object["region"] + "  登录ip：" + object["ip"] + "  登录时间："
-              + time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime(object["time"])))
 
+if __name__ == '__main__':
+    testFilterContent()
 
-def testLogin():
-    account = Account()
-    account.addObserver(SmsSender())
-    account.addObserver(MailSender())
-    account.login("Jack", "101.47.18.9", time.time())
-    account.login("Jack", "67.218.147.69", time.time())
-    account.login("Jack", "113.108.182.52", time.time())
-    account.login("Jack", "113.108.182.52", time.time())
-
-""" runing results:
-[短信发送] Jack您好！检测到您的账户可能登录异常。最近一次登录信息：
-登录地区：美国洛杉矶  登录ip：67.218.147.69  登录时间：2019-09-22 15:32:13
-[邮件发送] Jack您好！检测到您的账户可能登录异常。最近一次登录信息：
-登录地区：美国洛杉矶  登录ip：67.218.147.69  登录时间：2019-09-22 15:32:13
-[短信发送] Jack您好！检测到您的账户可能登录异常。最近一次登录信息：
-登录地区：广东省广州市  登录ip：113.108.182.52  登录时间：2019-09-22 15:32:13
-[邮件发送] Jack您好！检测到您的账户可能登录异常。最近一次登录信息：
-登录地区：广东省广州市  登录ip：113.108.182.52  登录时间：2019-09-22 15:32:13
+"""
+过滤前的内容： ['有人出售黄色书：<黄情味道>', '有人企图搞台独活动, ——"造谣咨询"']
+过滤后的内容： ['有人出售书：&lt;黄情味道&gt;', '有人企图搞活动, —— &quot;造谣咨询 &quot;']
 """
 ```
-注：实际项目中，用户信息（用户名、密码、最近几次登录信息等）存放在数据库中，登录应该检验用户信息，而不是模拟程序中的只记录上一次登录信息到Account对象中。
+
 
 ## 应用场景
-1. 对一个对象状态或数据的更新需要其他对象同步更新，或者一个对象的更新需要依赖另一个对象的更新。
-2. 对象仅需要将自己的更新通知给其他对象而不需要知道其他对象的细节，如消息推送。
+
+1. 敏感词过滤、舆情监测。
+2. 需要对对象列表（或数据列表）进行检验、审查或预处理的场景。
+3. 对网络接口的请求和响应进行拦截，例如对每一个请求和响应记录日志，以便日后分析。
 
 
 > 摘自： 罗伟富. 《人人都懂设计模式：从生活中领悟设计模式：Python实现》. 电子工业出版社

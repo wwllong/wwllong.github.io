@@ -97,3 +97,8 @@
 
 
 ## 进阶篇
+
+- [过滤模式](/design-patterns-advanced/1_dp-filter.html)
+
+  从一组对象中，过滤掉一些不符合要求的对象的过程。
+
