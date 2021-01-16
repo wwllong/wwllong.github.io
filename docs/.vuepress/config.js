@@ -200,7 +200,8 @@ function getDesignPatternsAdvancedSidebar(groupA){
       sidebarDepth: 1,
       children: [
         ['1_dp-filter','过滤模式'],
-        ['2_dp-objectpool','对象池技术']
+        ['2_dp-objectpool','对象池技术'],
+        ['3_dp-callback','回调机制']
       ]
     }
   ]
