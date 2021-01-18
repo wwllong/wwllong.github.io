@@ -30,7 +30,7 @@ MVC模式到目前为止没有一个标准的定义，但它的应用却广泛�
 相机就是对MVC模式非常形象的一个比喻：SD卡相当于模型层（Model），进行图像的存储；镜头和显示器相当于视图层（View），分别负责采集图像和显示图像；而机身相当于控制层（Controller），负责拍摄相关的控制，以及对镜头、显示器和SD卡的相关调度。我们用程序来模拟一下用相机拍摄照片的整个工作流程：
 
 ``` python
-# mvc模式 - 相机
+# mvc模式 - 相机，定格最美瞬间
 import random
 # 引入随机数模块
 
@@ -196,347 +196,85 @@ EOS 80D的设置   光圈：F5.6  快门：1/720  感光度：ISO 100
 
 ## MVC模式技术的框架模型
 
-把函数作为参数传入另一个函数的MVC模式是函数式编程的核心思想，MVC模式的实现方式非常简单，我们可以基于这一思想逐步抽象出一个简单可用的框架模型，主要有两种实现方式：
+### MVC
 
-### 面向过程的实现方式
+最初的MVC模式框架图如下：
 
-对于支持函数式编程的语言，MVC模式的实现非常简单：
+![MVC模式框架](./imgs/mvc.png)
 
-``` python
-# MVC模式 - 框架模式，面向过程的实现方式
-def callback(*args, **kwargs):
-    """回调函数"""
-    # todo 函数体的实现
+1. User直接与View进行交互；
+2. View传送指令到Controller；
+3. Controller完成业务逻辑后，要求Model更新数据和状态；
+4. Model将新的数据发送到View，用户得到反馈。
 
+### MVP
 
-def otherFun(fun, *args, **kwargs):
-    """高阶函数，也叫包含函数"""
-    # todo 函数体的实现
-    fun()
-    
-# 调用方式
-otherFun(callable)
-```
+MVP是MVC的一个变种，很多框架都自称遵循MVC模式，但是实际上它们实现的是MVP模式。MVP在MVC的基础上，**使用Presenter对视图和模型进行解耦，视图和模型独立发展，互不干扰，沟通都通过Presenter进行**。MVP模式框架图如下图所示：
 
-### 面向对象的是实现方式
+![PVM模式框架](./imgs/pvm.png)
 
-我们已知回调函数属于函数式编程，也就是面向过程编程。在面向对象编程中，如何实现这种机制呢？特别是那些不支持函数作为参数来传递的语言（如Java，可以使用接口-匿名类实现的方式实现）。那么解决方案就是[策略模式](/design-patterns-base/14_dp-strategy.html)。策略模式通过定义一系列算法，将每个算法都封装起来，使它们之间可以相互替换。其代码框架如下：
+1. Presenter相当于MVC中的Controller，负责业务逻辑的处理；
+2. Model和View不能直接通信，只能通过Presenter间接地通信；
+3. Presenter与Model、Presenter与View是双向通信；
+4. Presenter协调和控制Model与View的工作。
 
-``` python
-# MVC模式 - 框架模式，面向对象的实现方式
-from abc import ABCMeta, abstractmethod
-# 引入ABCMeta和abstractmethod来定义抽象类和抽象方法
+其实MVP模式被应用得更为广泛，很多著名的框架都用的是这种模式，如Java的SpringMVC，PHP的Laravel。上述相机的示例代码也用的是这种模式。
 
+### MVVM
 
-class Strategy(metaclass=ABCMeta):
-    """算法的抽象类"""
+MVVM也是MVC的一个变种。MVVM（Model-View-ViewModel）最早由微软提出，ViewModel指 “ModelofView”，即“视图的模型”，它将View的状态和行为抽象化，让我们可以将UI和业务逻辑分开。MVVM模式架构图如下所示：
 
-    @abstractmethod
-    def algorithm(self, *args, **kwargs):
-        """定义算法"""
-        pass
+![MVVM-1模式框架](./imgs/mvvm_1.png)
 
+在MVP中，Presenter负责协调和控制Model与View的工作，保证Model和View的数据实时同步和更新，但这个操作需要程序员写代码手动控制。而**MVVM中ViewModel把View和Model的同步逻辑自动化了**，以前Presenter负责的View和Model同步不再需要手动地进行操作，而是交给框架所提供的数据绑定功能来负责，只需要告诉它View显示的数据对应的是Model的哪一部分即可。
 
-class StrategyA(Strategy):
-    """策略A"""
+MVVM模式的最佳实践当属前端的Vue.js框架。Vue.js专注于MVVM中的ViewModel，不仅做到了数据**双向绑定**，而且也是一个相对轻量级的JS库。不同的框架实现双向数据绑定的技术有所不同，Vue采用数据劫持和发布-订阅模式的方式。双向数据绑定可以简单地理解为一个模板引擎，当视图改变时更新模型，当模型改变时更新视图，如下图所示：
 
-    def algorithm(self, *args, **kwargs):
-        print("算法A的实现...")
+![MVVM-2模式框架](./imgs/mvvm_2.png)
 
-
-class StrategyB(Strategy):
-    """策略B"""
-
-    def algorithm(self, *args, **kwargs):
-        print("算法B的实现...")
-
-
-class Context:
-    """上下文环境类"""
-
-    def interface(self, strategy, *args, **kwargs):
-        """交互接口"""
-        print("回调执行前的操作")
-        strategy.algorithm()
-        print("回调执行后的操作")
-
-
-# 调用方式
-context = Context()
-context.interface(StrategyA())
-context.interface(StrategyB())
-```
-
-示例-迎新大会,展示才能，基于策略模式的实现方式：
-
-```python
-# MVC模式 - 迎新大会,展示才能。基于策略模式实现
-from abc import ABCMeta, abstractmethod
-# 引入ABCMeta和abstractmethod来定义抽象类和抽象方法
-
-
-class Skill(metaclass=ABCMeta):
-    """技能的抽象类"""
-
-    @abstractmethod
-    def performance(self):
-        """技能表演"""
-        pass
-
-
-class NewEmployee:
-    """公司新员工"""
-
-    def __init__(self, name):
-        self.__name = name
-
-    def doPerformance(self, skill):
-        print(self.__name + "的表演:", end="")
-        skill.performance()
-
-
-class Sing(Skill):
-    """唱歌"""
-    def performance(self):
-        print("唱一首歌")
-
-
-class Joke(Skill):
-    """说段子"""
-    def performance(self):
-        print("说一搞笑段子")
-
-
-class Dling(Skill):
-    """拉Ukulele"""
-    def performance(self):
-        print("拉一曲Ukulele")
-
-
-class PerformMagicTricks(Skill):
-    """表演魔术"""
-    def performance(self):
-        print("神秘魔术")
-
-
-class Skateboarding(Skill):
-    """玩滑板"""
-    def performance(self):
-        print("酷炫滑板")
-
-
-def testStrategySkill():
-    helen = NewEmployee("Helen")
-    helen.doPerformance(Sing())
-    frank = NewEmployee("Frank")
-    frank.doPerformance(Dling())
-    jacky = NewEmployee("Jacky")
-    jacky.doPerformance(Joke())
-    chork = NewEmployee("Chork")
-    chork.doPerformance(PerformMagicTricks())
-    Kerry = NewEmployee("Kerry")
-    Kerry.doPerformance(Skateboarding())
-
-if __name__ == '__main__':
-    testStrategySkill()
-
-"""
-Helen的表演:唱一首歌
-Frank的表演:拉一曲Ukulele
-Jacky的表演:说一搞笑段子
-Chork的表演:神秘魔术
-Kerry的表演:酷炫滑板
-"""
-```
-
-值得注意的是[策略模式](/design-patterns-base/14_dp-strategy.html#类图和实现)中Context和Strategy是一种聚合关系，即Context中存有Strategy的对象；而这里的NewEmployee和Skill是一种依赖关系，NewEmployee不存Skill的对象。因为设计模式不是一成不变的，而是可以根据实现情况灵活变通的。如果你愿意，依然可以写成聚合关系，但代码将不会这么优雅。
-
-
+从MVC到MVP，再到MVVM，就像一个打怪升级的过程，软件架构模式随着软件技术的升级而不断发展和延伸。
 
 ### 模型设计要点
 
-在设计回调的时候要注意以下几点：
+MVC模式有三个关键的角色，在设计MVC模式时要找到并区分这些角色：
 
-1. 在支持函数式编程的语言中，可以使用回调函数实现。作为参数传递的函数称为回调函数，接收回调函数（参数）的函数称为高阶函数或包含函数。
-2. 在只支持面向对象编程的语言中，可以使用策略模式来实现MVC模式。
+1. 模型（Model）：负责数据的存储和管理。
+2. 视图（View）：负责数据的输入和显示，是直接和用户交互的一层。
+3. 控制器（Controller）：负责具体的业务逻辑，根据用户的请求内容操作相应的模型和视图。
 
 ### 优缺点
 
 优点：
 
-1. 避免重复代码。
-2. 增强代码的可维护性。
-3. 有更多定制的功能。
+1. 低耦合性。MVC模式将视图和模型分离，可以独立发展。
+2. 高重用性和可适用性。对于某些应用，我们可能会有不同的端，如Web端、移动端、桌面端，但它们使用的用户数据是相同的，因此可以用同一套服务端代码，即M层和C层是相同的。
+3. 快速开发，快速部署。有很多现成的框架本身就是采用MVC模式进行设计的，如Java的SpringMVC、PHP的ThinkPHP，采用这些框架可以快速地进行开发。
+4. 方便团队合作。将软件分成三层后，可以由不同的人员负责不同的模块。
+
 
 缺点：
 
-1. 可能出现“回调地狱”的问题，即多重的回调函数调用。如回调函数A被高阶函数B调用，同时B本身又是一个回调函数，被函数C调用。我们应尽量避免这种多重调用的情况，否则代码的可读性很差，程序将很难维护。
-
-
-
-## 实战应用
-
-需求：基于回调的方式，实现需求：求一个整数数组（如[2,3,6,9,12,15,18]）中所有的偶数并且大于10的数。
-
-```python
-# MVC模式应用-假设有这样一个需求：求一个整数数组（如[2,3,6,9,12,15,18]）中所有的偶数并且大于10的数。
-def isEvenNumber(num):
-    return num % 2 == 0
-
-def isGreaterThanTen(num):
-    return num > 10
-
-def getResultNumbers(fun, elements):
-    newList = []
-    for item in elements:
-        if (fun(item)):
-            newList.append(item)
-    return newList
-
-def testCallback():
-    elements = [2, 3, 6, 9, 12, 15, 18]
-    list1 = getResultNumbers(isEvenNumber, elements)
-    list2 = getResultNumbers(isGreaterThanTen, elements)
-    print("所有的偶数：", list1)
-    print("大于10的数：", list2)
-
-
-if __name__ == '__main__':
-    testCallback()
-
-"""
-所有的偶数： [2, 6, 12, 18]
-大于10的数： [12, 15, 18]
-"""
-```
-
-当然，在实际项目中也可以使用Python内置的filter函数和lambda表达式：
-
-```python
-def testFilter():
-    elements = [2, 3, 6, 9, 12, 15, 18]
-    list1 = list(filter(lambda x: x % 2 == 0, elements))
-    list2 = list(filter(lambda x: x > 10, elements))
-    print("所有的偶数：", list1)
-    print("大于10的数：", list2)
-```
-
-
-
-## 回调在异步中的应用
-
-程序的执行方式有两种，一种叫同步执行，一种叫异步执行。
-
-- 同步执行：只有前一个任务执行完毕，才能执行后一个任务；
-
-  > 下班了，你叫同事一起去看电影，你同事说：我还有工作没做完，等我做完再去。你就一直在那等……一直到他完成了工作，才一起去看电影。
-
-- 异步执行：前一个任务还没有执行完毕，就可以执行后一个任务（前一个任务执行完成后会收到一个通知）。
-
-  > 下班了，你叫同事一起去看电影，你同事说：等我一会，还有点工作没完成，做完了我会告诉你，你先忙点别的。然后你就去看书或玩手机了……他完成了工作喊你一声，你俩就一起去看电影了。
-
-前面讲的回调的应用都是基于同步执行的方式，而**回调更多的是应用在异步执行中**。回调函数在异步调用中应用得非常广泛，特别是前端的JS代码中，所有的执行结果都是通过回调函数的方式来通知的。异步执行的实现方式有两种：一种是通过多线程的方式（一个任务开一个新的线程），另一种是通过多任务的方式（如JS的异步就是通过基于任务队列的事件循环来实现的）。
-
-**异步调用经常用在一些比较耗时的任务上，如I/O操作、网络请求等**。如下载功能就是一项非常耗时的操作（特别是大文件的下载），假设我们有多个文件需要下载。如果是同步的方式，只能等第一个文件下载完后才能下载第二个文件，而且这期间不能进行任何其他的操作。但如果是异步的方式，就可以同时下载多个文件。异步的方式下载，我们只要点一下第一个要下载的文件，再点一下第二个要下载的文件，就可以去干别的事了。我们还可以定义一个下载进度的回调函数，实时显示下载的进度；还可以定义一个下载完成的回调函数，文件下载完成后及时通知我们。
-
-用代码模拟实现异步下载文件：
-
-```python
-# MVC模式 在异步中的应用 - 下载文件
-import requests
-# 引入Http请求模块
-from threading import Thread
-# 引入线程模块
-
-
-class DownloadThread (Thread):
-    """下载文件的线程"""
-
-    # 每次写文件的缓冲大小
-    CHUNK_SIZE = 1024 * 512
-
-    def __init__(self, fileName, url, savePath, callBackProgress, callBackFinished):
-        super().__init__()
-        self.__fileName = fileName
-        self.__url = url
-        self.__savePath = savePath
-        self.__callbackProgress = callBackProgress
-        self.__callBackFinished = callBackFinished
-
-    def run(self):
-        readSize = 0
-        r = requests.get(self.__url, stream=True)
-        totalSize = int(r.headers.get('Content-Length'))
-        print("[下载%s] 文件大小:%d" % (self.__fileName, totalSize))
-        with open(self.__savePath, "wb") as file:
-            for chunk in r.iter_content(chunk_size = self.CHUNK_SIZE):
-                if chunk:
-                    file.write(chunk)
-                    readSize += self.CHUNK_SIZE
-                    self.__callbackProgress(self.__fileName, readSize, totalSize)
-        self.__callBackFinished(self.__fileName)
-
-
-def testDownload():
-    def downloadProgress(fileName, readSize, totalSize):
-        """定义下载进度的回调函数"""
-        percent = (readSize / totalSize) * 100
-        print("[下载%s] 下载进度:%.2f%%" % (fileName, percent))
-
-    def downloadFinished(fileName):
-        """定义下载完成后的回调函数"""
-        print("[下载%s] 文件下载完成！" % fileName)
-
-    print("开始下载TestForDownload1.pdf......")
-    downloadUrl1 = "http://pe9hg91q8.bkt.clouddn.com/TestForDownload1.pdf"
-    download1 = DownloadThread("TestForDownload1", downloadUrl1, "./download/TestForDownload1.pdf", downloadProgress,
-                               downloadFinished)
-    download1.start()
-    print("开始下载TestForDownload2.zip......")
-    downloadUrl2 = "http://pe9hg91q8.bkt.clouddn.com/TestForDownload2.zip"
-    download2 = DownloadThread("TestForDownload2", downloadUrl2, "./download/TestForDownload2.zip", downloadProgress,
-                               downloadFinished)
-    download2.start()
-    print("执行其它的任务......")
-
-
-if __name__ == '__main__':
-    testDownload()
-```
-
-注：
-
-1. Python默认没有requests模块，需要先安装requests模块，pip的安装命令。
-
-   我基于python 3.x 实验：
-
-   ```python
-   # 使用配置国内镜像源
-   pip install requests  -i http://pypi.douban.com/simple/ --trusted-host pypi.douban.com
-   # 可能需要升级pip
-   python -m pip install --upgrade pip -i https://pypi.douban.com/simple
-   # 安装request
-   pip3 install requests 
-   ```
-
-   > 参见：
-   >
-   > https://blog.csdn.net/weixin_43495813/article/details/108055787
-   >
-   > https://www.cnblogs.com/karrya/p/10873075.html
-
-   
-
-2. 根据实际情况，设置下载路径。
-
-
+1. 增加了系统结构和实现的复杂性。对于简单的界面，严格遵循MVC会使模型、视图与控制器分离，增加很多代码。
 
 
 ## 应用场景
 
-1. 在第三方库和框架中。
-2. 异步执行（例如读文件、发送HTTP请求）。
-3. 在需要更多通用功能的地方，更好地实现抽象（可处理各种类型的函数）。
+MVC的应用可谓随处可见，几乎可在各大成熟的框架中看到它的影子。MVC最核心的思想是软件分层，将软件分成模型层、视图层和控制层。
 
+最早期的软件，逻辑代码、界面代码、数据混杂在一起，像一碗意大利面。
+
+![MVC-意大利面式的软件](./imgs/noodles.png)
+
+后来有了数据库，有了各种存储介质，于是就有了模型层，但这时界面代码和逻辑代码还是混杂在一起的。如JSP代码中会同时掺杂HTML的网页代码和Java的控制代码，只是通过JavaBean将模型层给独立出去了；PHP的代码中也会同时包含HTML的网页代码和PHP的控制代码。
+
+![MVC-早期的Web网站](./imgs/old-web.png)
+
+随着互联网的发展，网站的业务逻辑越来越复杂，这种 *前后端一站式* 的架构越来不能满足时代的要求。这时出现了前后端分离，前端一个项目，后端一个项目；前端通过AJAX请求后端的接口，后端负责业务逻辑和数据的存储，后端处理完请求后通过HTTP协议将数据返回给前端，如下图所示：
+
+![MVC-前后端分离的Web网站](./imgs/new-web.png)
+
+互联网发展非常迅速，数据越来越来多，业务也越来越复杂。为了响应快速开发、快速部署的要求，前后端都出现了很多成熟的框架，而每一个框架几乎都可用MVC模式来实现。这时，前端应用MVC模式（前端的Model并不持久化数据，只是缓存数据或临时数据），后端也用MVC模式。我们如果站在一个更高的层次看，整个网站也是一种MVC模式，前端相当于View，而后端同时负责Controller和Mode（服务器代码相当于Controller，数据库相当于Model）；用户直接与前端进行交互，根本不知道有后端的存在。
+
+![MVC-前后端都采用MVC模式](./imgs/new-web-2.png)
 
 > 摘自： 罗伟富. 《人人都懂设计模式：从生活中领悟设计模式：Python实现》. 电子工业出版社
