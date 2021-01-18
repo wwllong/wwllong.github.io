@@ -114,4 +114,8 @@
 
   软件架构模式，将软件系统分为三个基本部分：模型（Model）、视图（View）和控制器（Controller）。
 
+- [关于设计模式的理解](/design-patterns-advanced/5_dp-understand.html)
+
+  设计模式玄，也不玄! 如何区分不同的模式?
+
 

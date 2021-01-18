@@ -18,7 +18,8 @@ module.exports = {
             '/linux/': getLinuxSidebar("Linux"),
             '/design-patterns-base/': getDesignPatternsSidebar("设计模式-基础"),
             '/design-patterns-advanced/': getDesignPatternsAdvancedSidebar("设计模式-进阶"),
-            '/python-base/': getPythonBaseSidebar("Python基础")
+            '/python-base/': getPythonBaseSidebar("Python基础"),
+            '/thought/': getThoughtBaseSidebar("思想")
         },
         nextLinks: true,
         prevLinks: false
@@ -202,7 +203,8 @@ function getDesignPatternsAdvancedSidebar(groupA){
         ['1_dp-filter','过滤模式'],
         ['2_dp-objectpool','对象池技术'],
         ['3_dp-callback','回调机制'],
-        ['4_dp-mvc','MVC模式']
+        ['4_dp-mvc','MVC模式'],
+        ['5_dp-understand','关于设计模式的理解']
       ]
     }
   ]
@@ -224,6 +226,20 @@ function getPythonBaseSidebar (groupA) {
           ['py-type-isinstance','Python的内置函数type和isinstance'],
           ['py-metaclass','Python中metaclass的原理'],
           ['py-iterator','Python中的迭代器']
+        ]
+      }
+    ]
+}
+
+/** 思考 */
+function getThoughtBaseSidebar(groupA) {
+  return [
+      {
+        title: groupA,
+        collapsable: false,
+        sidebarDepth: 2,
+        children: [
+          ['metaphysics-buddhism','程序员的玄学与佛学']
         ]
       }
     ]
