@@ -110,4 +110,8 @@
 
   把函数作为参数传入另一个函数的回调机制是函数式编程的核心思想。
 
+- [MVC模式](/design-patterns-advanced/4_dp-mvc.html)
+
+  软件架构模式，将软件系统分为三个基本部分：模型（Model）、视图（View）和控制器（Controller）。
+
 
