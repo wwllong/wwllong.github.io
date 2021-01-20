@@ -8,19 +8,19 @@
 
 在程序设计领域起初有5大设计原则， SOLID（单一职责原则、 开放封闭原则、里氏替换原则、接口隔离原则以及依赖倒置原则的首字母缩略字）是由罗伯特·C·马丁（Robert·C·Martin）在《敏捷软件开发：原则、模式与实践》提出的，指代了面向对象编程和设计的五个基本原则。当这些原则被一起应用时，它们使得一个程序员开发一个易维护和易扩展的系统变得更加可能。这些原则能指导编程者对源码进行重构和“异味清扫"，从而使得软件清晰可读以及提高可扩展性。SOLID被典型的应用在测试驱动开发上，并且是敏捷开发以及自适应软件开发的基本原则的重要组成部分。
 
-到现在最熟知的设计模式主要有23种，而这23种设计模式又遵循了7大原则（口诀：开口合里最单依，有的书中只提到了6大原则）：
+到现在最熟知的设计模式主要有23种，而这23种设计模式又遵循了7大原则（口诀：开口合里最单依，有的书中只提到了6大原则），而组合/聚合原则、最少知识原则实际上他们是对5大原则的补充描述。设计模式和设计原则两者都包含了面向对象的精髓：封装、继承、多态。
 
 ```
 - 开：面向扩展开，面向修改关闭
 - 口：接口隔离原则
-- 合：组合/聚合原则
+- 合：合成/聚合复用原则
 - 里：里氏替换原则
-- 最：最少知识原则
+- 最：迪米特法则，又叫最少知识原则
 - 单：单一职责原则
 - 依：依赖倒置原则
 ```
 
-而组合/聚合原则、最少知识原则实际上他们是对5大原则的补充描述。
+
 
 ### 单一职责原则（SRP）
 
@@ -35,6 +35,8 @@
 例如：类T负责两个不同的职责（可以理解为功能）：职责P1，职责P2。当由于职责P1需求发生改变而需要修改类T时，可能会导致原本运行正常的职责P2功能发生故障，这就不符合单一职责原则。这时就应该将类T拆分成两个类T1、T2，使T1完成职责P1功能，T2完成职责P2功能。这样，当单独修改类T1或T2时，职责P2或P1都不会存在故障风险。
 
 通俗来讲就是一个类只负责一项功能或一类相似的功能。当然这个“一”并不是绝对的，应该理解为一个类只负责尽可能独立的一项功能，尽可能少的职责。就好比一个人的精力、时间都是有限的，如果什么事情都做，那么什么事情都做不好；所以应该集中精力做一件事，才能把事情做好。
+
+代表模式：迭代器模式
 
 #### 案例分析
 
@@ -156,6 +158,8 @@
 软件实体（如类、模块、函数等）应该对拓展开放，对修改封闭。
 
 通俗来讲就是在一个软件产品的生命周期内，不可避免会有一些业务和需求的变化，我们在设计代码的时候应该尽可能地考虑这些变化。在增加一个功能时，应当尽可能地不去改动已有的代码；当修改一个模块时不应该影响到其他模块。
+
+代表模式：装饰者模式
 
 #### 案例分析
 
@@ -350,28 +354,417 @@ testZoo()
 
 
 
-### 接口隔离原则
+### 接口隔离原则（ISP)
 
-接口隔离原则，即InterfaceSegregationPrinciple，简称ISP。1.核心思想Clientsshouldnotbeforcedtodependuponinterfacesthattheydon＇tuse.Insteadofonefatinterfacemanysmallinterfacesarepreferredbasedongroupsofmethods,eachoneservingonesubmodule.客户端不应该依赖它不需要的接口。用多个细粒度的接口来替代由多个方法组成的复杂接口，每一个接口服务于一个子模块。类A通过接口interface依赖类C，类B通过接口interface依赖类D，如果接口interface对于类A和类B来说不是最小接口，则类C和类D必须去实现它们不需要的方法。2.通俗来讲建立单一接口，不要建立庞大臃肿的接口，尽量细化接口，接口中的方法尽量少。也就是说，我们要为不同类别的类建立专用的接
+接口隔离原则（Interface Segregation Principle），简称ISP。
 
-接口，而不要试图建立一个很庞大的接口供所有依赖它的类调用。接口尽量小，但是要有限度。当发现一个接口过于臃肿时，就要对这个接口进行适当的拆分。但是如果接口过小，则会造成接口数量过多，使设计复杂化。所以接口大小一定要适度。3.案例分析我们知道在生物学分类中，从高到低有界、门（含亚门）、纲、目、科、属、种七个等级。脊椎动物就是脊索动物的一个亚门，是万千动物中数量最多、结构最复杂的一个门类。哺乳动物（也称兽类）、鸟类、鱼类是脊椎动物中最重要的三个子分类；哺乳动物大都生活于陆地，鱼类都生活在水里，而鸟类大都能飞行。但这些特性并不是绝对的，如蝙蝠是哺乳动物，但它却能飞行；鲸鱼也是哺乳动物，却生活在海中；天鹅是鸟类，能在天上飞，也能在水里游，还能在地上走。所以在前面的示例中，将动物根据活动场所分为水生动物、陆生动物和飞行动物是不够准确的，因为奔跑、游
+#### 核心思想
 
-游泳、飞翔只是动物的一种行为，而且有些动物可能同时具有多种行为，因此应该把它们抽象成接口。我们应该根据生理特征来分类，如哺乳类、鸟类、鱼类。哺乳类动物具有恒温、胎生、哺乳等生理特征；鸟类动物具有恒温、卵生、前肢成翅等生理特征；鱼类动物具有流线型体形、用鳃呼吸等生理特征。这里分别将奔跑、游泳、飞翔抽象成接口的操作就是对接口的一种细粒度拆分，可以提高程序设计的灵活性。代码的实现如下。源码示例26-10遵循接口隔离原则的设计
+> Clients should not be forced to depend upon interfaces that they don＇t use. Instead of one fat interface many small interfaces are preferred based on groups of methods, each one serving one submodule.
 
-4.优点（1）提高程序设计的灵活性。将接口进行细分后，多个接口可自由发展，互不干扰。（2）提高内聚，减少对外交互。使接口用最少的方法去完成最多的事情。（3）为依赖接口的类定制服务。只暴露给调用的类需要的方法，不需要的方法则隐藏起来。
+不应该强迫客户端依赖它们不使用的接口。与其使用一个胖接口（由多个方法组成的复杂接口），还不如使用许多基于方法组的小接口（多个细粒度的接口），每个方法组（每个接口）服务于一个子模块。
+
+例如：类A通过接口interface依赖(使用)类C，类B通过接口interface依赖(使用)类D，如果接口interface对于类A和类B来说不是最小接口，则类C和类D必须去实现它们不需要的方法。（ps：这里初看，可能会有些拗口，可以见[这里](https://blog.csdn.net/qq_49529322/article/details/112726998)的例子。)
+
+通俗来讲就是建立单一接口，不要建立庞大臃肿的接口，尽量细化接口，接口中的方法尽量少。也就是说，我们要为不同类别的类建立专用的接口，而不要试图建立一个很庞大的接口供所有依赖它的类调用。
+
+接口尽量小，但是要有限度。当发现一个接口过于臃肿时，就要对这个接口进行适当的拆分。但是如果接口过小，则会造成接口数量过多，使设计复杂化。所以接口大小一定要适度。
+
+#### 案例分析
+
+我们知道在生物学分类中，从高到低有界、门（含亚门）、纲、目、科、属、种七个等级。脊椎动物就是脊索动物的一个亚门，是万千动物中数量最多、结构最复杂的一个门类。哺乳动物（也称兽类）、鸟类、鱼类是脊椎动物中最重要的三个子分类；哺乳动物大都生活于陆地，鱼类都生活在水里，而鸟类大都能飞行。但这些特性并不是绝对的，如蝙蝠是哺乳动物，但它却能飞行；鲸鱼也是哺乳动物，却生活在海中；天鹅是鸟类，能在天上飞，也能在水里游，还能在地上走。所以在前面的示例中，将动物根据活动场所分为水生动物、陆生动物和飞行动物是不够准确的，因为奔跑、游泳、飞翔只是动物的一种行为，而且有些动物可能同时具有多种行为，因此应该把它们(动物行为）抽象成接口。
+
+我们应该根据生理特征来分类，如哺乳类、鸟类、鱼类。哺乳类动物具有恒温、胎生、哺乳等生理特征；鸟类动物具有恒温、卵生、前肢成翅等生理特征；鱼类动物具有流线型体形、用鳃呼吸等生理特征。这里分别将奔跑、游泳、飞翔抽象成接口的操作就是对接口的一种细粒度拆分，可以提高程序设计的灵活性。代码的实现如下：
+
+```python
+# 接口隔离原则，Interface Segregation Principle
+from abc import ABCMeta, abstractmethod
+
+
+class Animal(metaclass=ABCMeta):
+    """(脊椎)动物"""
+
+    def __init__(self, name):
+        self._name = name
+
+    def getName(self):
+        return self._name
+
+    @abstractmethod
+    def feature(self):
+        pass
+
+    @abstractmethod
+    def moving(self):
+        pass
+
+
+class IRunnable(metaclass=ABCMeta):
+    """奔跑的接口"""
+
+    @abstractmethod
+    def running(self):
+        pass
+
+
+class IFlyable(metaclass=ABCMeta):
+    """飞行的接口"""
+
+    @abstractmethod
+    def flying(self):
+        pass
+
+
+class INatatory(metaclass=ABCMeta):
+    """游泳的接口"""
+
+    @abstractmethod
+    def swimming(self):
+        pass
+
+
+class MammalAnimal(Animal, IRunnable):
+    """哺乳动物"""
+
+    def __init__(self, name):
+        super().__init__(name)
+
+    def feature(self):
+        print(self._name + "的生理特征：恒温，胎生，哺乳。")
+
+    def running(self):
+        print("在陆上跑...")
+
+    def moving(self):
+        print(self._name + "的活动方式：", end="")
+        self.running()
+
+
+class BirdAnimal(Animal, IFlyable):
+    """鸟类动物"""
+
+    def __init__(self, name):
+        super().__init__(name)
+
+    def feature(self):
+        print(self._name + "的生理特征：恒温，卵生，前肢成翅。")
+
+    def flying(self):
+        print("在天空飞...")
+
+    def moving(self):
+        print(self._name + "的活动方式：", end="")
+        self.flying()
+
+
+class FishAnimal(Animal, INatatory):
+    """鱼类动物"""
+
+    def __init__(self, name):
+        super().__init__(name)
+
+    def feature(self):
+        print(self._name + "的生理特征：流线型体形，用鳃呼吸。")
+
+    def swimming(self):
+        print("在水里游...")
+
+    def moving(self):
+        print(self._name + "的活动方式：", end="")
+        self.swimming()
+
+
+class Bat(MammalAnimal, IFlyable):
+    """蝙蝠"""
+
+    def __init__(self, name):
+        super().__init__(name)
+
+    def running(self):
+        print("行走功能已经退化。")
+
+    def flying(self):
+        print("在天空飞...", end="")
+
+    def moving(self):
+        print(self._name + "的活动方式：", end="")
+        self.flying()
+        self.running()
+
+
+class Swan(BirdAnimal, IRunnable, INatatory):
+    """天鹅"""
+
+    def __init__(self, name):
+        super().__init__(name)
+
+    def running(self):
+        print("在陆上跑...", end="")
+
+    def swimming(self):
+        print("在水里游...", end="")
+
+    def moving(self):
+        print(self._name + "的活动方式：", end="")
+        self.running()
+        self.swimming()
+        self.flying()
+
+
+class CrucianCarp(FishAnimal):
+    """鲫鱼"""
+
+    def __init__(self, name):
+        super().__init__(name)
+
+
+def testAnimal():
+    bat = Bat("蝙蝠")
+    bat.feature()
+    bat.moving()
+    swan = Swan("天鹅")
+    swan.feature()
+    swan.moving()
+    crucianCarp = CrucianCarp("鲫鱼")
+    crucianCarp.feature()
+    crucianCarp.moving()
+
+
+testAnimal()
+
+"""
+蝙蝠的生理特征：恒温，胎生，哺乳。
+蝙蝠的活动方式：在天空飞...行走功能已经退化。
+天鹅的生理特征：恒温，卵生，前肢成翅。
+天鹅的活动方式：在陆上跑...在水里游...在天空飞...
+鲫鱼的生理特征：流线型体形，用鳃呼吸。
+鲫鱼的活动方式：在水里游...
+"""
+```
+
+#### 优缺点
+
+优点：
+
+1. 提高程序设计的灵活性。将接口进行细分后，多个接口可自由发展，互不干扰。
+2. 提高内聚，减少对外交互。使接口用最少的方法去完成最多的事情。
+3. 为依赖接口的类定制服务。只暴露给调用的类需要的方法，不需要的方法则隐藏起来。
+
+缺点：
+
+1. 对接口进行拆分的时候，如果接口过小，则会造成接口数量过多，使设计复杂化。
+
+
 
 ### 依赖倒置原则（DIP）
 
-依赖倒置原则，即DependenceInversionPrinciple，简称DIP。1.核心思想Highlevelmodulesshouldnotdependonlowlevelmodules;bothshoulddependonabstractions.Abstractionsshouldnotdependondetails.Detailsshoulddependuponabstractions.
+依赖倒置原则（Dependence Inversion Principle），简称DIP。
 
-高层模块不应该依赖低层模块，二者都该依赖其抽象。抽象不应该依赖细节，细节应该依赖抽象。高层模块就是调用端，低层模块就是具体实现类。抽象就是指接口或抽象类，细节是指具体的实现类。也就是说，我们只依赖抽象编程。2.通俗来讲把具有相同特征或相似功能的类，抽象成接口或抽象类，让具体的实现类继承这个抽象类（或实现对应的接口）。抽象类（接口）负责定义统一的方法，实现类负责具体功能的实现。3.案例分析在源码示例26-6（遵循开放封闭原则的设计）中，我们把各种类型的动物抽象成一个抽象类Animal，并定义了统一的方法moving（），这也遵循了依赖倒置原则。我们的Zoo（动物园）类是一个高层模块，Zoo类中的displayActivity（）方法依赖的是动物
-物的抽象类Animal和其定义的抽象方法moving（），这就是高层模块依赖抽象而不是依赖细节的表现。我们对这个案例进行一次更深层次的挖掘。我们知道民以食为天，动物更是如此，动物每天都要吃东西。一说到动物吃东西，你可能立刻就会想：狗喜欢吃肉，鱼喜欢吃草，鸟喜欢吃虫子！你在小学就会背了，哈哈！如果让你用程序来模拟一下动物吃东西的过程，你会怎么设计你的程序呢？你可能会不假思索地写出下面这样的代码。源码示例26-8动物吃东西
+#### 核心思想
 
-如果写出这样的代码，那就糟糕了！因为这样实现会有两个问题：（1）每一种动物，你都需要为其定义一个食物类，高度依赖于细节。（2）每一种动物只能吃一种东西（它最喜欢的食物），这与现实相违背。如：猫不仅喜欢吃老鼠，还喜欢吃鱼；不仅鱼喜欢吃草，牛也喜欢吃草。这个时候就应该遵循依赖倒置原则来进行设计：抽象出一个食物（Food）类，动物（Animal）应该依赖食物的抽象类Food，而不应该依赖具体的细节（具体的食物）。我们根据这一原则来设计一
+> High level modules should not depend on low level modules; both should depend on abstractions. Abstractions should not depend on details. Details should depend upon abstractions.
 
-一下代码，如源码示例26-9所示。源码示例26-9遵循依赖倒置原则的设计
+高层模块不应该依赖低层模块，二者都该依赖其抽象。抽象不应该依赖细节，细节应该依赖抽象。高层模块就是调用端，低层模块就是具体实现类。抽象就是指接口或抽象类，细节是指具体的实现类。也就是说，我们 *只依赖抽象编程* 。
 
-在这个例子中，动物抽象出一个父类Animal，食物也抽象出一个抽象类Food。Animal抽象不依赖于细节（具体的食物类），具体的动物（如Dog）也不依赖于细节（具体的食物类）。就是说我们只依赖抽象编程。源码示例26-9的实现可用类图表示，如图26-1所示。
+通俗来讲就是把具有相同特征或相似功能的类，抽象成接口或抽象类，让具体的实现类继承这个抽象类或实现对应的接口。抽象类（接口）负责定义统一的方法，实现类负责具体功能的实现。
+
+代表模式：工厂模式
+
+#### 案例分析
+
+在介绍遵循开放封闭原则（OCP）的示例代码中，我们把各种类型的动物抽象成一个抽象类Animal，并定义了统一的方法moving（），这也遵循了依赖倒置原则。同时Zoo类是一个高层模块，Zoo类中的displayActivity（）方法依赖的是动物抽象类Animal和其定义的抽象方法moving（），这就是高层模块依赖抽象而不是依赖细节的表现。
+
+我们对这个案例进行一次更深层次的挖掘。我们知道民以食为天，动物更是如此。一说到动物吃东西，你可能立刻就会想：狗喜欢吃肉，鱼喜欢吃草，鸟喜欢吃虫子！如果让你用程序来模拟一下动物吃东西的过程，你会怎么设计你的程序呢？你可能会不假思索地写出下面这样的代码：
+
+```python
+class Dog:
+
+    def eat(self, meat):
+        pass
+
+class Fish:
+
+    def eat(self, grass):
+        pass
+ 
+```
+
+如果写出这样的代码，那就糟糕了！因为这样实现会有两个问题：
+
+1. 每一种动物，你都需要为其定义一个食物类，高度依赖于细节。
+2. 每一种动物只能吃一种最喜欢的食物，这与现实相违背。如：猫不仅喜欢吃老鼠，还喜欢吃鱼；不仅鱼喜欢吃草，牛也喜欢吃草。
+
+这个时候就应该遵循依赖倒置原则来进行设计：抽象出一个食物的抽象类（Food），动物类（Animal）应该依赖食物的抽象类（Food），而不应该依赖具体的细节（具体的食物）。我们根据这一原则来设计一下代码：
+
+```python
+# 依赖倒置原则，Dependence Inversion Principle
+from abc import ABCMeta, abstractmethod
+
+
+class Animal(metaclass=ABCMeta):
+    """动物"""
+
+    def __init__(self, name):
+        self._name = name
+
+    def eat(self, food):
+        if(self.checkFood(food)):
+            print(self._name + "进食" + food.getName())
+        else:
+            print(self._name + "不吃" + food.getName())
+
+    @abstractmethod
+    def checkFood(self, food):
+        """检查哪种食物能吃"""
+        pass
+
+
+class Dog(Animal):
+    """狗"""
+
+    def __init__(self):
+        super().__init__("狗")
+
+    def checkFood(self, food):
+        return food.category() == "肉类"
+
+
+class Swallow(Animal):
+    """燕子"""
+
+    def __init__(self):
+        super().__init__("燕子")
+
+    def checkFood(self, food):
+        return food.category() == "昆虫"
+
+
+class Food(metaclass=ABCMeta):
+    """食物"""
+
+    def __init__(self, name):
+        self._name = name
+
+    def getName(self):
+        return self._name
+
+    @abstractmethod
+    def category(self):
+        """食物类别"""
+        pass
+
+    @abstractmethod
+    def nutrient(self):
+        """营养成分"""
+        pass
+
+
+class Meat(Food):
+    """肉"""
+
+    def __init__(self):
+        super().__init__("肉")
+
+    def category(self):
+        return "肉类"
+
+    def nutrient(self):
+        return "蛋白质、脂肪"
+
+
+class Worm(Food):
+    """虫子"""
+
+    def __init__(self):
+        super().__init__("虫子")
+
+    def category(self):
+        return "昆虫"
+
+    def nutrient(self):
+        return "蛋白质含、微量元素"
+
+
+def testFood():
+    dog = Dog()
+    swallow = Swallow()
+    meat = Meat()
+    worm = Worm()
+    dog.eat(meat)
+    dog.eat(worm)
+    swallow.eat(meat)
+    swallow.eat(worm)
+
+
+testFood()
+
+'''
+狗进食肉
+狗不吃虫子
+燕子不吃肉
+燕子进食虫子
+'''
+```
+
+在这个例子中，动物被抽象出一个父类Animal，食物也抽象出一个抽象类Food。Animal不依赖于细节（具体的食物类），具体的动物（如Dog、Swallow）也不依赖于细节（具体的食物类）。就是说我们只依赖抽象编程。
+
+#### 扩展
+
+依赖关系的传递一般有三种方式：
+
+1. 接口传递；
+2. 构造方法传递；
+3. setter方法传递。
+
+
+
+### 其他原则补充
+
+#### 合成/聚合复用原则（CARP）
+
+合成/聚合复用原则（Composite/Aggregate Reuse Principle，CARP），一般也叫合成复用原则(Composite Reuse Principle, CRP)。
+
+> Use composition/aggregation instead of inheritance for reuse purposes.
+
+合成复用原则：尽量使用合成/聚合，而不是通过继承达到复用的目的。
+
+例如：A类和B类，B类可能仅仅想要使用A类的两个方法，如果通过继承的方式实现，首先耦合性很高，其次这种继承没必要，甚至会带来别的麻烦。所以尽量使用合成或者聚合的方式。
+
+通俗来说就是在一个新的对象里面使用一些已有的对象，使之成为新对象的一部分；新的对象通过向内部持有的这些对象的委派达到复用已有功能的目的，而不是通过继承来获得已有的功能。
+
+聚合(Aggregate)的概念：
+
+聚合表示一种弱的"拥有"关系，一般表现为松散的整体和部分的关系，其实，所谓整体和部分也可以是完全不相关的。例如A对象持有B对象（通常是私有变量，通过setter传递），B对象并不是A对象的一部分，也就是B对象的生命周期是B对象自身管理，和A对象不相关。
+
+代表模式：策略模式
+
+合成(Composite)的概念：
+
+合成表示一种强的"拥有"关系，一般表现为严格的整体和部分的关系，部分和整体的生命周期是一样的。例如，B直接实例化在A对象里面，当A对象创建的时候，就已经有一个实例化的对象B，可以直接调用B的方法。
+
+
+
+#### 迪米特法则/最少知道原则（DP）
+
+迪米特法则（Demeter Principle），又叫最少知道原则。
+
+> Only talk to your immediate friends。
+
+只与直接的朋友通信。
+
+什么是直接朋友？每个对象都会和其他对象有耦合关系（依赖、关联、组合、聚合等等），只要两个对象之间有耦合关系，那么我们就说这两个对象之间是朋友关系。其中我们称出现在成员变量、方法参数、方法返回值中的类为直接的朋友，而出现在局部变量中的类不是直接朋友，也就是说，陌生的类最好不要以局部变量的形式出现在类的内部，一个对象的“直接朋友”包括它本身（this)、它持有的成员对象、入参对象、它所创建的对象（非局部）。
+
+例如：A类有属性B b 或 某个方法为 fun(B b) 或 某方法返回类型是 B，那么 B 就是 A 的直接朋友；同样是A类有方法为D fun(B b)，该方法用到一个 C c = new C(),也就是说C以局部变量的方式出现，那么C就是陌生的类，不是直接朋友。
+
+通俗来说就是一个类对自己依赖类知道的越少越好，对于被依赖的类不管多么复杂，都尽量将逻辑封装在类的内部，对外提供public方法。
+
+核心思想：迪米特法则的核心观念就是类间解耦，也就降低类之间的耦合，只有类处于弱耦合状态，类的复用率才会提高。所谓降低类间耦合，实际上就是尽量减少对象之间的交互，如果两个对象之间不必彼此直接通信，那么这两个对象就不应当发生任何直接的相互作用，如果其中的一个对象需要调用另一个对象的某一个方法的话，可以通过第三者转发这个调用。简言之，就是通过引入一个合理的第三者来降低现有对象之间的耦合度。但是这样会引发一个问题，有可能产生大量的中间类或者跳转类，导致系统的复杂性提高，可维护性降低。
+
+代表模式：外观模式、中介者模式
+
+
+
+
 
 ## 是否一定要遵循这些设计原则
 
@@ -384,4 +777,6 @@ testZoo()
 > [设计模式的7大原则（设计模式6大设计原则增强版）](https://blog.csdn.net/belvine/article/details/104689175/)
 >
 > [设计模式是五大或六大还是七大原则？](https://blog.csdn.net/cadenzasolo/article/details/50565204)
+>
+> [七大设计原则](https://www.jianshu.com/p/3a0e9fba3a41)
 
