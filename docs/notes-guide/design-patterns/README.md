@@ -5,7 +5,7 @@
 &emsp;&emsp;**学习设计模式，应该领悟其设计思想，而不应该局限于代码的层面**。例如，监听模式可以应用于网络中的客户端和服务器，比如手机中的各种App的消息推送，服务端是被观察者，各个手机上的App是观察者，一旦服务器上的数据有更新，就会被推送到手机上。在这个应用中你会发现服务器代码和App客户端代码其实是两套完全不一样的代码，它们是通过网络接口进行通信的，所以只停留在代码层面是不够的。
 
 
-## 基础篇
+## 23种设计模式
 
 - [监听模式](/design-patterns-base/1_dp-monitor.html)
 
@@ -63,7 +63,7 @@
 
   定义一系列算法，将每个算法都封装起来，并且使它们之间可以相互替换。
 
-- [工厂模式](/design-patterns-base/15_dp-factory.html)
+- [工厂模式（工厂方法模式&抽象工厂模式）](/design-patterns-base/15_dp-factory.html)
 
   专门定义一个类来负责创建其他类的实例。工厂模式又可以派生出简单工厂、工厂方法、抽象工厂模式。
 
@@ -96,7 +96,7 @@
   描述如何使用面向对象构建一个简单的语言解释器。
 
 
-## 进阶篇
+## 设计模式扩展
 
 - [过滤模式](/design-patterns-advanced/1_dp-filter.html)
 
@@ -113,6 +113,16 @@
 - [MVC模式](/design-patterns-advanced/4_dp-mvc.html)
 
   软件架构模式，将软件系统分为三个基本部分：模型（Model）、视图（View）和控制器（Controller）。
+
+
+## 七大设计原则
+
+- [七大设计原则](/design-patterns-advanced/6_dp-principles.html)
+
+  OOP七大设计原则就是面向对象编程思想的指导总纲。
+
+
+## 关于设计模式的思考
 
 - [关于设计模式的理解](/design-patterns-advanced/5_dp-understand.html)
 

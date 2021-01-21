@@ -16,7 +16,7 @@ module.exports = {
             '/git/': getGitSidebar("Git"),
             '/microservices/': getMicroservicesSidebar("微服务简介"),
             '/linux/': getLinuxSidebar("Linux"),
-            '/design-patterns-base/': getDesignPatternsSidebar("设计模式-基础"),
+            '/design-patterns-base/': getDesignPatternsSidebar("23种设计模式"),
             '/design-patterns-advanced/': getDesignPatternsAdvancedSidebar("设计模式-进阶"),
             '/python-base/': getPythonBaseSidebar("Python基础"),
             '/thought/': getThoughtBaseSidebar("思想")
@@ -198,12 +198,13 @@ function getDesignPatternsAdvancedSidebar(groupA){
     {
       title: groupA,
       collapsable: false,
-      sidebarDepth: 1,
+      sidebarDepth: 2,
       children: [
         ['1_dp-filter','过滤模式'],
         ['2_dp-objectpool','对象池技术'],
         ['3_dp-callback','回调机制'],
         ['4_dp-mvc','MVC模式'],
+        ['6_dp-principles','七大设计原则'],
         ['5_dp-understand','关于设计模式的理解']
       ]
     }
@@ -217,7 +218,7 @@ function getPythonBaseSidebar (groupA) {
       {
         title: groupA,
         collapsable: false,
-        sidebarDepth: 2,
+        sidebarDepth: 3,
         children: [
           ['py-introduction','Python简介'],
           ['py-base-grammar','Python基础语法'],
