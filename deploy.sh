@@ -18,7 +18,7 @@ if [ $DEPLOY_MODEL = '-a' ] ; then
     # 提交代码到博客vuepress-blog仓库
     git add -A
     git commit -m $2
-    git push
+    git push origin master
    
     echo "2.发布blog提交日志信息为：$3 ，构建生成静态文件，发布中......"  
     # 构建
