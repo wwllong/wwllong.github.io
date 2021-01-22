@@ -70,6 +70,12 @@ cat ~/.ssh/id_rsa.pub
 
 ![git-ssh](./imgs/git-ssh.png)
 
+如果想检验是否配置成功，可以回到git bash，输入以下命令：（其实尝试拉取代码即可）
+
+```
+ssh -T git@github.com
+```
+
 最后，就可以成功使用git的方式拉取代码。
 
 ## 参考：

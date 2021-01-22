@@ -121,11 +121,19 @@
 
   OOP七大设计原则就是面向对象编程思想的指导总纲。
 
+- [更简单实用的设计原则](/design-patterns-advanced/8_dp-others-principles.html)
 
-## 关于设计模式的思考
+  KISS原则（保持简单和愚蠢）、DRY原则（不要重复自己）。YAGNI原则（您将不需要它）、ROT原则（三次法则）、CQS原则(命令查询分离)
 
-- [关于设计模式的理解](/design-patterns-advanced/5_dp-understand.html)
+
+## 关于设计模式/原则的思考
+
+- [关于设计模式的理解](/design-patterns-advanced/5_dp-think4patterns.html)
 
   设计模式玄，也不玄! 如何区分不同的模式? 设计模式的三重境界！
+
+- [关于设计原则的理解](/design-patterns-advanced/7_dp-think4principles.html)
+
+  七大设计原则总结。应该根据实际情况去遵循设计原则！
 
 

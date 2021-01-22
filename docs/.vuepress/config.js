@@ -121,7 +121,8 @@ function getGitSidebar (groupA) {
           ['git-introduciton-install','Git简介和安装'],
           ['git-configure-ssh','Git配置SSH'],
           ['tortoiseGit-configure-ssh','TortoiseGit配置SSH'],
-          'git-workFlow'
+          ['git-workFlow','Git-WorkFlow'],
+          ['git-command','Git命令']
         ]
       }
     ]
@@ -205,7 +206,9 @@ function getDesignPatternsAdvancedSidebar(groupA){
         ['3_dp-callback','回调机制'],
         ['4_dp-mvc','MVC模式'],
         ['6_dp-principles','七大设计原则'],
-        ['5_dp-understand','关于设计模式的理解']
+        ['8_dp-others-principles','更简单实用的设计原则'],
+        ['5_dp-think4patterns','关于设计模式的理解'],
+        ['7_dp-think4principles','关于设计原则的理解']
       ]
     }
   ]
