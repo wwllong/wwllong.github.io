@@ -208,7 +208,8 @@ function getDesignPatternsAdvancedSidebar(groupA){
         ['6_dp-principles','七大设计原则'],
         ['8_dp-others-principles','更简单实用的设计原则'],
         ['5_dp-think4patterns','关于设计模式的理解'],
-        ['7_dp-think4principles','关于设计原则的理解']
+        ['7_dp-think4principles','关于设计原则的理解'],
+        ['9_dp-think4refactor','关于项目重构的思考']
       ]
     }
   ]

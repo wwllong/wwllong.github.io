@@ -132,8 +132,14 @@
 
   设计模式玄，也不玄! 如何区分不同的模式? 设计模式的三重境界！
 
-- [关于设计原则的理解](/design-patterns-advanced/7_dp-think4principles.html)
+- [关于设计原则的思考](/design-patterns-advanced/7_dp-think4principles.html)
 
-  七大设计原则总结。应该根据实际情况去遵循设计原则！
+  关于七大设计原则的总结。如何应用设计原则?
+
+- [关于项目重构的思考](/design-patterns-advanced/7_dp-think4refactor.html)
+
+  什么是重构? 什么时候可以重构？怎么重构？如何让代码更加整洁?
+
+ 
 
 
