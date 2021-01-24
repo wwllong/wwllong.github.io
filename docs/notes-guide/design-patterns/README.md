@@ -136,7 +136,7 @@
 
   关于七大设计原则的总结。如何应用设计原则?
 
-- [关于项目重构的思考](/design-patterns-advanced/7_dp-think4refactor.html)
+- [关于项目重构的思考](/design-patterns-advanced/9_dp-think4refactor.html)
 
   什么是重构? 什么时候可以重构？怎么重构？如何让代码更加整洁?
 
