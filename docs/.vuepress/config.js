@@ -13,6 +13,7 @@ module.exports = {
             '/notes-guide/': getNotesGuideSidebar('博文索引','程序员内功','技术栈','其他'),
             '/change-logs/': getLogsSidebar("Changelog"),
             '/java-base/': getJavaBaseSidebar("Java-基础篇（上）"),
+            '/java-vm/': getJVMSidebar("Java虚拟机"),
             '/git/': getGitSidebar("Git"),
             '/microservices/': getMicroservicesSidebar("微服务简介"),
             '/linux/': getLinuxSidebar("Linux"),
@@ -107,6 +108,20 @@ function getJavaBaseSidebar (groupA) {
           ]
         }
       ]
+}
+
+/** JVM */
+function getJVMSidebar (groupA) {
+  return [
+      {
+        title: groupA,
+        collapsable: false,
+        sidebarDepth: 3,
+        children: [
+          ['JDK-JRE-JVM','JDK-JRE-JVM三者关系']
+        ]
+      }
+    ]
 }
 
 /** git */
