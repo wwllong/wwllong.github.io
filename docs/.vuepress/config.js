@@ -104,7 +104,8 @@ function getJavaBaseSidebar (groupA) {
             '1-helloworld',
             ['2-kws-ident-notes','关键字、标识符、注释'],
             ['3-constant-hexconv','常量和进制的运算'],
-            ['4-variable-typetran','变量和类型转换']
+            ['4-variable-typetran','变量和类型转换'],
+            ['5-type-oper-details','类型运算细节']
           ]
         }
       ]

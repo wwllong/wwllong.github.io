@@ -83,8 +83,8 @@ System.out.println(x);
 
 参考：
 
-https://blog.csdn.net/Deft_MKJing/article/details/79460485
+[ASCII，Unicode和UTF-8终于找到一个能完全搞清楚的文章了](https://blog.csdn.net/Deft_MKJing/article/details/79460485)
 
-https://blog.csdn.net/qq_29027865/article/details/81506901
+[ascii码字节数目总结](https://blog.csdn.net/qq_29027865/article/details/81506901)
 
-https://baike.baidu.com/item/Unicode/750500?fr=aladdin
+[百度百科-Unicode](https://baike.baidu.com/item/Unicode/750500?fr=aladdin)
