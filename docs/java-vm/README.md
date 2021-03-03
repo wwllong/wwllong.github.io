@@ -8,10 +8,10 @@
 
 
 
-## 一些概念
+## 一些概念和开始
 
 - [JDK-JRE-JVM三者关系](/java-vm/JDK-JRE-JVM.html)
-- 自己编译JDK
+- 实战自己编译JDK
   
 
 ## 自动内存管理机制
