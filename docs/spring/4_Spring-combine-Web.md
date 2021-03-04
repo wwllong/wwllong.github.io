@@ -2,7 +2,7 @@
 
 ## Spring整合Web
 
-Jar应用的入口为main函数，War应用的入口在web.xml中配置。Spring-web是专门用来使Spring支持Web应用的依赖。
+Spring-Web是专门用来使Spring支持Web应用的依赖。Jar应用的入口为main函数，War应用的入口在web.xml中配置。
 
 ### 容器初始化
 
@@ -46,7 +46,7 @@ Jar应用的入口为main函数，War应用的入口在web.xml中配置。Spring
 
 ## ApplicationContextAware
 
-当一个类实现了这个接口（ApplicationContextAware）之后，这个类就可以方便获得ApplicationContext的所有bean。换句话说，就是这个类可以直接获取Spring配置文件中，所有配置到的Bean对象。
+当一个类实现了这个接口（ApplicationContextAware）之后，这个类就可以方便获得ApplicationContext的所有bean。换句话说，就是这个类可以直接获取Spring配置文件中，所有配置到的Bean对象。例如下面的工具类SpringContext就实现了ApplicationContextAware，他可以让我们方便得获取到Bean：
 
 ``` java
 public class SpringContext implements ApplicationContextAware, DisposableBean {
@@ -94,10 +94,7 @@ public class SpringContext implements ApplicationContextAware, DisposableBean {
 
 ```
 
->更多关于ApplicationContextAware：
-https://www.jianshu.com/p/4c0723615a52
-
-Validate类为`commons-lang3`包提供的方法，所以需要引入该包。然后在spring-context.xml中配置SpringContext的实例，注意改实例需要放在第一的位置。
+注意工具类中：Validate类为`commons-lang3`包提供的方法，所以需要引入该包。并且在spring-context.xml中配置SpringContext的实例时，注意该实例应该需要放在第一的位置。
 
 ``` xml
 
@@ -109,6 +106,10 @@ Validate类为`commons-lang3`包提供的方法，所以需要引入该包。然
 
 ```
 
+更多关于ApplicationContextAware的使用可以参考：[ApplicationContextAware使用理解](https://www.jianshu.com/p/4c0723615a52)
+
+
+
 ## Bean的装配方式
 
 ### 默认装配方式
@@ -119,13 +120,14 @@ Validate类为`commons-lang3`包提供的方法，所以需要引入该包。然
 
 在学习Bean的装配方式之前，我们需要先了解一下Bean的作用域。当通过Spring容器创建一个Bean实例，不仅可以完成Bean的实例化，还可以通过scope属性，为Bean指定的作用域。
 
-Spring支持5种作用域：·
-
-* singleton：单例模式。在整个Spring容器种，使用singleton定义的Bean将是单例的，只有一个实例。默认为单例模式。
-* prototype：原型模式。即每次使用getBean方式获取的同一个<bean/>的实例都是一个新的实例。
-* request：对每次HTTP请求，都将会产生一个不同的Bean实例。
-* session：对于每个不同的HTTP Session，都将产生一个不同的Bean实例。
-* global session：每个全局的HTTP Session对应一个Bean实例。经典情况下，仅在使用protlet集群时生效，多个Web应用共享一个session。一般应用中，global-session与session是等同的。
+Spring支持5种作用域：
+```
+- singleton：单例模式。在整个Spring容器种，使用singleton定义的Bean将是单例的，只有一个实例。默认为单例模式。
+- prototype：原型模式。即每次使用getBean方式获取的同一个<bean/>的实例都是一个新的实例。
+- request：对每次HTTP请求，都将会产生一个不同的Bean实例。
+- session：对于每个不同的HTTP Session，都将产生一个不同的Bean实例。
+- global session：每个全局的HTTP Session对应一个Bean实例。经典情况下，仅在使用protlet集群时生效，多个Web应用共享一个session。一般应用中，global-session与session是等同的。
+```
 
 注意事项：
 
@@ -137,7 +139,7 @@ Spring支持5种作用域：·
 
 对于 DI 使用注解，将不在需要在Spring配置文件中声明Bean实例。Spring使用注解，需要在原有Spring运行环境基础上再做些改变。
 
-在Spring配置文件中配置`组件扫描器`，用于在指定的基本包中扫描注解。
+在Spring配置文件中配置**组件扫描器**，用于在指定的基本包中扫描注解。
 
 ``` xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -166,7 +168,7 @@ Spring 常用注解：
 |@Resource|域属性注解， 该注解有一个name属性，可以注入指定的bean|
 |@PostConstruct|方法注解，相当于初始化|
 
-#### 注解与XML配置的区别
+### 注解装配与XML装配的区别
 
 注解的好处是配置方便、直观。但是其弊端是以硬编码的方式写入了Java代码中，其修改是需要重新编译代码的。
 

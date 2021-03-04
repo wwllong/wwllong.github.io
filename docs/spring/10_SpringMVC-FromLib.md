@@ -12,7 +12,7 @@
 
 **<form:form />**
 
-使用 Spring MVC 的 form 标签主要有两个作用，第一是`它会自动的绑定来自 Model 中的一个属性值到当前 form 对应的实体对象，默认是 command 属性`，这样我们就可以在 form 表单体里面方便的使用该对象的属性了。第二是它`支持我们在提交表单的时候使用除 GET 和 POST 之外的其他方法进行提交，包括 DELETE 和 PUT 等`。
+使用 Spring MVC 的 form 标签主要有两个作用，第一是**它会自动的绑定来自 Model 中的一个属性值到当前 form 对应的实体对象，默认是 command 属性**，这样我们就可以在 form 表单体里面方便的使用该对象的属性了。第二是它**支持我们在提交表单的时候使用除 GET 和 POST 之外的其他方法进行提交，包括 DELETE 和 PUT 等**。
 
 ``` jsp
 <form:form action="formTag/form.do" method="post">  
@@ -95,7 +95,7 @@
 
 ## 单选按钮
 
-*** <form:radiobutton /> ***
+**<form:radiobutton />**
 
 使用 <form:radiobutton /> 标签来渲染一个 HTML 单选按钮，等同于：
 ``` jsp
@@ -107,7 +107,7 @@
 
 ## 单选按钮（多选）
 
-*** <form:radiobuttons /> ***
+**<form:radiobuttons />**
 
 使用 <form:radiobuttons path="favoriteNumber" items="${numbersList}" /> 标签来渲染一个 HTML 多项单选按钮，等同于：
 ``` jsp

@@ -1,6 +1,6 @@
 # Spring Validation
 
-# SR-303 简介
+## SR-303 简介
 
 JSR-303 是 JavaEE 6 中的一项子规范，叫做 Bean Validation，官方参考实现是 Hibernate Validator。
 

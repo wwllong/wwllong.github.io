@@ -2,7 +2,7 @@
 
 ## 拦截器简介
 
-Spring Web MVC 的处理器拦截器，类似于 Servlet 开发中的过滤器 Filter，用于对处理器进行预处理和后处理。
+SpringMVC 的处理器拦截器，类似于 Servlet 开发中的过滤器 Filter，用于对处理器进行预处理和后处理。
 
 ## 常见应用场景
 
@@ -15,11 +15,17 @@ Spring Web MVC 的处理器拦截器，类似于 Servlet 开发中的过滤器 F
 
 Spring MVC 拦截器需要实现 `HandlerInterceptor` 接口，该接口定义了 3 个方法，分别为 `preHandle()`、`postHandle()` 和 `afterCompletion()`，我们就是通过重写这 3 个方法来对用户的请求进行拦截处理的。
 
-* `preHandle(HttpServletRequest request, HttpServletResponse response, Object handle)`：该方法在请求处理之前进行调用。Spring MVC 中的 Interceptor 是链式调用的，在一个应用中或者说是在一个请求中可以同时存在多个 Interceptor 。每个 Interceptor 的调用会依据它的声明顺序依次执行，而且最先执行的都是 Interceptor 中的 `preHandle` 方法，`所以可以在这个方法中进行一些前置初始化操作或者是对当前请求做一个预处理，也可以在这个方法中进行一些判断来决定请求是否要继续进行下去`。该方法的返回值是布尔值 `Boolean` 类型的，当它返回为 `false` 时，表示请求结束，后续的 Interceptor 和 Controller 都不会再执行；当返回值为 `true` 时，就会继续调用下一个 Interceptor 的 `preHandle` 方法，如果已经是最后一个 Interceptor 的时候，就会是调用当前请求的 Controller 中的方法。
+* `preHandle(HttpServletRequest request, HttpServletResponse response, Object handle)`：
 
-* `postHandle(HttpServletRequest request, HttpServletResponse response, Object handle, ModelAndView modelAndView)`：通过 `preHandle` 方法的解释我们知道这个方法包括后面要说到的 `afterCompletion` 方法都只能在当前所属的 Interceptor 的 `preHandle` 方法的返回值为 `true` 的时候，才能被调用。postHandle 方法在当前请求进行处理之后，也就是在 Controller 中的方法调用之后执行，但是它会在 `DispatcherServlet` 进行视图返回渲染之前被调用，所以我们可以在这个方法中对 Controller 处理之后的 `ModelAndView` 对象进行操作。`postHandle` 方法被调用的方向跟 `preHandle` 是相反的，也就是说，先声明的 Interceptor 的 `postHandle` 方法反而会后执行。
+该方法在请求处理之前进行调用。Spring MVC 中的 Interceptor 是链式调用的，在一个应用中或者说是在一个请求中可以同时存在多个 Interceptor 。每个 Interceptor 的调用会依据它的声明顺序依次执行，而且最先执行的都是 Interceptor 中的 `preHandle` 方法，`所以可以在这个方法中进行一些前置初始化操作或者是对当前请求做一个预处理，也可以在这个方法中进行一些判断来决定请求是否要继续进行下去`。该方法的返回值是布尔值 `Boolean` 类型的，当它返回为 `false` 时，表示请求结束，后续的 Interceptor 和 Controller 都不会再执行；当返回值为 `true` 时，就会继续调用下一个 Interceptor 的 `preHandle` 方法，如果已经是最后一个 Interceptor 的时候，就会是调用当前请求的 Controller 中的方法。
 
-* `afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handle, Exception ex)`：也是需要当前对应的 Interceptor 的 `preHandle` 方法的返回值为 true 时才会执行。因此，该方法将在整个请求结束之后，也就是在 `DispatcherServlet` 渲染了对应的视图之后执行，这个方法的主要作用是用于进行资源清理的工作。
+* `postHandle(HttpServletRequest request, HttpServletResponse response, Object handle, ModelAndView modelAndView)`：
+
+通过 `preHandle` 方法的解释我们知道这个方法包括后面要说到的 `afterCompletion` 方法都只能在当前所属的 Interceptor 的 `preHandle` 方法的返回值为 `true` 的时候，才能被调用。postHandle 方法在当前请求进行处理之后，也就是在 Controller 中的方法调用之后执行，但是它会在 `DispatcherServlet` 进行视图返回渲染之前被调用，所以我们可以在这个方法中对 Controller 处理之后的 `ModelAndView` 对象进行操作。`postHandle` 方法被调用的方向跟 `preHandle` 是相反的，也就是说，先声明的 Interceptor 的 `postHandle` 方法反而会后执行。
+
+* `afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handle, Exception ex)`：
+
+也是需要当前对应的 Interceptor 的 `preHandle` 方法的返回值为 true 时才会执行。因此，该方法将在整个请求结束之后，也就是在 `DispatcherServlet` 渲染了对应的视图之后执行，这个方法的主要作用是用于进行资源清理的工作。
 
 ## 创建登陆拦截器
 
@@ -97,4 +103,4 @@ public class LoginInterceptor implements HandlerInterceptor {
   * mvc:exclude-mapping：需要排除的请求路径，比如登录页本身是不需要拦截的，这里还包括了静态资源路径也是不需要拦截的
   * bean class：配置指定的拦截器对象
 
-注意避免拦截器中的`拦截闭环`。
+**注意避免拦截器中的拦截闭环**。

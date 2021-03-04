@@ -20,7 +20,8 @@ module.exports = {
             '/design-patterns-base/': getDesignPatternsSidebar("23种设计模式"),
             '/design-patterns-advanced/': getDesignPatternsAdvancedSidebar("设计模式-进阶"),
             '/python-base/': getPythonBaseSidebar("Python基础"),
-            '/thought/': getThoughtBaseSidebar("思想")
+            '/thought/': getThoughtBaseSidebar("思想"),   
+            '/spring/': getSpringSidebar("Spring")     
         },
         nextLinks: true,
         prevLinks: false
@@ -266,4 +267,29 @@ function getThoughtBaseSidebar(groupA) {
     ]
 }
 
+/** Spring */
+function getSpringSidebar(groupA) {
+  return [
+      {
+        title: groupA,
+        collapsable: false,
+        sidebarDepth: 2,
+        children: [
+          ['1_Spring-Introduction','Spring简介'],
+          ['2_Spring-IoC','Spring与IoC'],
+          ['3_Hello-Spring','Hello-Spring'],
+          ['4_Spring-combine-Web','Spring-Web'],
+          ['5_SpringMVC-Introduction','SpringMVC简介'],
+          ['6_three-tier-architecture-MVC','三层架构与MVC'],
+          ['7_Spring-combine-SpringMVC','Spring整合SpringMVC'],
+          ['8_Hello-Controller','Hello-Controller控制器'],
+          ['9_SpringMVC-Interceptor','SpringMVC拦截器的使用'],
+          ['10_SpringMVC-FromLib','SpringMVC表单标签库'],
+          ['11_SpringMVC-Annotations','SpringMVC的一些注解'],
+          ['12_Spring-Transaction','Spring Transaction'],
+          ['13_Spring-Validation','Spring Validation']
+        ]
+      }
+    ]
+}
 

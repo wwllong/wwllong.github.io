@@ -1,6 +1,6 @@
 # Spring MVC 简介
 
-Spring MVC 也叫 Spring Web MVC，属于`展示层框架`。SpringMVC是Spring框架的一部分。
+Spring MVC 也叫 Spring Web MVC，属于**展示层框架**。SpringMVC是Spring框架的一部分。
 
 Spring Web MVC 框架提供了MVC（模型-视图-控制器）架构和用于开发灵活和松散耦合的Web应用程序的组件。MVC模式导致应用程序的不同方面（输入逻辑、业务逻辑和UI逻辑）分离，同时提供了这些元素之间的松散耦合。
 
@@ -14,7 +14,7 @@ Spring Web MVC 框架提供了MVC（模型-视图-控制器）架构和用于开
 
 针对上述问题，SpringMVC是这样解决的：Spring Web MVC 框架是围绕DispathcerServlet设计的(核心组件），它处理所有的HTTP请求和响应，它的设计是方法级别的处理。Spring Web MVC DispatcerServlet的请求处理工作流如下图所示：
 
-![img](imgs/springmvc-dispatcherServlet.png)
+![img](./imgs/springmvc-dispatcherServlet.png)
 
 DispathcerServlet传入HTTP请求的事件顺序：
 
