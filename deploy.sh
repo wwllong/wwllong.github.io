@@ -22,7 +22,7 @@ if [ $DEPLOY_MODEL = '-a' ] ; then
    
     echo "2.发布blog提交日志信息为：$3 ，构建生成静态文件，发布中......"  
     # 构建
-    yarn run docs:build
+    sudo yarn run docs:build
     # 进入生成的构建文件夹，发布博客
     cd docs/.vuepress/dist
 

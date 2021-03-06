@@ -21,7 +21,10 @@ module.exports = {
             '/design-patterns-advanced/': getDesignPatternsAdvancedSidebar("设计模式-进阶"),
             '/python-base/': getPythonBaseSidebar("Python基础"),
             '/thought/': getThoughtBaseSidebar("思想"),   
-            '/spring/': getSpringSidebar("Spring")     
+            '/spring/': getSpringSidebar("Spring"),
+            '/mybaits/': getMyBaitsSidebar("MyBaits"),
+            '/junit/': getJUnitSidebar("JUnit"),
+            '/log4j/': getLog4jSidebar("Log4j")
         },
         nextLinks: true,
         prevLinks: false
@@ -292,4 +295,57 @@ function getSpringSidebar(groupA) {
       }
     ]
 }
+
+/** MyBaits */
+function getMyBaitsSidebar(groupA) {
+  return [
+      {
+        title: groupA,
+        collapsable: false,
+        sidebarDepth: 2,
+        children: [
+          ['1_MyBatis-Introduction','MyBaits简介'],
+          ['1_Spring-combine-MyBatis','Spring整合MyBaits'],
+          ['2_Hello-MyBaits','Hello-MyBaits'],
+          ['3_MyBatis-CRUD','MyBatis-CRUD'],
+          ['4_MyBatis-Dynamic-SQL','MyBatis动态SQL'],
+          ['5_Druid-Introduction','Druid简介'],
+          ['6_Spring-conbine-Druid','Spring整合Druid']
+        ]
+      }
+    ]
+}
+
+/** JUnit */
+function getJUnitSidebar(groupA) {
+  return [
+      {
+        title: groupA,
+        collapsable: false,
+        sidebarDepth: 2,
+        children: [
+          ['1_JUnit-Introduction','JUnit简介'],
+          ['2_TDD-Test-Introduction.md','TDD和测试简介'],
+          ['3_JUnit-Annotations-Assert','JUnit注解和断言']
+        ]
+      }
+    ]
+}
+
+/** Log4j */
+function getLog4jSidebar(groupA) {
+  return [
+      {
+        title: groupA,
+        collapsable: false,
+        sidebarDepth: 2,
+        children: [
+          ['1_Log4j-Introduction','Log4j简介'],
+          ['2_Log4j-Config-File','Log4j日志配置文件'],
+          ['3_Log4j-Output-Control-File','Log4j日志输出控制文件']
+        ]
+      }
+    ]
+}
+
 

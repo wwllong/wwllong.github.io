@@ -6,7 +6,7 @@ MyBatis 是一个优秀的基于 Java 的持久层框架，它内部封装了 JD
 
 Mybatis 通过 xml 或注解的方式将要执行的各种 Statement（Statement、PreparedStatement 等）配置起来，并通过 Java 对象和 Statement 中 SQL 的动态参数进行映射生成最终执行的 SQL 语句，最后由 MyBatis 框架执行 SQL 并将结果映射成 Java 对象并返回。(ORM过程)
 
-![MyBaits体系结构](imgs/MyBaits体系结构.png)
+![MyBaits体系结构](./imgs/MyBaits-architecture.png)
 
 ps:注意扩展数据处理层过程、基础支撑层的缓存处理（页面置换算法：LRU、FIFO等)。
 
@@ -24,4 +24,4 @@ Hibernate 提供了 `方言` 的概念， 要想实现全自动， 需要额外�
 * 因为需要程序员自己去编写 SQL 语句，程序员可以结合数据库自身的特点灵活控制 SQL 语句，因此能够实现比 Hibernate 等全自动 ORM 框架更高的查询效率，能够完成复杂查询。
 * 简单，易于学习，易于使用，上手快。
 
-![MyBaits体系结构](imgs/MyBatis的特点.png)
+![MyBaits体系结构](./imgs/MyBatis-characteristics.png)
