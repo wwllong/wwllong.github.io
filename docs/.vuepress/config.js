@@ -24,7 +24,8 @@ module.exports = {
             '/spring/': getSpringSidebar("Spring"),
             '/mybaits/': getMyBaitsSidebar("MyBaits"),
             '/junit/': getJUnitSidebar("JUnit"),
-            '/log4j/': getLog4jSidebar("Log4j")
+            '/log4j/': getLog4jSidebar("Log4j"),
+            '/maven/': getMavenSidebar("Maven")
         },
         nextLinks: true,
         prevLinks: false
@@ -347,5 +348,29 @@ function getLog4jSidebar(groupA) {
       }
     ]
 }
+
+/** Maven */
+function getMavenSidebar(groupA) {
+  return [
+      {
+        title: groupA,
+        collapsable: false,
+        sidebarDepth: 2,
+        children: [
+          ['1_Maven-Introduction-Install','Maven 简介和安装'],
+          ['2_Maven-Repository','Maven中央仓库'],
+          ['3_Maven-Dependent-Mechanism','Maven依赖机制'],
+          ['4_Fix_Maven_Unautomatically-Download','解决Maven无法自动下载依赖的问题'],
+          ['5_Maven-POM','Maven POM'],
+          ['6_Hello-Maven','Hello-Maven'],
+          ['7_Maven-Plugin,','Maven插件'],
+          ['8_Maven-Snapshot','Maven快照'],
+          ['9_Maven-Common-Commands','Maven常用命令'],
+          ['10_Maven-Modular-Dev','Maven模块化开发']
+        ]
+      }
+    ]
+}
+
 
 

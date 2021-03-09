@@ -5,19 +5,23 @@
 ## 创建Mavne工程- web项目
 Create New Project -> Maven:
 
-![hello-maven](imgs/hello-maven.png)
+![hello-maven](./imgs/hello-maven.png)
 
 关于archetype(骨架)，它是封装好的Maven工程，默认带了一些配置，目的是为了简化开发。
 
-![hello-maven](imgs/hello-maven-mulu.png)
+![hello-maven](./imgs/hello-maven-mulu.png)
 
-## IDEA 配置 Maven （略）
+## IDEA 配置 Maven 
+
+1. ctrl + alt + s ：快捷打开设置。
+2. 搜索：Maven（路径：Build -》 Build Tools -》 Maven）
+3. 修改Maven home，User settings file、Local repository等配置即可。
 
 ## 创建webapp目录
 
 创建webapp目录，修改pom.xml文件，刷新Maven依赖，webapp文件夹样式会发生改变。
 
-![hello-maven](imgs/hello-maven-web.png)
+![hello-maven](./imgs/hello-maven-web.png)
 
 ## 配置web.xml
 
@@ -34,7 +38,7 @@ web目录文件添加WEB-INF目录，配置web.xml。
 
 可通过IDEA生成web.xml。
 
-![hello-maven](imgs/hello-maven-webxml.png)
+![hello-maven](./imgs/hello-maven-webxml.png)
 
 ## 编写HelloServlet
 
@@ -112,7 +116,7 @@ web.xml文件添加servlet配置
 
 在配置Tomcat前，打包项目`mvn package`:
 
-![hello-maven](imgs/hello-maven-tomcat.png)
+![hello-maven](./imgs/hello-maven-tomcat.png)
 
 访问：http://localhost:8080/servlet/hello
 

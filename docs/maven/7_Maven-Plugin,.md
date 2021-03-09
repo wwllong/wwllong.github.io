@@ -1,6 +1,6 @@
-# Maven 插件
+# Maven插件
 
-&emsp;&emsp;Maven是一个执行插件的框架，每一个任务`实际上是由插件完成的`。Maven插件通常用于：
+**Maven是一个执行插件的框架，每一个任务实际上是由插件完成的**。Maven插件通常用于：
 * 创建jar立件
 * 创建war文件
 * 编译代码文件
@@ -10,12 +10,12 @@
 
 一个插件通常提供了一组目标。可使用以下语法来执行：
 
-``` maven
+``` mvn
 mvn [plugin-name]:[goal-name]
 ```
 
 例如，一个Java顶目可以使用Maven编译器插件来编译目标，通过运行以下命令编译运行：
-``` maven 
+``` mvn 
 mvn compiler:compile
 ```
 
