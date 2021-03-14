@@ -25,7 +25,8 @@ module.exports = {
             '/mybaits/': getMyBaitsSidebar("MyBaits"),
             '/junit/': getJUnitSidebar("JUnit"),
             '/log4j/': getLog4jSidebar("Log4j"),
-            '/maven/': getMavenSidebar("Maven")
+            '/maven/': getMavenSidebar("Maven"),
+            '/java-utils/': getJavaUtilsSidebar("JavaUtils")
         },
         nextLinks: true,
         prevLinks: false
@@ -372,5 +373,22 @@ function getMavenSidebar(groupA) {
     ]
 }
 
-
+/** JavaUtils */
+function getJavaUtilsSidebar(groupA) {
+  return [
+    {
+      title: groupA,
+      collapsable: false,
+      sidebarDepth: 2,
+      children: [
+        ['CommonsEmail','CommonsEmail'],
+        ['CookieUtils','CookieUtils'],
+        ['HttpClientUtils','HttpClientUtils'],
+        ['JacksonUtils','JacksonUtils'],
+        ['Kaptcha','Kaptcha'],
+        ['RegexpUtils','RegexpUtils']
+      ]
+    }
+  ]
+}
 

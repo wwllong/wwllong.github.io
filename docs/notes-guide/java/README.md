@@ -17,3 +17,6 @@
 - [MyBaits](/mybaits/1_MyBatis-Introduction.html)
 - [MyBaits-Plus](https://mybatis.plus/)
 
+## 其他
+
+- [工具类](/java-utils/CommonsEmail.html)
