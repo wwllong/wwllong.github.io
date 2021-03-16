@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>适配器模式 | 万隆的博客</title>
+    <meta name="description" content="小小码农">
+    <link rel="icon" href="/favicon.png">
+    
+    <link rel="preload" href="/assets/css/0.styles.eb66b6c2.css" as="style"><link rel="preload" href="/assets/js/app.aa8f86e4.js" as="script"><link rel="preload" href="/assets/js/2.f9a5e3be.js" as="script"><link rel="preload" href="/assets/js/11.2e0a5867.js" as="script"><link rel="prefetch" href="/assets/js/10.718fa6cc.js"><link rel="prefetch" href="/assets/js/100.1caa12c7.js"><link rel="prefetch" href="/assets/js/101.29c233fb.js"><link rel="prefetch" href="/assets/js/102.452f9f0b.js"><link rel="prefetch" href="/assets/js/103.635753d6.js"><link rel="prefetch" href="/assets/js/104.c19e42bd.js"><link rel="prefetch" href="/assets/js/105.fb7e9c9f.js"><link rel="prefetch" href="/assets/js/106.6087b778.js"><link rel="prefetch" href="/assets/js/107.31fa2761.js"><link rel="prefetch" href="/assets/js/108.81d7ff86.js"><link rel="prefetch" href="/assets/js/109.eb97027b.js"><link rel="prefetch" href="/assets/js/110.5e1cbe87.js"><link rel="prefetch" href="/assets/js/111.c0a17815.js"><link rel="prefetch" href="/assets/js/112.c38e41b0.js"><link rel="prefetch" href="/assets/js/113.e9bb4061.js"><link rel="prefetch" href="/assets/js/114.eb89d505.js"><link rel="prefetch" href="/assets/js/115.3284a611.js"><link rel="prefetch" href="/assets/js/116.eed6aa4c.js"><link rel="prefetch" href="/assets/js/117.df336e4c.js"><link rel="prefetch" href="/assets/js/118.aa0c4d13.js"><link rel="prefetch" href="/assets/js/119.a59a81fb.js"><link rel="prefetch" href="/assets/js/12.99b027ac.js"><link rel="prefetch" href="/assets/js/120.4dc1ada5.js"><link rel="prefetch" href="/assets/js/121.05e9ab53.js"><link rel="prefetch" href="/assets/js/122.be807364.js"><link rel="prefetch" href="/assets/js/123.68635d17.js"><link rel="prefetch" href="/assets/js/124.723cc37a.js"><link rel="prefetch" href="/assets/js/125.37190dc7.js"><link rel="prefetch" href="/assets/js/126.49756b8c.js"><link rel="prefetch" href="/assets/js/127.238c6258.js"><link rel="prefetch" href="/assets/js/128.e22f66cd.js"><link rel="prefetch" href="/assets/js/129.429e0105.js"><link rel="prefetch" href="/assets/js/13.267a01c8.js"><link rel="prefetch" href="/assets/js/130.cc8ab7a9.js"><link rel="prefetch" href="/assets/js/131.d0b437ee.js"><link rel="prefetch" href="/assets/js/132.dee0770b.js"><link rel="prefetch" href="/assets/js/133.d0ca0a9a.js"><link rel="prefetch" href="/assets/js/134.10f5c255.js"><link rel="prefetch" href="/assets/js/135.db6cbe1f.js"><link rel="prefetch" href="/assets/js/136.ab0917a7.js"><link rel="prefetch" href="/assets/js/137.b8c16fa5.js"><link rel="prefetch" href="/assets/js/138.436e3d14.js"><link rel="prefetch" href="/assets/js/139.fef2aa5c.js"><link rel="prefetch" href="/assets/js/14.e43925dd.js"><link rel="prefetch" href="/assets/js/140.13535d2b.js"><link rel="prefetch" href="/assets/js/141.d7775d47.js"><link rel="prefetch" href="/assets/js/142.3698e213.js"><link rel="prefetch" href="/assets/js/15.37327058.js"><link rel="prefetch" href="/assets/js/16.feea21ed.js"><link rel="prefetch" href="/assets/js/17.7346fdd2.js"><link rel="prefetch" href="/assets/js/18.ce682c12.js"><link rel="prefetch" href="/assets/js/19.3b5e56c4.js"><link rel="prefetch" href="/assets/js/20.da2a44a7.js"><link rel="prefetch" href="/assets/js/21.7b5bc0e6.js"><link rel="prefetch" href="/assets/js/22.35b4518c.js"><link rel="prefetch" href="/assets/js/23.520eb7cd.js"><link rel="prefetch" href="/assets/js/24.08dda258.js"><link rel="prefetch" href="/assets/js/25.76838dc9.js"><link rel="prefetch" href="/assets/js/26.e9e85f99.js"><link rel="prefetch" href="/assets/js/27.1773acc2.js"><link rel="prefetch" href="/assets/js/28.dfa3c105.js"><link rel="prefetch" href="/assets/js/29.7b4929c7.js"><link rel="prefetch" href="/assets/js/3.499de965.js"><link rel="prefetch" href="/assets/js/30.9b89dd5c.js"><link rel="prefetch" href="/assets/js/31.19a1132e.js"><link rel="prefetch" href="/assets/js/32.521d293f.js"><link rel="prefetch" href="/assets/js/33.0e082a0b.js"><link rel="prefetch" href="/assets/js/34.b81caf3b.js"><link rel="prefetch" href="/assets/js/35.946360f8.js"><link rel="prefetch" href="/assets/js/36.4ef7b556.js"><link rel="prefetch" href="/assets/js/37.8bb388b3.js"><link rel="prefetch" href="/assets/js/38.0e1e92e4.js"><link rel="prefetch" href="/assets/js/39.1b0fe556.js"><link rel="prefetch" href="/assets/js/4.d6e028ee.js"><link rel="prefetch" href="/assets/js/40.269ee7f8.js"><link rel="prefetch" href="/assets/js/41.41e03fce.js"><link rel="prefetch" href="/assets/js/42.14b2549d.js"><link rel="prefetch" href="/assets/js/43.2fd0b8a9.js"><link rel="prefetch" href="/assets/js/44.0f11b207.js"><link rel="prefetch" href="/assets/js/45.657b6c10.js"><link rel="prefetch" href="/assets/js/46.274cba63.js"><link rel="prefetch" href="/assets/js/47.bcbde7d8.js"><link rel="prefetch" href="/assets/js/48.fd8aa6c0.js"><link rel="prefetch" href="/assets/js/49.a86df0fd.js"><link rel="prefetch" href="/assets/js/5.33a2e8d3.js"><link rel="prefetch" href="/assets/js/50.b07def42.js"><link rel="prefetch" href="/assets/js/51.10e388e3.js"><link rel="prefetch" href="/assets/js/52.e53a8ac7.js"><link rel="prefetch" href="/assets/js/53.617bdccc.js"><link rel="prefetch" href="/assets/js/54.06452d89.js"><link rel="prefetch" href="/assets/js/55.8e3c5d43.js"><link rel="prefetch" href="/assets/js/56.8011dc0a.js"><link rel="prefetch" href="/assets/js/57.74d03790.js"><link rel="prefetch" href="/assets/js/58.612c1d3d.js"><link rel="prefetch" href="/assets/js/59.d552efe2.js"><link rel="prefetch" href="/assets/js/6.98c6411c.js"><link rel="prefetch" href="/assets/js/60.54e70b24.js"><link rel="prefetch" href="/assets/js/61.97f8774d.js"><link rel="prefetch" href="/assets/js/62.bf8cbe0f.js"><link rel="prefetch" href="/assets/js/63.8c0a8955.js"><link rel="prefetch" href="/assets/js/64.de97887b.js"><link rel="prefetch" href="/assets/js/65.f74e40cc.js"><link rel="prefetch" href="/assets/js/66.5f0d5ca5.js"><link rel="prefetch" href="/assets/js/67.a5241c1a.js"><link rel="prefetch" href="/assets/js/68.81c12502.js"><link rel="prefetch" href="/assets/js/69.17870683.js"><link rel="prefetch" href="/assets/js/7.eae10382.js"><link rel="prefetch" href="/assets/js/70.f8ded352.js"><link rel="prefetch" href="/assets/js/71.eeb654ed.js"><link rel="prefetch" href="/assets/js/72.90f39cfb.js"><link rel="prefetch" href="/assets/js/73.bc338ddf.js"><link rel="prefetch" href="/assets/js/74.a2c2e261.js"><link rel="prefetch" href="/assets/js/75.a0fa7cae.js"><link rel="prefetch" href="/assets/js/76.a1bb8828.js"><link rel="prefetch" href="/assets/js/77.699197ca.js"><link rel="prefetch" href="/assets/js/78.3bf3a800.js"><link rel="prefetch" href="/assets/js/79.14bcab42.js"><link rel="prefetch" href="/assets/js/8.605b2ed5.js"><link rel="prefetch" href="/assets/js/80.68b21317.js"><link rel="prefetch" href="/assets/js/81.71f1cb30.js"><link rel="prefetch" href="/assets/js/82.28370bcc.js"><link rel="prefetch" href="/assets/js/83.834bc17a.js"><link rel="prefetch" href="/assets/js/84.7e91eef9.js"><link rel="prefetch" href="/assets/js/85.75447b28.js"><link rel="prefetch" href="/assets/js/86.22a9a877.js"><link rel="prefetch" href="/assets/js/87.29e606d3.js"><link rel="prefetch" href="/assets/js/88.b5a96537.js"><link rel="prefetch" href="/assets/js/89.e164872a.js"><link rel="prefetch" href="/assets/js/9.9abbd740.js"><link rel="prefetch" href="/assets/js/90.f2ac31f3.js"><link rel="prefetch" href="/assets/js/91.496d70d6.js"><link rel="prefetch" href="/assets/js/92.6f98e559.js"><link rel="prefetch" href="/assets/js/93.84fb9a60.js"><link rel="prefetch" href="/assets/js/94.eaa2aae9.js"><link rel="prefetch" href="/assets/js/95.634526f9.js"><link rel="prefetch" href="/assets/js/96.db216120.js"><link rel="prefetch" href="/assets/js/97.da144da5.js"><link rel="prefetch" href="/assets/js/98.7fb37118.js"><link rel="prefetch" href="/assets/js/99.289272c5.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.eb66b6c2.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/favicon.png" alt="万隆的博客" class="logo"> <span class="site-name can-hide">万隆的博客</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/notes-guide/" class="nav-link">博文索引</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">在线资源</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>在线学站</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="http://www.runoob.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  菜鸟教程
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://www.w3cschool.cn/tutorial" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  入门教程
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://www.coursera.org/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Coursera
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></li><li class="dropdown-item"><h4>在线文档</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="http://www.w3school.com.cn/index.html" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  w3school
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="http://www.bootcss.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Bootstrap
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://cn.vuejs.org/v2/api/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Vue
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></li><li class="dropdown-item"><h4>在线工具</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://tool.lu/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  tool 工具集
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://www.bejson.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  bejson 工具集
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://smallpdf.com/cn" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  文档转换
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></li><li class="dropdown-item"><!----> <a href="/online/" class="nav-link">更多在线资源</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">了解更多</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/change-logs/" class="nav-link">Changlog</a></li><li class="dropdown-item"><!----> <a href="/more/about-me/" class="nav-link">Aboutme</a></li></ul></div></div><div class="nav-item"><a href="https://github.com/wwllong" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/notes-guide/" class="nav-link">博文索引</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">在线资源</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>在线学站</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="http://www.runoob.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  菜鸟教程
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://www.w3cschool.cn/tutorial" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  入门教程
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://www.coursera.org/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Coursera
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></li><li class="dropdown-item"><h4>在线文档</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="http://www.w3school.com.cn/index.html" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  w3school
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="http://www.bootcss.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Bootstrap
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://cn.vuejs.org/v2/api/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Vue
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></li><li class="dropdown-item"><h4>在线工具</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://tool.lu/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  tool 工具集
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://www.bejson.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  bejson 工具集
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-subitem"><a href="https://smallpdf.com/cn" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  文档转换
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></li><li class="dropdown-item"><!----> <a href="/online/" class="nav-link">更多在线资源</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">了解更多</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/change-logs/" class="nav-link">Changlog</a></li><li class="dropdown-item"><!----> <a href="/more/about-me/" class="nav-link">Aboutme</a></li></ul></div></div><div class="nav-item"><a href="https://github.com/wwllong" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>23种设计模式</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/design-patterns-base/1_dp-monitor.html" class="sidebar-link">监听模式</a></li><li><a href="/design-patterns-base/2_dp-state.html" class="sidebar-link">状态模式</a></li><li><a href="/design-patterns-base/3_dp-intermediary.html" class="sidebar-link">中介模式</a></li><li><a href="/design-patterns-base/4_dp-decorative.html" class="sidebar-link">装饰模式</a></li><li><a href="/design-patterns-base/5_dp-singleton.html" class="sidebar-link">单例模式</a></li><li><a href="/design-patterns-base/6_dp-clone.html" class="sidebar-link">原型模式</a></li><li><a href="/design-patterns-base/7_dp-duty.html" class="sidebar-link">职责模式</a></li><li><a href="/design-patterns-base/8_dp-proxy.html" class="sidebar-link">代理模式</a></li><li><a href="/design-patterns-base/9_dp-facade.html" class="sidebar-link">外观模式</a></li><li><a href="/design-patterns-base/10_dp-iterator.html" class="sidebar-link">迭代器模式</a></li><li><a href="/design-patterns-base/11_dp-composite.html" class="sidebar-link">组合模式</a></li><li><a href="/design-patterns-base/12_dp-builder.html" class="sidebar-link">构建模式</a></li><li><a href="/design-patterns-base/13_dp-adapter.html" class="active sidebar-link">适配模式</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/design-patterns-base/13_dp-adapter.html#什么是适配器模式" class="sidebar-link">什么是适配器模式</a></li><li class="sidebar-sub-header"><a href="/design-patterns-base/13_dp-adapter.html#适配器模式的设计思想" class="sidebar-link">适配器模式的设计思想</a></li><li class="sidebar-sub-header"><a href="/design-patterns-base/13_dp-adapter.html#从生活中领悟适配器模式" class="sidebar-link">从生活中领悟适配器模式</a></li><li class="sidebar-sub-header"><a href="/design-patterns-base/13_dp-adapter.html#适配器模式的框架模型" class="sidebar-link">适配器模式的框架模型</a></li><li class="sidebar-sub-header"><a href="/design-patterns-base/13_dp-adapter.html#实战应用" class="sidebar-link">实战应用</a></li><li class="sidebar-sub-header"><a href="/design-patterns-base/13_dp-adapter.html#应用场景" class="sidebar-link">应用场景</a></li></ul></li><li><a href="/design-patterns-base/14_dp-strategy.html" class="sidebar-link">策略模式</a></li><li><a href="/design-patterns-base/15_dp-factory.html" class="sidebar-link">工厂模式</a></li><li><a href="/design-patterns-base/16_dp-command.html" class="sidebar-link">命令模式</a></li><li><a href="/design-patterns-base/17_dp-memento.html" class="sidebar-link">备忘模式</a></li><li><a href="/design-patterns-base/18_dp-flyweight.html" class="sidebar-link">享元模式</a></li><li><a href="/design-patterns-base/19_dp-visitor.html" class="sidebar-link">访问模式</a></li><li><a href="/design-patterns-base/20_dp-template.html" class="sidebar-link">模板模式</a></li><li><a href="/design-patterns-base/21_dp-bridge.html" class="sidebar-link">桥接模式</a></li><li><a href="/design-patterns-base/22_dp-interpreter.html" class="sidebar-link">解释模式</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="content default"><h1 id="适配器模式"><a href="#适配器模式" aria-hidden="true" class="header-anchor">#</a> 适配器模式</h1> <h2 id="什么是适配器模式"><a href="#什么是适配器模式" aria-hidden="true" class="header-anchor">#</a> 什么是适配器模式</h2> <blockquote><p>Convert the interface of a class into another interface clients expect. Adapter lets classes work together that couldn't otherwise because of incompatible interfaces.</p></blockquote> <p>将一个类的接口变成客户端所期望的另一种接口，从而使原本因接口不匹配而无法一起工作的两个类能够在一起工作。这就是适配模式，又叫包装（Wrapper）模式。</p> <p>适配器模式的作用：</p> <ol><li>接口转换，将原有的接口（或方法）转换成另一种接口。</li> <li>用新的接口包装一个已有的类。</li> <li>匹配一个老的组件到一个新的接口。</li></ol> <h2 id="适配器模式的设计思想"><a href="#适配器模式的设计思想" aria-hidden="true" class="header-anchor">#</a> 适配器模式的设计思想</h2> <p>适配器模式的核心思想是：将一个对象经过包装或转换后使它符合指定的接口，使得调用方可以像使用接口的一般对象一样使用它。适配模式通常用于对已有的系统进行新功能拓展，尤其适用于在设计良好的系统框架下接入第三方的接口或第三方的SDK。在系统的最初设计阶段，最好不要把适配模式考虑进去，除非一些特殊的场景，例如系统本身就是要对接和适配多种类型的硬件接口。</p> <h2 id="从生活中领悟适配器模式"><a href="#从生活中领悟适配器模式" aria-hidden="true" class="header-anchor">#</a> 从生活中领悟适配器模式</h2> <p>适配器的思想在生活中可谓处处可见，例如插座转换器，具有电压转换功能的变压器插座，各种转接头，如MiniDP转HDMI接头、HDMI转VGA线转换器、MicroUSB转Type-C接头等等。下面以去香港旅游时经常遇到的插座适配器为例，中国香港的插座大多是英标插座（T字方型3针脚），而我们中国大陆使用的是国标插座（八字扁型3针脚），所以经常使用一个适配器，将英标插座转换为国标插座来给我们的数码产品充电。</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token comment"># 适配模式-插座适配器</span>
+
+<span class="token keyword">from</span> abc <span class="token keyword">import</span> ABCMeta<span class="token punctuation">,</span> abstractmethod
+<span class="token comment"># 引入ABCMeta和abstractmethod来定义抽象类和抽象方法</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">SocketEntity</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;插座接口类型定义&quot;&quot;&quot;</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> numOfPin<span class="token punctuation">,</span> typeOfPin<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>__numOfPin <span class="token operator">=</span> numOfPin  <span class="token comment"># 针数</span>
+        self<span class="token punctuation">.</span>__typeOfPin <span class="token operator">=</span> typeOfPin  <span class="token comment"># 插座类型</span>
+
+    <span class="token keyword">def</span> <span class="token function">getNumOfPin</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>__numOfPin
+
+    <span class="token keyword">def</span> <span class="token function">setNumOfPin</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> numOfPin<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>__numOfPin <span class="token operator">=</span> numOfPin
+
+    <span class="token keyword">def</span> <span class="token function">getTypeOfPin</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>__typeOfPin
+
+    <span class="token keyword">def</span> <span class="token function">setTypeOfPin</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> typeOfPin<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>__typeOfPin <span class="token operator">=</span> typeOfPin
+
+
+<span class="token keyword">class</span> <span class="token class-name">ISocket</span><span class="token punctuation">(</span>metaclass<span class="token operator">=</span>ABCMeta<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;插座类型&quot;&quot;&quot;</span>
+
+    <span class="token keyword">def</span> <span class="token function">getName</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">&quot;&quot;&quot;插座名称&quot;&quot;&quot;</span>
+        <span class="token keyword">pass</span>
+
+    <span class="token keyword">def</span> <span class="token function">getSocket</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">&quot;&quot;&quot;获取接口&quot;&quot;&quot;</span>
+        <span class="token keyword">pass</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">ChineseSocket</span><span class="token punctuation">(</span>ISocket<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;国标插座&quot;&quot;&quot;</span>
+
+    <span class="token keyword">def</span> <span class="token function">getName</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token string">&quot;国标插座&quot;</span>
+
+    <span class="token keyword">def</span> <span class="token function">getSocket</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> SocketEntity<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token string">&quot;八字扁型&quot;</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">BritishSocket</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;英标插座&quot;&quot;&quot;</span>
+
+    <span class="token keyword">def</span> <span class="token function">name</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token string">&quot;英标插座&quot;</span>
+
+    <span class="token keyword">def</span> <span class="token function">socketInterface</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> SocketEntity<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token string">&quot;T字方型&quot;</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">AdapterSocket</span><span class="token punctuation">(</span>ISocket<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;插座转换器&quot;&quot;&quot;</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> britishSocket<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>__britishSocket <span class="token operator">=</span> britishSocket
+
+    <span class="token keyword">def</span> <span class="token function">getName</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>__britishSocket<span class="token punctuation">.</span>name<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">&quot;转换器&quot;</span>
+
+    <span class="token keyword">def</span> <span class="token function">getSocket</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        socket <span class="token operator">=</span> self<span class="token punctuation">.</span>__britishSocket<span class="token punctuation">.</span>socketInterface<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        socket<span class="token punctuation">.</span>setTypeOfPin<span class="token punctuation">(</span><span class="token string">&quot;八字扁型&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> socket
+
+
+<span class="token keyword">def</span> <span class="token function">canChargeforDigtalDevice</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> socket<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> socket<span class="token punctuation">.</span>getNumOfPin<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">3</span> <span class="token operator">and</span> socket<span class="token punctuation">.</span>getTypeOfPin<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">&quot;八字扁型&quot;</span><span class="token punctuation">:</span>
+        isStandard <span class="token operator">=</span> <span class="token string">&quot;符合&quot;</span>
+        canCharge <span class="token operator">=</span> <span class="token string">&quot;可以&quot;</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        isStandard <span class="token operator">=</span> <span class="token string">&quot;不符合&quot;</span>
+        canCharge <span class="token operator">=</span> <span class="token string">&quot;不能&quot;</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;[%s]：\n针脚数量：%d，针脚类型：%s； %s中国标准，%s给大陆的电子设备充电！&quot;</span>
+          <span class="token operator">%</span> <span class="token punctuation">(</span>name<span class="token punctuation">,</span> socket<span class="token punctuation">.</span>getNumOfPin<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> socket<span class="token punctuation">.</span>getTypeOfPin<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> isStandard<span class="token punctuation">,</span> canCharge<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">def</span> <span class="token function">testSocket</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    chineseSocket <span class="token operator">=</span> ChineseSocket<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    canChargeforDigtalDevice<span class="token punctuation">(</span>chineseSocket<span class="token punctuation">.</span>getName<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> chineseSocket<span class="token punctuation">.</span>getSocket<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    britishSocket <span class="token operator">=</span> BritishSocket<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    canChargeforDigtalDevice<span class="token punctuation">(</span>britishSocket<span class="token punctuation">.</span>name<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> britishSocket<span class="token punctuation">.</span>socketInterface<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    adapterSocket <span class="token operator">=</span> AdapterSocket<span class="token punctuation">(</span>britishSocket<span class="token punctuation">)</span>
+    canChargeforDigtalDevice<span class="token punctuation">(</span>adapterSocket<span class="token punctuation">.</span>getName<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> adapterSocket<span class="token punctuation">.</span>getSocket<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">&quot;__main__&quot;</span><span class="token punctuation">:</span>
+    testSocket<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token triple-quoted-string string">&quot;&quot;&quot;
+[国标插座]：
+针脚数量：3，针脚类型：八字扁型； 符合中国标准，可以给大陆的电子设备充电！
+[英标插座]：
+针脚数量：3，针脚类型：T字方型； 不符合中国标准，不能给大陆的电子设备充电！
+[英标插座转换器]：
+针脚数量：3，针脚类型：八字扁型； 符合中国标准，可以给大陆的电子设备充电！
+&quot;&quot;&quot;</span>
+</code></pre></div><p>这个示例中，使用插座转换器将英标插口转换为国标插口，解决了因为接口不同而不能给电子设备充电的问题，像这种将原本不匹配某种功能的对象转变变得匹配这种功能，在程序中就叫做适配模式。</p> <h2 id="适配器模式的框架模型"><a href="#适配器模式的框架模型" aria-hidden="true" class="header-anchor">#</a> 适配器模式的框架模型</h2> <p>对插座转换器示例代码抽象出适配器模式的框架模型：</p> <h3 id="类图和实现"><a href="#类图和实现" aria-hidden="true" class="header-anchor">#</a> 类图和实现</h3> <p>适配器模式有两种实现方式：一种是组合方式，另一种是继承方式。</p> <p><img src="/assets/img/adapter_mode_1.c7f6c535.png" alt="适配器模式-组合方式"></p> <p><img src="/assets/img/adapter_mode_2.81d188c1.png" alt="适配器模式-继承方式"></p> <p>Target：一个接口类，是提供给用户调用的接口抽象，如示例中的ISocket。</p> <p>Adaptee：是要进行适配的对象类，如示例中的BritishSocket。</p> <p>Adapter：是一个适配器，是对Adaptee的适配，它将Adaptee的对象转换（包装）成符合Target接口的对象。如示例中的AdapterSocket，它将BritishSocket的name（）和socketInterface（）方法包装成成ISocket的getName（）和getSocket（）接口。</p> <p>**适配模式的两种实现方式，比较推荐组合的方式，**因为在一些没有interface类型的编程语言（如C++、Python）中，Adapter类就会多继承，同时继承Target和Adaptee，在程序设计中应该尽量避免多继承（虽然Target只是一个接口类）。</p> <p>代码实现：</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token comment"># 适配模式-代码框架</span>
+
+<span class="token keyword">from</span> abc <span class="token keyword">import</span> ABCMeta<span class="token punctuation">,</span> abstractmethod
+<span class="token comment"># 引入ABCMeta和abstractmethod来定义抽象类和抽象方法</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">Target</span><span class="token punctuation">(</span>metaclass<span class="token operator">=</span>ABCMeta<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;目标类&quot;&quot;&quot;</span>
+
+    @abstractmethod
+    <span class="token keyword">def</span> <span class="token function">function</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">pass</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">Adaptee</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;源对象类，被适配对象&quot;&quot;&quot;</span>
+
+    <span class="token keyword">def</span> <span class="token function">speciaficFunction</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;被适配对象的特殊功能&quot;</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">Adapter</span><span class="token punctuation">(</span>Target<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;适配器&quot;&quot;&quot;</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> adaptee<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>__adaptee <span class="token operator">=</span> adaptee
+
+    <span class="token keyword">def</span> <span class="token function">function</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;进行功能的转换&quot;</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>__adaptee<span class="token punctuation">.</span>speciaficFunction<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+</code></pre></div><h3 id="设计要点"><a href="#设计要点" aria-hidden="true" class="header-anchor">#</a> 设计要点</h3> <p>适配器模式中主要有三个角色，在设计适配器模式时要找到并区分这些角色。</p> <ol><li>目标（Target）：即你期望的目标接口，要转换成的接口。</li> <li>源对象（Adaptee）：即要被转换的角色，要把谁转换成目标角色。</li> <li>适配器（Adapter）：适配模式的核心角色，负责把源对象转换和包装成目标对象。</li></ol> <h3 id="适配器模式优缺点"><a href="#适配器模式优缺点" aria-hidden="true" class="header-anchor">#</a> 适配器模式优缺点</h3> <p>优点：</p> <ol><li>可以让两个没有关联的类一起运行，起中间转换的作用。</li> <li>提高了类的复用率。</li> <li>灵活性好，不会破坏原有系统。</li></ol> <p>缺点：</p> <ol><li><p>如果原有系统没有设计好（如Target不是抽象类或接口，而是一个实体类），适配模式将很难实现。</p></li> <li><p>过多地使用适配器，容易使代码结构混乱，如明明看到调用的是A接口，内部调用的却是B接口的实现。</p></li></ol> <h2 id="实战应用"><a href="#实战应用" aria-hidden="true" class="header-anchor">#</a> 实战应用</h2> <p>假如有一个电子书阅读器的项目（Reader），研发之初，经过各方讨论，产品经理最后告诉我们只支持TXT和Epub格式的电子书。然后经过仔细思考、精心设计，采用了如下图所示的类图结构。</p> <p><img src="/assets/img/adapter_mode_3.183f54cf.png" alt="适配器模式实战-电子书-1"></p> <p>在这个类图中，有一个阅读器的核心类Reader，一个TXT文档的关键类TxtBook（负责TXT格式文件的解析），以及一个Epub文档的关键类EpubBook（负责Epub格式文件的解析）。</p> <p>产品上线半年后，市场反响良好，业务部门反映：有很多办公人员也在用我们的阅读器，他们希望这个阅读器能同时支持PDF格式，这样就不用在多个阅读器之间来回切换了。这时我们的程序就需要增加对PDF格式的支持，而支持PDF格式并不是核心业务，我们不会单独为其开发一套PDF解析内核，而会使用一些开源的PDF库（我们称它为第三方库），如MuPDF、TCPDF等。而开源库的接口和我们的接口并不相同，返回的内容也不是我们直接需要的，需要经过一些转换才能符合我们的要求。</p> <p><img src="/assets/img/adapter_mode_4.f93a2e78.png" alt="适配器模式实战-电子书-2"></p> <p>这时，我们就需要对第三方的PDF解析库（如MuPDF）进行适配，这个时候我们就可以使用适配器模式来实现这个需求。</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token comment"># 适配模式-实战电子书阅读器</span>
+
+<span class="token keyword">from</span> abc <span class="token keyword">import</span> ABCMeta<span class="token punctuation">,</span> abstractmethod<span class="token punctuation">,</span> ABC
+<span class="token comment"># 引入ABCMeta和abstractmethod来定义抽象类和抽象方法</span>
+<span class="token keyword">import</span> os
+<span class="token comment"># 导入os库,用于文件、路径相关的解析</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">Page</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;电子书一页的内容&quot;&quot;&quot;</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> pageNum<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>__pageNum <span class="token operator">=</span> pageNum
+
+    <span class="token keyword">def</span> <span class="token function">getContent</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token string">&quot;第 &quot;</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>__pageNum<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">&quot; 页的内容&quot;</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">Catalogue</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;目录结构&quot;&quot;&quot;</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> title<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>__title <span class="token operator">=</span> title
+        self<span class="token punctuation">.</span>__chapters <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+
+    <span class="token keyword">def</span> <span class="token function">addChapter</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> title<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>__chapters<span class="token punctuation">.</span>append<span class="token punctuation">(</span>title<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">showInfo</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;书名：&quot;</span> <span class="token operator">+</span> self<span class="token punctuation">.</span>__title<span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;目录：&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword">for</span> chapter <span class="token keyword">in</span> self<span class="token punctuation">.</span>__chapters<span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;    &quot;</span> <span class="token operator">+</span> chapter<span class="token punctuation">)</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">IBook</span><span class="token punctuation">(</span>metaclass<span class="token operator">=</span>ABCMeta<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;电子书文档的接口类&quot;&quot;&quot;</span>
+
+    @abstractmethod
+    <span class="token keyword">def</span> <span class="token function">parseFile</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> filePath<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">&quot;&quot;&quot;解析文档&quot;&quot;&quot;</span>
+        <span class="token keyword">pass</span>
+
+    @abstractmethod
+    <span class="token keyword">def</span> <span class="token function">getCatalogue</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">&quot;&quot;&quot;获取目录&quot;&quot;&quot;</span>
+        <span class="token keyword">pass</span>
+
+    @abstractmethod
+    <span class="token keyword">def</span> <span class="token function">getPage</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> pageNum<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">&quot;&quot;&quot;获取第pageNum页的内容&quot;&quot;&quot;</span>
+        <span class="token keyword">pass</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">TxtBook</span><span class="token punctuation">(</span>IBook<span class="token punctuation">,</span> ABC<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;txt解析类&quot;&quot;&quot;</span>
+
+    <span class="token keyword">def</span> <span class="token function">parseFile</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> filePath<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment"># 模拟文档的解析</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>filePath <span class="token operator">+</span> <span class="token string">&quot; 文件解析成功&quot;</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>__title <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>splitext<span class="token punctuation">(</span>filePath<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+        self<span class="token punctuation">.</span>__pageCount <span class="token operator">=</span> <span class="token number">800</span>
+        <span class="token keyword">return</span> <span class="token boolean">True</span>
+
+    <span class="token keyword">def</span> <span class="token function">getCatalogue</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        catelogue <span class="token operator">=</span> Catalogue<span class="token punctuation">(</span>self<span class="token punctuation">.</span>__title<span class="token punctuation">)</span>
+        catelogue<span class="token punctuation">.</span>addChapter<span class="token punctuation">(</span><span class="token string">&quot;第一章 标题&quot;</span><span class="token punctuation">)</span>
+        catelogue<span class="token punctuation">.</span>addChapter<span class="token punctuation">(</span><span class="token string">&quot;第二章 标题&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> catelogue
+
+    <span class="token keyword">def</span> <span class="token function">getPageCount</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>__pageCount
+
+    <span class="token keyword">def</span> <span class="token function">getPage</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> pageNum<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> Page<span class="token punctuation">(</span>pageNum<span class="token punctuation">)</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">EpubBook</span><span class="token punctuation">(</span>IBook<span class="token punctuation">,</span> ABC<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;Epub解析类&quot;&quot;&quot;</span>
+
+    <span class="token keyword">def</span> <span class="token function">parseFile</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> filePath<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment"># 模拟文档的解析</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>filePath <span class="token operator">+</span> <span class="token string">&quot; 文件解析成功&quot;</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>__title <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>splitext<span class="token punctuation">(</span>filePath<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+        self<span class="token punctuation">.</span>__pageCount <span class="token operator">=</span> <span class="token number">800</span>
+        <span class="token keyword">return</span> <span class="token boolean">True</span>
+
+    <span class="token keyword">def</span> <span class="token function">getCatalogue</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        catelogue <span class="token operator">=</span> Catalogue<span class="token punctuation">(</span>self<span class="token punctuation">.</span>__title<span class="token punctuation">)</span>
+        catelogue<span class="token punctuation">.</span>addChapter<span class="token punctuation">(</span><span class="token string">&quot;第一章 标题&quot;</span><span class="token punctuation">)</span>
+        catelogue<span class="token punctuation">.</span>addChapter<span class="token punctuation">(</span><span class="token string">&quot;第二章 标题&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> catelogue
+
+    <span class="token keyword">def</span> <span class="token function">getPageCount</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>__pageCount
+
+    <span class="token keyword">def</span> <span class="token function">getPage</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> pageNum<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> Page<span class="token punctuation">(</span>pageNum<span class="token punctuation">)</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">Outline</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;第三方PDF解析库的目录类&quot;&quot;&quot;</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>__outlines <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+
+    <span class="token keyword">def</span> <span class="token function">addOutline</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> title<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>__outlines<span class="token punctuation">.</span>append<span class="token punctuation">(</span>title<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">getOutlines</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>__outlines
+
+
+<span class="token keyword">class</span> <span class="token class-name">PdfPage</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;PDF页&quot;&quot;&quot;</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> pageNum<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>__pageNum <span class="token operator">=</span> pageNum
+
+    <span class="token keyword">def</span> <span class="token function">getPageNum</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>__pageNum
+
+
+<span class="token keyword">class</span> <span class="token class-name">ThirdPdf</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;第三方PDF解析库&quot;&quot;&quot;</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>__pageSize <span class="token operator">=</span> <span class="token number">0</span>
+        self<span class="token punctuation">.</span>__title <span class="token operator">=</span> <span class="token string">&quot;&quot;</span>
+
+    <span class="token keyword">def</span> <span class="token function">open</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> filePath<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;第三方库解析PDF文件：&quot;</span> <span class="token operator">+</span> filePath<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>__title <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>splitext<span class="token punctuation">(</span>filePath<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+        self<span class="token punctuation">.</span>__pageCount <span class="token operator">=</span> <span class="token number">1000</span>
+        <span class="token keyword">return</span> <span class="token boolean">True</span>
+
+    <span class="token keyword">def</span> <span class="token function">getTitle</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>__title
+
+    <span class="token keyword">def</span> <span class="token function">getOutLine</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        outline <span class="token operator">=</span> Outline<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        outline<span class="token punctuation">.</span>addOutline<span class="token punctuation">(</span><span class="token string">&quot;第一章 PDF电子书标题&quot;</span><span class="token punctuation">)</span>
+        outline<span class="token punctuation">.</span>addOutline<span class="token punctuation">(</span><span class="token string">&quot;第二章 PDF电子书标题&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> outline
+
+    <span class="token keyword">def</span> <span class="token function">pageSize</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>__pageSize
+
+    <span class="token keyword">def</span> <span class="token function">page</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> index<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> PdfPage<span class="token punctuation">(</span>index<span class="token punctuation">)</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">PdfAdapterBook</span><span class="token punctuation">(</span>ThirdPdf<span class="token punctuation">,</span> IBook<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;对第三方的PDF解析库重新进行包装&quot;&quot;&quot;</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> thirdPdf<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>__thirdPdf <span class="token operator">=</span> thirdPdf
+
+    <span class="token keyword">def</span> <span class="token function">parseFile</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> filePath<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment"># 模拟文档的解析</span>
+        rtn <span class="token operator">=</span> self<span class="token punctuation">.</span>__thirdPdf<span class="token punctuation">.</span><span class="token builtin">open</span><span class="token punctuation">(</span>filePath<span class="token punctuation">)</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>rtn<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span>filePath <span class="token operator">+</span> <span class="token string">&quot;文件解析成功&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> rtn
+
+    <span class="token keyword">def</span> <span class="token function">getCatalogue</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        outline <span class="token operator">=</span> self<span class="token punctuation">.</span>__thirdPdf<span class="token punctuation">.</span>getOutLine<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;将Outline结构的目录转换成Catalogue结构的目录&quot;</span><span class="token punctuation">)</span>
+        catalogue <span class="token operator">=</span> Catalogue<span class="token punctuation">(</span>self<span class="token punctuation">.</span>__thirdPdf<span class="token punctuation">.</span>getTitle<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">for</span> title <span class="token keyword">in</span> outline<span class="token punctuation">.</span>getOutlines<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            catalogue<span class="token punctuation">.</span>addChapter<span class="token punctuation">(</span>title<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> catalogue
+
+    <span class="token keyword">def</span> <span class="token function">getPageCount</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>__thirdPdf<span class="token punctuation">.</span>pageSize<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">getPage</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> pageNum<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        page <span class="token operator">=</span> self<span class="token punctuation">.</span>__thirdPdf<span class="token punctuation">.</span>page<span class="token punctuation">(</span>pageNum<span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;将PdfPage的面向对象转换成Page的对象&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> Page<span class="token punctuation">(</span>page<span class="token punctuation">.</span>getPageNum<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">Reader</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;阅读器&quot;&quot;&quot;</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>__name <span class="token operator">=</span> name
+        self<span class="token punctuation">.</span>__filePath <span class="token operator">=</span> <span class="token string">&quot;&quot;</span>
+        self<span class="token punctuation">.</span>__curBook <span class="token operator">=</span> <span class="token boolean">None</span>
+        self<span class="token punctuation">.</span>__curPageNum <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span>
+
+    <span class="token keyword">def</span> <span class="token function">__initBook</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> filePath<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>__filePath <span class="token operator">=</span> filePath
+        extName <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>splitext<span class="token punctuation">(</span>filePath<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>extName<span class="token punctuation">.</span>lower<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">&quot;.epub&quot;</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>__curBook <span class="token operator">=</span> EpubBook<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">elif</span><span class="token punctuation">(</span>extName<span class="token punctuation">.</span>lower<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">&quot;.txt&quot;</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>__curBook <span class="token operator">=</span> TxtBook<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">elif</span> <span class="token punctuation">(</span>extName<span class="token punctuation">.</span>lower<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">&quot;.pdf&quot;</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>__curBook <span class="token operator">=</span> PdfAdapterBook<span class="token punctuation">(</span>ThirdPdf<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>__curBook <span class="token operator">=</span> <span class="token boolean">None</span>
+
+    <span class="token keyword">def</span> <span class="token function">openFile</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> filePath<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>__initBook<span class="token punctuation">(</span>filePath<span class="token punctuation">)</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>__curBook <span class="token keyword">is</span> <span class="token operator">not</span> <span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            rtn <span class="token operator">=</span> self<span class="token punctuation">.</span>__curBook<span class="token punctuation">.</span>parseFile<span class="token punctuation">(</span>filePath<span class="token punctuation">)</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>rtn<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                self<span class="token punctuation">.</span>__curPageNum <span class="token operator">=</span> <span class="token number">1</span>
+            <span class="token keyword">return</span> rtn
+        <span class="token keyword">return</span> <span class="token boolean">False</span>
+
+    <span class="token keyword">def</span> <span class="token function">closeFile</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;关闭 &quot;</span> <span class="token operator">+</span> self<span class="token punctuation">.</span>__filePath <span class="token operator">+</span> <span class="token string">&quot;文件&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token boolean">True</span>
+
+    <span class="token keyword">def</span> <span class="token function">showCatalogue</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        catalogue <span class="token operator">=</span> self<span class="token punctuation">.</span>__curBook<span class="token punctuation">.</span>getCatalogue<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        catalogue<span class="token punctuation">.</span>showInfo<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">prePage</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;往前翻一页：&quot;</span><span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">&quot;&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>gotoPage<span class="token punctuation">(</span>self<span class="token punctuation">.</span>__curPageNum <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">nextPage</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;往后翻一页：&quot;</span><span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">&quot;&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>gotoPage<span class="token punctuation">(</span>self<span class="token punctuation">.</span>__curPageNum <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">gotoPage</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> pageNum<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>pageNum <span class="token operator">&gt;</span> <span class="token number">1</span> <span class="token operator">and</span> pageNum <span class="token operator">&lt;</span> self<span class="token punctuation">.</span>__curBook<span class="token punctuation">.</span>getPageCount<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>__curPageNum <span class="token operator">=</span> pageNum
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;显示第&quot;</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>__curPageNum<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">&quot;页&quot;</span><span class="token punctuation">)</span>
+        page <span class="token operator">=</span> self<span class="token punctuation">.</span>__curBook<span class="token punctuation">.</span>getPage<span class="token punctuation">(</span>self<span class="token punctuation">.</span>__curPageNum<span class="token punctuation">)</span>
+        page<span class="token punctuation">.</span>getContent<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> page
+
+
+<span class="token keyword">def</span> <span class="token function">testReaderBase</span><span class="token punctuation">(</span>fileName<span class="token punctuation">,</span> reader<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">not</span> reader<span class="token punctuation">.</span>openFile<span class="token punctuation">(</span>fileName<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span>
+    reader<span class="token punctuation">.</span>showCatalogue<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    reader<span class="token punctuation">.</span>prePage<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    reader<span class="token punctuation">.</span>nextPage<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    reader<span class="token punctuation">.</span>nextPage<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    reader<span class="token punctuation">.</span>closeFile<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">def</span> <span class="token function">testReader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    reader <span class="token operator">=</span> Reader<span class="token punctuation">(</span><span class="token string">&quot;阅读器&quot;</span><span class="token punctuation">)</span>
+    testReaderBase<span class="token punctuation">(</span><span class="token string">&quot;背影.txt&quot;</span><span class="token punctuation">,</span> reader<span class="token punctuation">)</span>
+    testReaderBase<span class="token punctuation">(</span><span class="token string">&quot;解忧杂货铺.epub&quot;</span><span class="token punctuation">,</span> reader<span class="token punctuation">)</span>
+    testReaderBase<span class="token punctuation">(</span><span class="token string">&quot;如何从生活中领悟设计模式.pdf&quot;</span><span class="token punctuation">,</span> reader<span class="token punctuation">)</span>
+
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    testReader<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token triple-quoted-string string">&quot;&quot;&quot;
+背影.txt 文件解析成功
+书名：背影
+目录：
+    第一章 标题
+    第二章 标题
+往前翻一页：显示第1页
+往后翻一页：显示第2页
+往后翻一页：显示第3页
+关闭 背影.txt文件
+
+解忧杂货铺.epub 文件解析成功
+书名：解忧杂货铺
+目录：
+    第一章 标题
+    第二章 标题
+往前翻一页：显示第1页
+往后翻一页：显示第2页
+往后翻一页：显示第3页
+关闭 解忧杂货铺.epub文件
+
+第三方库解析PDF文件：如何从生活中领悟设计模式.pdf
+如何从生活中领悟设计模式.pdf文件解析成功
+将Outline结构的目录转换成Catalogue结构的目录
+书名：如何从生活中领悟设计模式
+目录：
+    第一章 PDF电子书标题
+    第二章 PDF电子书标题
+往前翻一页：显示第1页
+将PdfPage的面向对象转换成Page的对象
+往后翻一页：显示第1页
+将PdfPage的面向对象转换成Page的对象
+往后翻一页：显示第1页
+将PdfPage的面向对象转换成Page的对象
+关闭 如何从生活中领悟设计模式.pdf文件
+
+&quot;&quot;&quot;</span>
+</code></pre></div><h2 id="应用场景"><a href="#应用场景" aria-hidden="true" class="header-anchor">#</a> 应用场景</h2> <ol><li>系统需要使用现有的类，而这些类的接口不符合现有系统的要求。</li> <li>对已有的系统拓展新功能，尤其适用于在设计良好的系统框架下增加接入第三方的接口或第三方的SDK。</li></ol> <blockquote><p>摘自： 罗伟富. 《人人都懂设计模式：从生活中领悟设计模式：Python实现》. 电子工业出版社</p></blockquote></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">上次更新: </span> <span class="time">1/7/2021, 3:09:45 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/design-patterns-base/12_dp-builder.html" class="prev">
+          构建模式
+        </a></span> <span class="next"><a href="/design-patterns-base/14_dp-strategy.html">
+          策略模式
+        </a>
+        →
+      </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.aa8f86e4.js" defer></script><script src="/assets/js/2.f9a5e3be.js" defer></script><script src="/assets/js/11.2e0a5867.js" defer></script>
+  </body>
+</html>
