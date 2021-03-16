@@ -2,7 +2,7 @@
 
 ## 什么是字体图标
 
-`字体图标`就是使用字体（Font）格式的字形做成的图标，他是矢量的。
+**字体图标就是使用字体（Font）格式的字形做成的图标，他是矢量的**。
 
 ## Bootstrap自带的字体图标
 
@@ -28,7 +28,7 @@ Bootstrap自带了200多种字体格式的字形，在fonts文件夹内可以找
 
 ## 其他字体图标库
 
-* FontAwesome：http://fontawesome.dashgame.com/
-* LineAwesome：http://icons8.com/line-awesome
-* SocialIcons: http://www.socicon.com/chart.php
-* 阿里巴巴矢量图库: http://www.iconfont.cn/
+1. [FontAwesome](http://fontawesome.dashgame.com/)
+2. [LineAwesome](http://icons8.com/line-awesome)
+3. [SocialIcons](http://www.socicon.com/chart.php)
+4. [阿里巴巴矢量图库](http://www.iconfont.cn/)

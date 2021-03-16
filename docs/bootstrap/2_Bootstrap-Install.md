@@ -2,11 +2,11 @@
 
 ## 下载Bootstrap
 
-Bootstrap官方地址：https://getbootstrap.com/  
-Bootstrap中文文档：https://www.bootcss.com/  
-jQuery下载地址：https://jquery.com/
+1. [Bootstrap官方地址](https://getbootstrap.com/)
+2. [Bootstrap中文文档](https://www.bootcss.com/)
+3. [jQuery下载地址](https://jquery.com/)
 
-注：
+注意：
 * Bootstrap 4.x版本不支持IE8。
 * Bootstrap需要jQuery的支持。
 * 下载用于生产环境的Bootstrap
@@ -14,7 +14,7 @@ jQuery下载地址：https://jquery.com/
 ## 文件结构
 
 预编译版，下载压缩包之后，将其解压缩到任意目录即可看到以下（压缩版的）目录结构：
-![文件结构](imgs/bootstrap-mulu.png)
+![文件结构](./imgs/bootstrap-mulu.png)
 
 ## HTML模板
 
@@ -51,8 +51,9 @@ jQuery下载地址：https://jquery.com/
 
 ## 前端目录结构模板
 
-![前端目录结构模板](imgs/bootstrap-template.png)
+![前端目录结构模板](./imgs/bootstrap-template.png)
 
 
-感谢：https://v3.bootcss.com/getting-started/
+参考：
+[Bootstrap v3 起步](https://v3.bootcss.com/getting-started/)
 
