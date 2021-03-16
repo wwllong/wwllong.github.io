@@ -2,17 +2,18 @@
 
 ## Bootstrap简介
 
-Bootstrap，来自Twitter，是目前很受欢迎的前端框架。Bootstrap基于HTML、CSS、JavaScript，它简洁灵活，使得得Web开发加快。它是一个`CSS/HTML框架`。Bootstrap提供了优雅的HTML和CSS规范。Bootstrap一经推出后颇受欢迎。一直是GitHub上的热门开源项目。
+Bootstrap，来自Twitter，是目前很受欢迎的前端框架。Bootstrap基于HTML、CSS、JavaScript，它简洁灵活，使得得Web开发加快。它是一个**CSS/HTML框架**。Bootstrap提供了优雅的HTML和CSS规范。Bootstrap一经推出后颇受欢迎。一直是GitHub上的热门开源项目。
 
 ## 为什么使用Bootstrap？
+
 * 移动设备优先：自Bootstrap 3起，框架包含了贵穿于整个库的移动设备优先的样式。
 * 浏览器支持：所有的主流浏览器都支持Bootstrap。
 * 容易上手：只要您具HTML和CSS的基础和识，您就可以开始学习Bootstrap。
-* `响应式设计`：Bootstrap的响应式CSS能够自适应台式机、平板电脑和手机。
-* 它为开发人员创建接口提供了`一个简洁统一的解决方案`。
-* 它含了功能大的`内置组件`，易于定制。
+* **响应式设计**：Bootstrap的响应式CSS能够自适应台式机、平板电脑和手机。
+* 它为开发人员创建接口提供了**一个简洁统一的解决方案**。
+* 它含了功能大的**内置组件**，易于定制。
 * 它还供了基干Web的定制。
-* 它是`开源`的。
+* 它是**开源**的。
 
 ## Bootstrap包含的内容
 

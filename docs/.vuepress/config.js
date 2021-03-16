@@ -26,7 +26,9 @@ module.exports = {
             '/junit/': getJUnitSidebar("JUnit"),
             '/log4j/': getLog4jSidebar("Log4j"),
             '/maven/': getMavenSidebar("Maven"),
-            '/java-utils/': getJavaUtilsSidebar("JavaUtils")
+            '/java-utils/': getJavaUtilsSidebar("JavaUtils"),
+            '/java-mysql/': getMySQLSidebar("MySql"),
+            '/bootstrap/': getBootstrapSidebar("Bootstrap")
         },
         nextLinks: true,
         prevLinks: false
@@ -392,3 +394,35 @@ function getJavaUtilsSidebar(groupA) {
   ]
 }
 
+/** MySQL */
+function getMySQLSidebar(groupA){
+  return[
+    {
+      title: groupA,
+      collapsable: false,
+      sidebarDepth: 2,
+      children: [
+        ['MySQL-version','MySQL的版本']
+      ]
+    }
+  ]
+}
+
+/** Bootstrap */
+function getBootstrapSidebar(groupA){
+  return[
+    {
+      title: groupA,
+      collapsable: false,
+      sidebarDepth: 2,
+      children: [
+        ['1_Bootstrap-Introduction','Bootstrap简介'],
+        ['2_Bootstrap-Install','Bootstrap安装'],
+        ['3_Bootstrap-Form','Bootstrap表格'],
+        ['4_Bootstrap-Media-Search','Bootstrap媒体查询'],
+        ['5_Bootstra-Grid','Bootstrap栅格系统'],
+        ['6_Bootstrap-Font-Icon','Bootstrap字体图标']
+      ]
+    }
+  ]
+}
