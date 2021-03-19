@@ -53,16 +53,16 @@ elif [ $DEPLOY_MODEL = '-2' ] ; then
     echo "发布模式：只发布博客"
     echo "发布blog提交日志信息为：$2 ,构建生成静态文件，发布中......"
      # 构建
-    yarn run docs:build
+    # yarn run docs:build
     # 进入生成的构建文件夹，发布博客
     cd docs/.vuepress/dist
 
-    git init
-    git add -A
-    git commit -m $2
+    # git init
+    # git add -A
+    # git commit -m $2
 
     # 如果发布到  https://<USERNAME>.github.io
-    git push -f git@github.com:wwllong/wwllong.github.io.git master
+    # git push -f git@github.com:wwllong/wwllong.github.io.git master
     git push -f https://gitee.com/wenwlon/wwllong.github.io.git master
 
 else

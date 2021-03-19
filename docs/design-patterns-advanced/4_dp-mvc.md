@@ -224,13 +224,13 @@ MVP是MVC的一个变种，很多框架都自称遵循MVC模式，但是实际�
 
 MVVM也是MVC的一个变种。MVVM（Model-View-ViewModel）最早由微软提出，ViewModel指 “ModelofView”，即“视图的模型”，它将View的状态和行为抽象化，让我们可以将UI和业务逻辑分开。MVVM模式架构图如下所示：
 
-![MVVM-1模式框架](./imgs/mvvm_1.png)
+![MVVM-1模式框架](./imgs/MVVM_1.png)
 
 在MVP中，Presenter负责协调和控制Model与View的工作，保证Model和View的数据实时同步和更新，但这个操作需要程序员写代码手动控制。而**MVVM中ViewModel把View和Model的同步逻辑自动化了**，以前Presenter负责的View和Model同步不再需要手动地进行操作，而是交给框架所提供的数据绑定功能来负责，只需要告诉它View显示的数据对应的是Model的哪一部分即可。
 
 MVVM模式的最佳实践当属前端的Vue.js框架。Vue.js专注于MVVM中的ViewModel，不仅做到了数据**双向绑定**，而且也是一个相对轻量级的JS库。不同的框架实现双向数据绑定的技术有所不同，Vue采用数据劫持和发布-订阅模式的方式。双向数据绑定可以简单地理解为一个模板引擎，当视图改变时更新模型，当模型改变时更新视图，如下图所示：
 
-![MVVM-2模式框架](./imgs/mvvm_2.png)
+![MVVM-2模式框架](./imgs/MVVM_2.png)
 
 从MVC到MVP，再到MVVM，就像一个打怪升级的过程，软件架构模式随着软件技术的升级而不断发展和延伸。
 
