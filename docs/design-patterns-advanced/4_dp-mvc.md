@@ -211,7 +211,7 @@ EOS 80D的设置   光圈：F5.6  快门：1/720  感光度：ISO 100
 
 MVP是MVC的一个变种，很多框架都自称遵循MVC模式，但是实际上它们实现的是MVP模式。MVP在MVC的基础上，**使用Presenter对视图和模型进行解耦，视图和模型独立发展，互不干扰，沟通都通过Presenter进行**。MVP模式框架图如下图所示：
 
-![PVM模式框架](./imgs/pvm.png)
+![PVM模式框架](./imgs/mvp.png)
 
 1. Presenter相当于MVC中的Controller，负责业务逻辑的处理；
 2. Model和View不能直接通信，只能通过Presenter间接地通信；
