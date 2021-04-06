@@ -15,6 +15,7 @@ module.exports = {
             '/java-base/': getJavaBaseSidebar("Java-基础篇（上）"),
             '/java-vm/': getJVMSidebar("Java虚拟机"),
             '/git/': getGitSidebar("Git"),
+            '/git-issue/': getGitIssueSidebar("Git-Issue"),
             '/microservices/': getMicroservicesSidebar("微服务简介"),
             '/linux/': getLinuxSidebar("Linux"),
             '/design-patterns-base/': getDesignPatternsSidebar("23种设计模式"),
@@ -147,6 +148,20 @@ function getGitSidebar (groupA) {
           ['tortoiseGit-configure-ssh','TortoiseGit配置SSH'],
           ['git-workFlow','Git-WorkFlow'],
           ['git-command','Git命令']
+        ]
+      }
+    ]
+}
+
+/** git-issue */
+function getGitIssueSidebar (groupA) {
+  return [
+      {
+        title: groupA,
+        collapsable: false,
+        sidebarDepth: 1,
+        children: [
+          ['git-issue-001', 'sourcetree - error: insufficient permission for adding an object to repository database']
         ]
       }
     ]
