@@ -161,7 +161,8 @@ function getGitIssueSidebar (groupA) {
         collapsable: false,
         sidebarDepth: 1,
         children: [
-          ['git-issue-001', 'sourcetree - error: insufficient permission for adding an object to repository database']
+          ['git-issue-001', 'sourcetree - error: insufficient permission for adding an object to repository database'],
+          ['git-issue-002', 'fatal: could not read Username for "https://git.dev.tencent.com" 解决方法']
         ]
       }
     ]
