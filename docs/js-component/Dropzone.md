@@ -2,9 +2,9 @@
 
 Dropzone 是一个开源的 JavaScript 库，提供文件的异步上传功能，并支持拖拽上传功能
 
-官方网站：https://www.dropzonejs.com/
-GitHub：https://github.com/enyo/dropzone
-Wiki：https://gitlab.com/meno/dropzone/-/wikis/home
+* [官方网站](https://www.dropzonejs.com/)
+* [GitHub](https://github.com/enyo/dropzone)
+* [Wiki](https://gitlab.com/meno/dropzone/-/wikis/home)
 
 ## 页面引用
 

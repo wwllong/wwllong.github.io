@@ -2,10 +2,10 @@
 
 DataTables 是一款 jQuery 表格插件。它是一个高度灵活的工具，可以将任何HTML表格添加高级的交互功能。
 
-* 中文网站：http://datatables.club/
-* 实例索引：http://datatables.club/example/
-* 参考手册：http://datatables.club/manual/
-* 帮助文档：http://datatables.club/reference/
+* [中文网站](http://datatables.club/)
+* [实例索引](http://datatables.club/example/)
+* [参考手册](http://datatables.club/manual/)
+* [帮助文档](http://datatables.club/reference/)
 
 ## 页面引用
 
@@ -259,11 +259,11 @@ $('#dataTable').DataTable({
 });
 ``` 
 
-## 参考以下文档完成
+## 参考
 
-* 配置选项：http://datatables.club/reference/option/
-* 服务器处理：http://datatables.club/manual/server-side.html
-* 设置列的数据源：https://datatables.net/reference/option/columns.data
-* 国际化：http://datatables.club/manual/i18n.html
-* 日期格式化工具：http://momentjs.cn/
-* 多条件查询：http://datatables.club/reference/option/ajax.data.html
+* [配置选项](http://datatables.club/reference/option/)
+* [服务器处理](http://datatables.club/manual/server-side.html)
+* [设置列的数据源](https://datatables.net/reference/option/columns.data)
+* [国际化](http://datatables.club/manual/i18n.html)
+* [日期格式化工具](http://momentjs.cn/)
+* [多条件查询](http://datatables.club/reference/option/ajax.data.html)

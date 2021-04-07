@@ -16,7 +16,7 @@
 - [Java](./java/)
 - [Git](./git/)
 - [Python](./python/)
-- [JavaScript](./temp/)
+- [JavaScript](/js-component/jQuery-Datatables.html)
 - [Nodojs](./temp/)
 - [Bootstrap](/bootstrap/1_Bootstrap-Introduction.html)
 

@@ -29,7 +29,8 @@ module.exports = {
             '/maven/': getMavenSidebar("Maven"),
             '/java-utils/': getJavaUtilsSidebar("JavaUtils"),
             '/java-mysql/': getMySQLSidebar("MySql"),
-            '/bootstrap/': getBootstrapSidebar("Bootstrap")
+            '/bootstrap/': getBootstrapSidebar("Bootstrap"),
+            '/js-component/': getJavaScriptSidebar("JavaScript")
         },
         nextLinks: true,
         prevLinks: false
@@ -438,6 +439,27 @@ function getBootstrapSidebar(groupA){
         ['4_Bootstrap-Media-Search','Bootstrap媒体查询'],
         ['5_Bootstra-Grid','Bootstrap栅格系统'],
         ['6_Bootstrap-Font-Icon','Bootstrap字体图标']
+      ]
+    }
+  ]
+}
+
+/** JavaScript */
+function getJavaScriptSidebar(groupA){
+  return[
+    {
+      title: groupA,
+      collapsable: false,
+      sidebarDepth: 2,
+      children: [
+        ['jQuery-Datatables','jQuery Datatables'],
+        ['jQuery-iCheck','jQuery iCheck'],
+        ['jQuery-zTree','jQuery zTree'],
+        ['jQuery-TreeTable','jQuery TreeTable'],
+        ['jQuery-Validation','jQuery Validation'],
+        ['Dropzone','Dropzone'],
+        ['wangEditor','wangEditor'],
+        ['DataTime','DataTime']
       ]
     }
   ]

@@ -2,9 +2,9 @@
 
 轻量级 web 富文本编辑器，配置方便，使用简单。支持 IE10+ 浏览器。
 
-* 官网：http://www.wangEditor.com
-* 文档：http://www.kancloud.cn/wangfupeng/wangeditor3/332599
-* 源码：http://github.com/wangfupeng1988/wangEditor
+* [官网](http://www.wangEditor.com)
+* [文档](http://www.kancloud.cn/wangfupeng/wangeditor3/332599)
+* [源码](http://github.com/wangfupeng1988/wangEditor)
 
 ## 什么是富文本编辑器
 
@@ -40,7 +40,7 @@ editor.create();
 
 配置方式同 Dropzone 图片上传插件
 
-* 上传文件文档：https://www.kancloud.cn/wangfupeng/wangeditor3/335782
+* [上传文件文档](https://www.kancloud.cn/wangfupeng/wangeditor3/335782)
 * 注意返回的JSON格式
 
 控制器关键代码参考

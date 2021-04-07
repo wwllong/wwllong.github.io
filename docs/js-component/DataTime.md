@@ -303,4 +303,4 @@ var DateTime = function () {
 
 ## 其他时间工具类
 
-* momentjs ： http://momentjs.cn/
+* [momentjs](http://momentjs.cn/)
