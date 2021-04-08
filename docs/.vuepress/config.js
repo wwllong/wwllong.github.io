@@ -196,7 +196,10 @@ function getLinuxSidebar(groupA){
       collapsable: false,
       sidebarDepth: 1,
       children: [
-        ['linux-introduction','Linux简介']
+        ['linux-introduction','Linux简介'],
+        ['linux-terminal','Linux远程控制'],
+        ['linux-dir-management','Linux目录管理及指令'],
+        ['linux-archive','Linux压缩命令']
       ]
     }
   ]

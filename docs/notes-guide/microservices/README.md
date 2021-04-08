@@ -4,4 +4,4 @@
 
 近年来，微服务在应用开发和部署方面取得了显著的进步。将应用开发或者重构成微服务以分离服务，通过 API 以明确的方式来相互“对话” 。例如，每个微服务都是自包含（self-contained），各自维护自己的数据存储（这非常有意义），可以独立更新其他服务。
 
-- [简介和理论](/microservices/index.html)
+- [简介和理论](/microservices/micrservice-introduction.html)
