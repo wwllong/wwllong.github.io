@@ -17,8 +17,10 @@
 - [Git](./git/)
 - [Python](./python/)
 - [JavaScript](/js-component/jQuery-Datatables.html)
-- [Nodojs](./temp/)
+- [Linux](./linux/index.html)
 - [Bootstrap](/bootstrap/1_Bootstrap-Introduction.html)
+- [微服务](/notes-guide/microservices/)
+- [Nodojs](./temp/)
 
 ## 其他
 

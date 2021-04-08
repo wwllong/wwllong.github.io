@@ -70,9 +70,11 @@ function getNotesGuideSidebar (groupA,groupB,groupC,groupD) {
             children: [
               '/notes-guide/java/',
               '/notes-guide/git/',
-              '/notes-guide/microservices/',
+              '/notes-guide/python/',
+              '/js-component/',
               '/notes-guide/linux/',
-              '/notes-guide/python/'
+              '/bootstrap/',
+              '/notes-guide/microservices/'
             ]
         },
         {
@@ -179,7 +181,8 @@ function getMicroservicesSidebar(groupA){
       children: [
         ['micrservice-introduction','微服务简介'],
         ['micrservice-CAP-BASE','CAP定理和BASE理论'],
-        ['micrservice-high-concurrency','如何应对高并发']
+        ['micrservice-high-concurrency','如何应对高并发'],
+        ['micrservice-note','微服务速记']
       ]
     }
   ]

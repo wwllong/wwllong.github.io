@@ -25,9 +25,9 @@ Linux 操作系统也是自由软件和开放源代码发展中最著名的例�
 原生云应用基本都是基于云服务器部署，本地化的 Linux 操作基本也都是在虚拟机中进行模拟操作。故我们只需要安装虚拟机并在虚拟机上安装对应的 Linux 操作系统即可。
 
 下载地址：
-1. 英文官网，https://ubuntu.com/download
-2. 中文网，https://cn.ubuntu.com/
+1. [英文官网](https://ubuntu.com/download)
+2. [中文网](https://cn.ubuntu.com/)
 
-安装中注意
-1. 设置镜像阿里云镜像地址：http://mirrors.aliyun.com/ubuntu/
+安装注意事项：
+1. [设置镜像阿里云镜像地址](http://mirrors.aliyun.com/ubuntu/)
 2. 使用LVM技术挂载磁盘，方便后续扩容。
