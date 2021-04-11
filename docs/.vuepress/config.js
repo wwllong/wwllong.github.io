@@ -30,7 +30,8 @@ module.exports = {
             '/java-utils/': getJavaUtilsSidebar("JavaUtils"),
             '/java-mysql/': getMySQLSidebar("MySql"),
             '/bootstrap/': getBootstrapSidebar("Bootstrap"),
-            '/js-component/': getJavaScriptSidebar("JavaScript")
+            '/js-component/': getJavaScriptSidebar("JavaScript"),
+            '/algs_base/': getAlgorithmSidebar("算法")
         },
         nextLinks: true,
         prevLinks: false
@@ -466,6 +467,20 @@ function getJavaScriptSidebar(groupA){
         ['Dropzone','Dropzone'],
         ['wangEditor','wangEditor'],
         ['DataTime','DataTime']
+      ]
+    }
+  ]
+}
+
+/** AlgorithmSidebar */
+function getAlgorithmSidebar(groupA){
+  return[
+    {
+      title: groupA,
+      collapsable: false,
+      sidebarDepth: 2,
+      children: [
+        ['algs_base','算法基本知识']
       ]
     }
   ]
