@@ -1,6 +1,11 @@
 # 数据结构与算法
 
+程序 = 数据结构 + 算法
+
+## 基础
+
 [算法基础知识](/algorithm/algs_base.html)
+[时间复杂度扩展](/algorithm/algs_base.html)
 
 ## 数据结构
 

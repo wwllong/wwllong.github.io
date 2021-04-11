@@ -31,7 +31,7 @@ module.exports = {
             '/java-mysql/': getMySQLSidebar("MySql"),
             '/bootstrap/': getBootstrapSidebar("Bootstrap"),
             '/js-component/': getJavaScriptSidebar("JavaScript"),
-            '/algs_base/': getAlgorithmSidebar("算法")
+            '/algorithm/': getAlgorithmSidebar("算法")
         },
         nextLinks: true,
         prevLinks: false
