@@ -11,5 +11,8 @@
     "docs:build": "vuepress build docs"
   },
   "repository": "https://github.com/wwllong/vuepress-blog.git",
-  "author": "wwllong18@163.com"
+  "author": "wwllong18@163.com",
+  "dependencies": {
+    "vuepress-plugin-latex": "^0.1.3"
+  }
 }

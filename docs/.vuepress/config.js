@@ -35,13 +35,10 @@ module.exports = {
         },
         nextLinks: true,
         prevLinks: false
-    }
-    // ,
-    // markdown: {
-    //   extendMarkdown: md => {
-    //     md.use(require("markdown-it-disable-url-encode"));
-    //   }
-    // }                
+    },
+    plugins: [
+      'latex' // or 'vuepress-plugin-latex'
+    ]
 }
 
 /** 首页指引 */
@@ -480,7 +477,8 @@ function getAlgorithmSidebar(groupA){
       collapsable: false,
       sidebarDepth: 2,
       children: [
-        ['algs_base','算法基本知识']
+        ['algs_base','算法基本知识'],
+        ['time_complexity','时间复杂度拓展']
       ]
     }
   ]

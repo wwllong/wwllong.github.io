@@ -4,8 +4,8 @@
 
 ## 基础
 
-[算法基础知识](/algorithm/algs_base.html)
-[时间复杂度扩展](/algorithm/algs_base.html)
+- [算法基础知识](/algorithm/algs_base.html)
+- [时间复杂度扩展](/algorithm/time_complexity.html)
 
 ## 数据结构
 
