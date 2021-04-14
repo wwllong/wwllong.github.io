@@ -478,7 +478,8 @@ function getAlgorithmSidebar(groupA){
       sidebarDepth: 2,
       children: [
         ['algs_base','算法基本知识'],
-        ['time_complexity','时间复杂度拓展']
+        ['time_complexity','时间复杂度拓展'],
+        ['algs_data-structure','基础数据结构']
       ]
     }
   ]
