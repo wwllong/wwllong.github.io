@@ -472,7 +472,7 @@ function getJavaScriptSidebar(groupA){
 /** AlgorithmSidebar */
 function getAlgorithmSidebar(groupA){
   return[
-    {
+    { 
       title: groupA,
       collapsable: false,
       sidebarDepth: 2,
