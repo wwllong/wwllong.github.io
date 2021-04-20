@@ -197,7 +197,9 @@ function getLinuxSidebar(groupA){
         ['linux-introduction','Linux简介'],
         ['linux-terminal','Linux远程控制'],
         ['linux-dir-management','Linux目录管理及指令'],
-        ['linux-archive','Linux压缩命令']
+        ['linux-archive','Linux压缩命令'],
+        ['linux-system','Linux系统管理'],
+        ['linux-editor','Linux编辑器']
       ]
     }
   ]
@@ -479,7 +481,8 @@ function getAlgorithmSidebar(groupA){
       children: [
         ['algs_base','算法基本知识'],
         ['time_complexity','时间复杂度拓展'],
-        ['algs_data-structure','基础数据结构']
+        ['algs_data-structure','基础数据结构'],
+        ['algs_sort','排序算法']
       ]
     }
   ]

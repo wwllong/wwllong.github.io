@@ -7,6 +7,8 @@
 - [算法基础知识](/algorithm/algs_base.html)
 - [时间复杂度扩展](/algorithm/time_complexity.html)
 - [基础数据结构](/algorithm/algs_data-structure.html)
+- [排序算法](/algorithm/algs_sort.html)
+
 
 
 ## 数据结构
