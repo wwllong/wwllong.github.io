@@ -200,7 +200,8 @@ function getLinuxSidebar(groupA){
         ['linux-archive','Linux压缩命令'],
         ['linux-system','Linux系统管理'],
         ['linux-editor','Linux编辑器'],
-        ['linux-user-group','Linux用户和组管理']
+        ['linux-user-group','Linux用户和组管理'],
+        ['linux-file-manage','Linux文件权限管理']
       ]
     }
   ]
