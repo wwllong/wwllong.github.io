@@ -205,7 +205,8 @@ function getLinuxSidebar(groupA){
         ['linux-software-src','Linux软件包管理'],
         ['linux-install-jdk','Linux安装JDK'],
         ['linux-install-tomcat','Linux安装Tomcat'],
-        ['linux-install-mysql','Linux安装MySQL']
+        ['linux-install-mysql','Linux安装MySQL'],
+        ['linux-LVM','Linux LVM磁盘扩容']
       ]
     }
   ]
