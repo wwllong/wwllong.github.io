@@ -504,7 +504,8 @@ function getDockerSidebar(groupA){
       collapsable: false,
       sidebarDepth: 2,
       children: [
-        ['1-docker-introduction','Docker简介']
+        ['1-docker-introduction','Docker简介'],
+        ['2-docker-framework','Docker架构']
       ]
     }
   ]
