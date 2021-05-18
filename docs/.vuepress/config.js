@@ -31,7 +31,8 @@ module.exports = {
             '/java-mysql/': getMySQLSidebar("MySql"),
             '/bootstrap/': getBootstrapSidebar("Bootstrap"),
             '/js-component/': getJavaScriptSidebar("JavaScript"),
-            '/algorithm/': getAlgorithmSidebar("算法")
+            '/algorithm/': getAlgorithmSidebar("算法"),
+            '/docker/': getDockerSidebar("Docker")
         },
         nextLinks: true,
         prevLinks: false
@@ -490,6 +491,20 @@ function getAlgorithmSidebar(groupA){
         ['time_complexity','时间复杂度拓展'],
         ['algs_data-structure','基础数据结构'],
         ['algs_sort','排序算法']
+      ]
+    }
+  ]
+}
+
+/** Docker */
+function getDockerSidebar(groupA){
+  return[
+    { 
+      title: groupA,
+      collapsable: false,
+      sidebarDepth: 2,
+      children: [
+        ['1-docker-introduction','Docker简介']
       ]
     }
   ]
