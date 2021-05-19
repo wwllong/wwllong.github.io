@@ -507,7 +507,9 @@ function getDockerSidebar(groupA){
         ['1-docker-introduction','Docker简介'],
         ['2-docker-framework','Docker架构'],
         ['3-docker-image-container','Docker镜像和容器'],
-        ['4-docker-registry','Docker仓库']
+        ['4-docker-registry','Docker仓库'],
+        ['5-docker-install4Ubuntu','Ubuntu安装Docker'],
+        ['6-docker-accelerator','Docker镜像加速器']
       ]
     }
   ]
