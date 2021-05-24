@@ -73,7 +73,8 @@ function getNotesGuideSidebar (groupA,groupB,groupC,groupD) {
               '/js-component/',
               '/notes-guide/linux/',
               '/bootstrap/',
-              '/notes-guide/microservices/'
+              '/notes-guide/microservices/',
+              '/docker/'
             ]
         },
         {

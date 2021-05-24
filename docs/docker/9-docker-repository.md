@@ -93,27 +93,103 @@ wenwl@ubuntu:~$ docker search wenwl
 
 ## Docker 私有仓库
 
-有时候使用 Docker Hub 这样的公共仓库可能不方便，用户可以创建一个本地仓库供私人使用。本节介绍如何使用本地仓库。[`docker-registry`](https://docs.docker.com/registry/) 是官方提供的工具，可以用于构建私有的镜像仓库。本文内容基于 [`docker-registry`](https://github.com/docker/distribution) v2.x 版本。（生产中可能会用别的开源仓库管理-比如：Harbor）
+有时候使用 Docker Hub 这样的公共仓库可能不方便，用户可以创建一个本地仓库供私人使用。本节介绍如何使用本地仓库。
+
+[`docker-registry`](https://docs.docker.com/registry/) 是官方提供的工具，可以用于构建私有的镜像仓库。本文内容基于 [`docker-registry`](https://github.com/docker/distribution) v2.x 版本。（生产中可能会用别的开源仓库管理系统-比如：Harbor）
 
 ### 安装运行 docker-registry
 
 我们可以通过获取官方的 `registry` 镜像来启动私有仓库。默认情况下，仓库会被创建在容器的 `/var/lib/registry` 目录下。你可以通过 `-v` 参数来将镜像文件存放在本地的指定路径。例如下面的例子将上传的镜像放到本地的 `/opt/data/registry` 目录。
 
 ```bash
-docker run -d \
+# 安装运行容器
+wenwl@ubuntu:~$ docker run -d \
     -p 5000:5000 \
     -v /opt/data/registry:/var/lib/registry \
     registry
 ```
 
-### 在私有仓库上传、搜索、下载镜像
+### 在私有仓库上传、下载镜像
 
-创建好私有仓库之后，就可以使用 `docker tag` 来标记一个镜像，然后推送它到仓库。例如私有仓库地址为 `127.0.0.1:5000`。
+创建好私有仓库之后，就可以使用 `docker tag` 来标记一个镜像，然后推送它到仓库。
 
-这里将 最新版本的 tomcat 再上传到私人仓库中：
+例如私有仓库地址为 `127.0.0.1:5000`，将 最新版本的 tomcat 再上传到私人仓库中为例：
 
+``` shell
+# 标记镜像
+wenwl@ubuntu:~$ docker tag tomcat:latest 127.0.0.1:5000/tomcat:latest
+wenwl@ubuntu:~$ docker images
+REPOSITORY              TAG                 IMAGE ID            CREATED             SIZE
+127.0.0.1:5000/tomcat   latest              c43a65faae57        10 days ago         667MB
+# 上传标记的镜像到私库
+wenwl@ubuntu:~$ docker push 127.0.0.1:5000/tomcat:latest
+The push refers to repository [127.0.0.1:5000/tomcat]
+daf63ef0ddbb: Pushed 
+3307ffa538c1: Pushed 
+8f8b5acac684: Pushed 
+15786a1cf1cb: Pushed 
+6f770cdc9ebf: Pushed 
+3fc095fab4a2: Pushed 
+685934357c89: Pushed 
+ccb9b68523fd: Pushed 
+00bcea93703b: Pushed 
+688e187d6c79: Pushed 
+latest: digest: sha256:e82ade60f21a967a4e4769c0955a83db9a2fc271bcb881a8456e99d710159f9e size: 2421
+# 查看仓库中的镜像
+wenwl@ubuntu:~$ curl 127.0.0.1:5000/v2/_catalog
+{"repositories":["tomcat"]}
+# 删除已有镜像
+wenwl@ubuntu:~$ docker rmi 127.0.0.1:5000/tomcat:latest 
+Untagged: 127.0.0.1:5000/tomcat:latest
+Untagged: 127.0.0.1:5000/tomcat@sha256:e82ade60f21a967a4e4769c0955a83db9a2fc271bcb881a8456e99d710159f9e
 
+# 从私有仓库下载镜像
+wenwl@ubuntu:~$ docker pull  127.0.0.1:5000/tomcat:latest
+latest: Pulling from tomcat
+Digest: sha256:e82ade60f21a967a4e4769c0955a83db9a2fc271bcb881a8456e99d710159f9e
+Status: Downloaded newer image for 127.0.0.1:5000/tomcat:latest
+127.0.0.1:5000/tomcat:latest
+```
 
 ### 注意事项
 
-### 其他
+如果你不想使用 `127.0.0.1:5000` 作为仓库地址，比如想让本网段的其他主机也能把镜像推送到私有仓库。例如 `192.168.199.100:5000` 这样的内网地址作为私有仓库地址，这时你会发现无法成功推送镜像。
+
+这是因为 Docker 默认不允许非 `HTTPS` 方式推送镜像。我们可以通过 Docker 的配置选项来取消这个限制，或者查看下一节配置能够通过 `HTTPS` 访问的私有仓库。
+
+#### Ubuntu 14.04, Debian 7 Wheezy
+
+对于使用 `upstart` 的系统而言，编辑 `/etc/default/docker` 文件，在其中的 `DOCKER_OPTS` 中增加如下内容：
+
+```bash
+DOCKER_OPTS="--registry-mirror=https://registry.docker-cn.com --insecure-registries=192.168.199.100:5000"
+```
+
+重新启动服务：
+
+```bash
+$ sudo service docker restart
+```
+
+#### Ubuntu 16.04+, Debian 8+, centos 7
+
+对于使用 `systemd` 的系统，请在 `/etc/docker/daemon.json` 中写入如下内容（如果文件不存在请新建该文件）
+
+```json
+{
+  "registry-mirrors": [
+    "https://registry.docker-cn.com"
+  ],
+  "insecure-registries": [
+    "192.168.199.100:5000"
+  ]
+}
+```
+
+::: tip 注意
+
+该文件必须符合 `json` 规范，否则 Docker 将不能启动。
+
+:::
+
+对于 Docker for Windows 、 Docker for Mac 在设置中编辑 `daemon.json` 增加和上边一样的字符串即可。
