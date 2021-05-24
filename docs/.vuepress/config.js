@@ -511,7 +511,8 @@ function getDockerSidebar(groupA){
         ['5-docker-install4Ubuntu','Ubuntu安装Docker'],
         ['6-docker-accelerator','Docker镜像加速器'],
         ['7-docker-image-operation','Docker镜像基本操作'],
-        ['8-docker-container-operation','Docker容器基本操作']
+        ['8-docker-container-operation','Docker容器基本操作'],
+        ['9-docker-repository','Docker仓库']
       ]
     }
   ]

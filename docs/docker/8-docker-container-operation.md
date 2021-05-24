@@ -31,8 +31,8 @@ bab4361d0aae        rabbitmq:3.8.3-management   "docker-entrypoint.s…"   10 mo
 利用 `docker run` 命令新建并启动：
 
 ``` bash
-# 使用tomcat镜像创建一个容器，命名为tomcat，宿主机端口8080（左）映射容器端口8080（右侧）
-wenwl@ubuntu:~$ docker run -p 8080:8080 --name tomcat tomcat 
+# 使用tomcat镜像创建一个容器，命名为tomcat，宿主机端口8888（左）映射容器端口8080（右侧）
+wenwl@ubuntu:~$ docker run -p 8888:8080 --name tomcat tomcat 
 NOTE: Picked up JDK_JAVA_OPTIONS:  --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-
 ...... # 篇幅有限忽略
 22-May-2021 15:44:59.699 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
@@ -71,10 +71,10 @@ b4b3f94f7916
 
 更多的时候，需要让 Docker 在后台运行而不是直接把执行命令的结果输出在当前宿主机下。此时，可以通过添加 `-d` 参数来实现。
 
-先前的创建并运行容器命令 `docker run -p 8080:8080 --name tomcat tomcat ` ，容器会把输出的结果打印到宿主机上面，如果使用了 `-d` 参数运行容器：
+先前的创建并运行容器命令 `docker run -p 8888:8080 --name tomcat tomcat ` ，容器会把输出的结果打印到宿主机上面，如果使用了 `-d` 参数运行容器：
 
 ``` shell
-wenwl@ubuntu:~$ docker run -d -p 8080:8080 --name tomcat tomcat 
+wenwl@ubuntu:~$ docker run -d -p 8888:8080 --name tomcat tomcat 
 95bfac1f70fbf903278d99a4a91d924c212f10f7e8335b275d789c59d20216f1do
 ```
 
@@ -189,7 +189,7 @@ root@b62795961c53:/# ps
 
 ``` bash
 # 启动容器
-wenwl@ubuntu:~$ docker run -d -p 8080:8080 --name tomcat tomcat
+wenwl@ubuntu:~$ docker run -d -p 8888:8080 --name tomcat tomcat
 52da0ad3c93b1b862aa7ff84dc5eb93fcea93fe86362701f39420d61feee51d1
 # 终止容器
 wenwl@ubuntu:~$ docker stop tomcat
@@ -218,6 +218,8 @@ wenwl@ubuntu:~$ docker container prune
 WARNING! This will remove all stopped containers.
 Are you sure you want to continue? [y/N] y
 ```
+
+
 
 
 
