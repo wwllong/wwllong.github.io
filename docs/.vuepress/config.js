@@ -32,7 +32,8 @@ module.exports = {
             '/bootstrap/': getBootstrapSidebar("Bootstrap"),
             '/js-component/': getJavaScriptSidebar("JavaScript"),
             '/algorithm/': getAlgorithmSidebar("算法"),
-            '/docker/': getDockerSidebar("Docker")
+            '/docker/': getDockerSidebar("Docker"),
+            '/java-interview/': getJavaInterview("Java笔试面试相关")
         },
         nextLinks: true,
         prevLinks: false
@@ -514,6 +515,21 @@ function getDockerSidebar(groupA){
         ['7-docker-image-operation','Docker镜像基本操作'],
         ['8-docker-container-operation','Docker容器基本操作'],
         ['9-docker-repository','Docker仓库']
+      ]
+    }
+  ]
+}
+
+/** Interview */
+function getJavaInterview(groupA){
+  return[
+    { 
+      title: groupA,
+      collapsable: false,
+      sidebarDepth: 2,
+      children: [
+        ['interview_class_loader','类加载器'],
+        ['interview_arr_copy','Java复制数组的四种方法']
       ]
     }
   ]

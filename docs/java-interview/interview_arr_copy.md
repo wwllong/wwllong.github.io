@@ -87,13 +87,13 @@ public class ArrayCopyDemo {
 
 ## 测试结果
 size=10  
-![size=10](imgs/arr_copy_10.png)  
+![size=10](./imgs/arr_copy_10.png)  
 size=100  
-![size=100](imgs/arr_copy_100.png)  
+![size=100](./imgs/arr_copy_100.png)  
 size=1000  
-![size=1000](imgs/arr_copy_1000.png)  
+![size=1000](./imgs/arr_copy_1000.png)  
 size=10000  
-![size=10000](imgs/arr_copy_10000.png)  
+![size=10000](./imgs/arr_copy_10000.png)  
 
 除了上图的展示，还每个size情况进行了多次运行观察，发现：
 - 数组元素不多时，Arrays.copyOf方法执行耗时是最多的，for方法在1000纳秒的时间徘徊，clone 和 System.arraycopy 经常不相伯仲，但多数是System.arraycopy执行时间更短。
