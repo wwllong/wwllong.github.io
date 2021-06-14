@@ -192,4 +192,4 @@ $ sudo service docker restart
 
 :::
 
-对于 Docker for Windows 、 Docker for Mac 在设置中编辑 `daemon.json` 增加和上边一样的字符串即可。
+对于 Docker for Windows 、 Docker for Mac 在设置中编辑 `daemon.json` 增加和上面一样的字符串即可。
