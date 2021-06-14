@@ -515,7 +515,8 @@ function getDockerSidebar(groupA){
         ['7-docker-image-operation','Docker镜像基本操作'],
         ['8-docker-container-operation','Docker容器基本操作'],
         ['9-docker-repository','Docker仓库'],
-        ['10-docker-dockerfile','Dockerfile 定制镜像']
+        ['10-docker-dockerfile','Dockerfile 定制镜像'],
+        ['11-docker-dockerfile-command','Dockerfile 指令']
       ]
     }
   ]
