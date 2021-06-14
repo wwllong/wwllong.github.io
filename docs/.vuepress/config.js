@@ -32,7 +32,7 @@ module.exports = {
             '/bootstrap/': getBootstrapSidebar("Bootstrap"),
             '/js-component/': getJavaScriptSidebar("JavaScript"),
             '/algorithm/': getAlgorithmSidebar("算法"),
-            '/docker/': getDockerSidebar("Docker"),
+            '/docker/': getDockerSidebar("Docker", "Docker Compose"),
             '/java-interview/': getJavaInterview("Java笔试面试相关")
         },
         nextLinks: true,
@@ -499,7 +499,7 @@ function getAlgorithmSidebar(groupA){
 }
 
 /** Docker */
-function getDockerSidebar(groupA){
+function getDockerSidebar(groupA, groupB){
   return[
     { 
       title: groupA,
@@ -517,6 +517,15 @@ function getDockerSidebar(groupA){
         ['9-docker-repository','Docker仓库'],
         ['10-docker-dockerfile','Dockerfile 定制镜像'],
         ['11-docker-dockerfile-command','Dockerfile 指令']
+      ]
+    },
+    { 
+      title: groupB,
+      collapsable: false,
+      sidebarDepth: 2,
+      children: [
+        ['1-docker-compose-introduction','Docker Compose简介'],
+        ['2-docker-compose-use','Docker Compose使用'],
       ]
     }
   ]
