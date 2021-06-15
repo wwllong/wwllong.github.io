@@ -18,6 +18,7 @@ module.exports = {
             '/git-issue/': getGitIssueSidebar("Git-Issue"),
             '/microservices/': getMicroservicesSidebar("微服务简介"),
             '/linux/': getLinuxSidebar("Linux"),
+            '/linux-ubuntu/': getLinuxUbuntuSidebar("Ubuntu"),
             '/design-patterns-base/': getDesignPatternsSidebar("23种设计模式"),
             '/design-patterns-advanced/': getDesignPatternsAdvancedSidebar("设计模式-进阶"),
             '/python-base/': getPythonBaseSidebar("Python基础"),
@@ -210,6 +211,21 @@ function getLinuxSidebar(groupA){
         ['linux-install-tomcat','Linux安装Tomcat'],
         ['linux-install-mysql','Linux安装MySQL'],
         ['linux-LVM','Linux LVM磁盘扩容']
+      ]
+    }
+  ]
+}
+
+/** Ubuntu */
+function getLinuxUbuntuSidebar(groupA){
+  return [
+    {
+      title: groupA,
+      collapsable: false,
+      sidebarDepth: 1,
+      children: [
+        ['ubuntu-static-ip','Ubuntu设置静态IP'],
+        ['ubuntu-dns', 'Ubuntu 20.x DNS设置']
       ]
     }
   ]
@@ -525,7 +541,7 @@ function getDockerSidebar(groupA, groupB){
       sidebarDepth: 2,
       children: [
         ['1-docker-compose-introduction','Docker Compose简介'],
-        ['2-docker-compose-use','Docker Compose使用'],
+        ['2-docker-compose-use','Docker Compose的使用'],
       ]
     }
   ]
