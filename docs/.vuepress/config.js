@@ -542,6 +542,7 @@ function getDockerSidebar(groupA, groupB){
       children: [
         ['1-docker-compose-introduction','Docker Compose简介'],
         ['2-docker-compose-use','Docker Compose的使用'],
+        ['3-docker-compose-command','Docker Compose命令']
       ]
     }
   ]
