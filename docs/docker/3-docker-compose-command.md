@@ -25,6 +25,23 @@ docker-compose [-f=<arg>...] [options] [COMMAND] [ARGS...]
 - `--verbose` 输出更多调试信息。
 - `-v, --version` 打印版本并退出
 
+## 常用命令
+
+先说一些基本的的常用命令：
+
+```shell
+# 前台运行
+docker-compose up
+# 后台运行
+docker-compose up -d
+# 启动
+docker-compose start
+# 停止
+docker-compose stop
+# 停止并移除容器
+docker-compose down
+```
+
 ## build
 
 构建（重新构建）项目中的服务容器。可以随时在项目目录下运行 `docker-compose build` 来重新构建服务。格式为：
