@@ -2,7 +2,7 @@
 
 # Docker 部署Tomcat
 
-## 查找 Docker Hub 上的 Tomcat 镜像
+## 查找Tomcat 镜像
 
 ```text
 wenwl@lubuntu:/usr/local/docker/tomcat$ docker search tomcat
@@ -34,6 +34,8 @@ secoresearch/tomcat-varnish   Tomcat and Varnish 5.0                          0 
 s390x/tomcat                  Apache Tomcat is an open source implementati…   0                                        0
 ```
 
+## 拉取镜像
+
 这里我们拉取官方的镜像
 
 ```text
@@ -52,7 +54,7 @@ hello-world   latest    d1165f221234   4 months ago   13.3kB
 
 
 
-## 运行容器：
+## 运行容器
 
 ```shell
 wenwl@lubuntu:/usr/local/docker/tomcat$ docker run --name tomcat -p 8081:8080 -v $PWD/root:/usr/local/tomcat/webapps/ROOT -d tomcat
