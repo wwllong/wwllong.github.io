@@ -533,7 +533,9 @@ function getDockerSidebar(groupA, groupB){
         ['9-docker-repository','Docker仓库'],
         ['10-docker-dockerfile','Dockerfile 定制镜像'],
         ['11-docker-dockerfile-command','Dockerfile 指令'],
-        ['12-docker-data-volume', 'Dockerfile 数据卷']
+        ['12-docker-data-volume', 'Docker 数据卷'],
+        ['13-docker-deploy-tomcat', 'Docker 部署 Tomcat'],
+        ['14-docker-deploy-mysql', 'Docker 部署 MySQL']
       ]
     },
     { 
