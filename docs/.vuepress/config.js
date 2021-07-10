@@ -24,6 +24,7 @@ module.exports = {
             '/python-base/': getPythonBaseSidebar("Python基础"),
             '/thought/': getThoughtBaseSidebar("思想"),   
             '/spring/': getSpringSidebar("Spring"),
+            '/springboot/': getSpringBootSidebar("SpringBoot"),
             '/mybaits/': getMyBaitsSidebar("MyBaits"),
             '/junit/': getJUnitSidebar("JUnit"),
             '/log4j/': getLog4jSidebar("Log4j"),
@@ -344,6 +345,21 @@ function getSpringSidebar(groupA) {
           ['11_SpringMVC-Annotations','SpringMVC的一些注解'],
           ['12_Spring-Transaction','Spring Transaction'],
           ['13_Spring-Validation','Spring Validation']
+        ]
+      }
+    ]
+}
+
+/** SpringBoot */
+function getSpringBootSidebar(groupA) {
+  return [
+      {
+        title: groupA,
+        collapsable: false,
+        sidebarDepth: 3,
+        children: [
+          ['yaml','YAML 配置文件语言'],
+          ['why-not-JSON','为什么说 JSON 不适合做配置文件？']
         ]
       }
     ]
