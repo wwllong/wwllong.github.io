@@ -28,6 +28,14 @@ docker-compose version 1.23.1, build b02f1306
 
 Linux 系统请使用以下介绍的方法安装。
 
+### 软件包方式安装
+
+以ubuntu为例：
+
+``` bash
+$ sudo apt install docker-compose
+```
+
 ### 二进制包
 
 在 Linux 上的也安装十分简单，从 [官方 GitHub Release](https://github.com/docker/compose/releases) 处直接下载编译好的二进制文件即可。

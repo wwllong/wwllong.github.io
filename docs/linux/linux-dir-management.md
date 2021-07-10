@@ -61,7 +61,7 @@
 | cp    | 复制文件或目录                                               | cp [options] source dest                        |       |                                    |
 | rm    | 删除文件                                                     | rm [options] name...                            | -f    | 强制删除文件或目录                 |
 |       |                                                              |                                                 | -r    | 同时删除该目录下的所有文件         |
-| mv    | 移动文件或目录                                               | mv [options] source dest                        |       |                                    |
+| mv    | 用来对文件或目录重新命名，或者将文件从一个目录移到另一个目录中                                               | mv [options] source dest                        |       |                                    |
 | find  | 在文件系统中查找指定的文件                                   | find [filePath] [options]                       | -name | 文件名                             |
 | grep  | 在指定的文本文件中查找指定的字符串,通常和管道命令(\|)组合使用 | [cat fileName] \| grep hello                    |       |                                    |
 | tree  | 用于以树状图列出目录的内容                                   |                                                 |       |                                    |
