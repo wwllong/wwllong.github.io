@@ -531,11 +531,12 @@ function getDockerSidebar(groupA, groupB){
         ['7-docker-image-operation','Docker镜像基本操作'],
         ['8-docker-container-operation','Docker容器基本操作'],
         ['9-docker-repository','Docker仓库'],
-        ['10-docker-dockerfile','Dockerfile 定制镜像'],
-        ['11-docker-dockerfile-command','Dockerfile 指令'],
         ['12-docker-data-volume', 'Docker 数据卷'],
+        ['13-docker-common-command', 'Docker常用命令'],
         ['13-docker-deploy-tomcat', 'Docker 部署 Tomcat'],
-        ['14-docker-deploy-mysql', 'Docker 部署 MySQL']
+        ['14-docker-deploy-mysql', 'Docker 部署 MySQL'],
+        ['10-docker-dockerfile','Dockerfile 定制镜像'],
+        ['11-docker-dockerfile-command','Dockerfile 指令']
       ]
     },
     { 
