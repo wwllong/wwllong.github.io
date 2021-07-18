@@ -40,7 +40,7 @@ $ sudo apt install docker-compose
 
 在 Linux 上的也安装十分简单，从 [官方 GitHub Release](https://github.com/docker/compose/releases) 处直接下载编译好的二进制文件即可。
 
-例如，在 Linux 64 位系统上直接下载对应的二进制包。
+例如，在 Linux 64 位系统上直接下载对应的二进制包, 这里下载的是1.23.1版本。大家根据情况更改这个版本。
 
 ```bash
 $ sudo curl -L https://github.com/docker/compose/releases/download/1.23.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose

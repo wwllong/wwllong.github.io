@@ -92,7 +92,7 @@ dadfb3b78f6d   adminer   "entrypoint.sh docke…"   25 minutes ago   Up 5 second
 
 ```
 
-如果发现服务一直在尝试重启，这个时候用前台运行（docker-compose up），根据具体报错去处理。
+如果发现服务一直在尝试重启，这个时候可以查看容器日志`docker logs -f containerId`或前台运行（docker-compose up），根据具体报错去处理。
 
 下面是我遇到的一些问题：
 

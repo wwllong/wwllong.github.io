@@ -153,7 +153,8 @@ function getGitSidebar (groupA) {
           ['git-configure-ssh','Git配置SSH'],
           ['tortoiseGit-configure-ssh','TortoiseGit配置SSH'],
           ['git-workFlow','Git-WorkFlow'],
-          ['git-command','Git命令']
+          ['git-command','Git命令'],
+          ['git-proxy','Git配置代理']
         ]
       }
     ]
@@ -552,7 +553,8 @@ function getDockerSidebar(groupA, groupB){
         ['13-docker-deploy-tomcat', 'Docker 部署 Tomcat'],
         ['14-docker-deploy-mysql', 'Docker 部署 MySQL'],
         ['10-docker-dockerfile','Dockerfile 定制镜像'],
-        ['11-docker-dockerfile-command','Dockerfile 指令']
+        ['11-docker-dockerfile-command','Dockerfile 指令'],
+        ['12-docker-machine','Docker Machine']
       ]
     },
     { 
@@ -566,7 +568,8 @@ function getDockerSidebar(groupA, groupB){
         ['4-docker-compose-template','Docker Compose模板文件'],
         ['4-docker-compose-common-comand','Docker Compose常用命令'],
         ['5-docker-compose-tomcat','Docker Compose部署Tomcat'],
-        ['6-docker-compose-mysql','Docker Compose部署MySQL']
+        ['6-docker-compose-mysql','Docker Compose部署MySQL'],
+        ['7-docker-compose-gitlab','Docker Compose部署GitLab']
       ]
     }
   ]
