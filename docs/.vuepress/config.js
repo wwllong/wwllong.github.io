@@ -569,7 +569,8 @@ function getDockerSidebar(groupA, groupB){
         ['4-docker-compose-common-comand','Docker Compose常用命令'],
         ['5-docker-compose-tomcat','Docker Compose部署Tomcat'],
         ['6-docker-compose-mysql','Docker Compose部署MySQL'],
-        ['7-docker-compose-gitlab','Docker Compose部署GitLab']
+        ['7-docker-compose-gitlab','Docker Compose部署GitLab'],
+        ['8-docker-compose-nexus','Docker Compose部署Nexus']
       ]
     }
   ]

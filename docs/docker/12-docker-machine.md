@@ -23,7 +23,7 @@ $ base=https://github.com/docker/machine/releases/download/v0.16.0 &&
 
 ### Mac安装命令
 
-这里的示例，是使用Docker Machine创建基于VirtualBox的虚拟机。
+这里的示例，是使用Docker Machine创建基于（boot2docker）VirtualBox的虚拟机。
 
 ``` shell
 ## 安装docker、docker-machine、docker-compose、virtualbox
@@ -35,13 +35,16 @@ docker-machine stop
 vboxmanage sharedfolder add default --name <挂载共享目录名称> --hostpath <本地共享目录路径> --automount
 docker-machine start
 ## 固定虚拟机IP
-echo "ifconfig eth1 192.168.99.100 netmask 255.255.255.0 broadcast 192.168.99.255 up" | docker-machine ssh default sudo tee /var/lib/boot2docker/bootsync.sh > /dev/null
+echo "ifconfig eth1 192.168.99.101 netmask 255.255.255.0 broadcast 192.168.99.255 up" | docker-machine ssh default sudo tee /var/lib/boot2docker/bootsync.sh > /dev/null
+docker-machine restart
 ## 配置docker/docker-compose环境变量
 docker-machine env default
 eval $(docker-machine env default)
+## 更改ip需要重新生成证书（只需要第一次）
+docker-machine regenerate-certs default
 ```
 
-注意docker-machine默认启动的容器名称为 `default`, 可以根据实际情况自己命名。
+注意docker-machine指令，如果没有指定 [your machine name]，默认启动的容器名称为 `default`, 大家可以根据实际情况自己命名。
 
 这里的命令可能需要配置[Git 代理](/git/git-proxy.html)，才能下载到相应的依赖包。
 
