@@ -48,6 +48,19 @@ docker-machine regenerate-certs default
 
 这里的命令可能需要配置[Git 代理](/git/git-proxy.html)，才能下载到相应的依赖包。
 
+ps：boot2docker是个镜像引用，不管修改什么文件重启后都是重新加载的，这里有两种方式进行自定义配置。
+1. 在`/var/lib/boot2docker/bootsync.sh`任意定制自己的需求设置。
+   例如：
+   ``` shell
+   ifconfig eth1 192.168.99.101 netmask 255.255.255.0 broadcast 192.168.99.255 up
+   cp -f /mnt/sda1/localtime /etc/localtime && echo "Asia/Shanghai" > /etc/timezone; #更改时区、时间（/mnt/sda1/localtime是从别的服务器cp过阿里的/usr/share/zoneinfo/Asia/Shanghai）
+   echo "{\"registry-mirrors\": [\"https://registry.docker-cn.com\"]}" > /etc/docker/daemon.json;  #Docker 中国官方镜像加速
+   ```
+2. 修改`/var/lib/boot2docker/profile`，例如配置镜像源：
+   ``` shell
+   ## 在–label provider=virtualbox的下一行添加镜像源配置 我虚拟机是通过virtualbox启动的
+   --registry-mirror=https://registry.docker-cn.com
+   ```
 
 
 ### Windows安装命令
