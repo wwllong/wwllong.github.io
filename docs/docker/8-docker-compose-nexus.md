@@ -62,6 +62,8 @@ Creating nexus ... done
 
 2. 点击齿轮按钮，可以对Nexus进行更详细的配置，建议大家去看看熟悉。例如定期清理、代理仓库的配置、仓库组等的概念。
 
+   - 在设置的System->Tasks，Nexus提供了一些定时任务模版，例如Delete SNAPSHOT Task。
+
 
 
 ## Maven仓库概述

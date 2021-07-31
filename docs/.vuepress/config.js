@@ -571,7 +571,8 @@ function getDockerSidebar(groupA, groupB){
         ['6-docker-compose-mysql','Docker Compose部署MySQL'],
         ['7-docker-compose-gitlab','Docker Compose部署GitLab'],
         ['8-docker-compose-nexus','Docker Compose部署Nexus'],
-        ['9-docker-compose-harbor','Docker Compose部署Harbor']
+        ['9-docker-compose-harbor','Docker Compose部署Harbor'],
+        ['10-docker-compose-network','Docker Compose网络设置']
       ]
     }
   ]
