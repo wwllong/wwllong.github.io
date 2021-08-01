@@ -363,6 +363,8 @@ function getSpringBootSidebar(groupA) {
         sidebarDepth: 3,
         children: [
           ['springboot-introduction','Spring Boot 简介'],
+          ['hello-springboot','Hello Spring Boot'],
+          ['springboot-common-config','Spring Boot 常用配置'],
           ['yaml','YAML 配置文件语言'],
           ['why-not-JSON','为什么说 JSON 不适合做配置文件？']
         ]
