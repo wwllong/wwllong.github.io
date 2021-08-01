@@ -181,12 +181,15 @@ function getMicroservicesSidebar(groupA){
     {
       title: groupA,
       collapsable: false,
-      sidebarDepth: 1,
+      sidebarDepth: 2,
       children: [
         ['micrservice-introduction','微服务简介'],
         ['micrservice-CAP-BASE','CAP定理和BASE理论'],
         ['micrservice-high-concurrency','如何应对高并发'],
-        ['micrservice-note','微服务速记']
+        ['micrservice-framework-practices','微服务的实践'],
+        ['micrservice-framework-introduction','微服务架构简介'],
+        ['micrservice-framework-design','微服务架构设计模式'],
+        ['micrservice-note','微服务概念简记']
       ]
     }
   ]
