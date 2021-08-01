@@ -366,7 +366,11 @@ function getSpringBootSidebar(groupA) {
           ['hello-springboot','Hello Spring Boot'],
           ['springboot-common-config','Spring Boot 常用配置'],
           ['yaml','YAML 配置文件语言'],
-          ['why-not-JSON','为什么说 JSON 不适合做配置文件？']
+          ['why-not-JSON','为什么说 JSON 不适合做配置文件？'],
+          ['springboot-thymeleaf','Spring Boot 整合 Thymeleaf'],
+          ['thymeleaf-common-grammar','Thymeleaf 常用语法'],
+          ['thymeleaf-common-expression','Thymeleaf 表达式语法'],
+          ['thymeleaf-built-in-objects','Thymeleaf 内置对象']
         ]
       }
     ]
