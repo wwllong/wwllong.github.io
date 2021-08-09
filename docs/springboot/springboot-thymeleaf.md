@@ -96,12 +96,11 @@ public class IndexController {
         return "index";
     }
 }
-
 ```
 
 ### 测试访问
 
-启动成功后，访问：http://localhost:9090/thymeleaf/index ，即可看到效果：
+启动成功后，访问：http://localhost:9090/boot/thymeleaf/index ，即可看到效果：
 
 ``` html
 张三
