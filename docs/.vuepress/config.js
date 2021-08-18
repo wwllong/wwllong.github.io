@@ -370,7 +370,11 @@ function getSpringBootSidebar(groupA) {
           ['springboot-thymeleaf','Spring Boot 整合 Thymeleaf'],
           ['thymeleaf-common-grammar','Thymeleaf 常用语法'],
           ['thymeleaf-common-expression','Thymeleaf 表达式语法'],
-          ['thymeleaf-built-in-objects','Thymeleaf 内置对象']
+          ['thymeleaf-built-in-objects','Thymeleaf 内置对象'],
+          ['springboot-druid','Spring Boot 整合 Druid'],
+          ['springboot-hikari','Spring Boot 整合 HikariCP'],
+          ['springboot-tk-mybatis','Spring Boot 整合 tk.mybatis & PageHelper'],
+          ['mybaits-generate','MyBatis Maven 插件生成代码']
         ]
       }
     ]
