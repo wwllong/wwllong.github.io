@@ -25,6 +25,7 @@ module.exports = {
             '/thought/': getThoughtBaseSidebar("思想"),   
             '/spring/': getSpringSidebar("Spring"),
             '/springboot/': getSpringBootSidebar("SpringBoot"),
+            '/springcloud-netflix/': getSpringCloudNetflixSidebar("Spring Cloud Netflix"),
             '/mybaits/': getMyBaitsSidebar("MyBaits"),
             '/junit/': getJUnitSidebar("JUnit"),
             '/log4j/': getLog4jSidebar("Log4j"),
@@ -375,6 +376,21 @@ function getSpringBootSidebar(groupA) {
           ['springboot-hikari','Spring Boot 整合 HikariCP'],
           ['springboot-tk-mybatis','Spring Boot 整合 tk.mybatis & PageHelper'],
           ['mybaits-generate','MyBatis Maven 插件生成代码']
+        ]
+      }
+    ]
+}
+
+/** SpringCloudNetflix */
+function getSpringCloudNetflixSidebar(groupA) {
+  return [
+      {
+        title: groupA,
+        collapsable: false,
+        sidebarDepth: 3,
+        children: [
+          ['dependency-management','Hello Spring Cloud Netflix'],
+          ['spring-cloud-eureka','服务注册中心']
         ]
       }
     ]

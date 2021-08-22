@@ -17,6 +17,8 @@
 - [MyBaits](/mybaits/1_MyBatis-Introduction.html)
 - [MyBaits-Plus](https://mybatis.plus/)
 - [SpringBoot](/springboot/index.html)
+- [Spring Cloud Netflix](/springcloud-netflix/index.html)
+
 
 ## 其他
 

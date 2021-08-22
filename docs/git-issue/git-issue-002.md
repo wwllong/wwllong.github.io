@@ -10,9 +10,19 @@
 
 说明一下该Jenkins工程是在服务器上的本地仓库，通过https协议拉取项目代码，解决办法如下：
 
+## 方法一：修改remote地址
+
 1. git remote add origin https://{username}:{password}@github.com/{username}/project.git
 
 2. 直接修改 .git/config 隐藏文件，将 url 配置 修改为上诉格式即可。
 
    ![git-issue-002-1](./img/git-issue-002-1.png)
+
+## 方法二：配置SSH
+注意：实际生产不建议使用方式一：
+
+- 不安全：暴露了账号密码
+- 不稳定：容易出现403、Time Out等情况，因为GitHub也不推荐这种方式，后续可能会被GitHub不支持。
+
+生产上还是应该使用[Git配置SSH](/git/git-configure-ssh.html)。
 
