@@ -390,7 +390,8 @@ function getSpringCloudNetflixSidebar(groupA) {
         sidebarDepth: 3,
         children: [
           ['dependency-management','Hello Spring Cloud Netflix'],
-          ['spring-cloud-eureka','服务注册中心']
+          ['spring-cloud-eureka','服务注册与发现'],
+          ['spring-cloud-service-provider','服务提供者']
         ]
       }
     ]
