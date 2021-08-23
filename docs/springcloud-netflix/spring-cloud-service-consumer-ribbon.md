@@ -277,7 +277,7 @@ Hi，your message is :"HelloRibbon" i am from port：8762
 Hi，your message is :"HelloRibbon" i am from port：8763
 ```
 
-请求成功则表示我们已经成功实现了负载均衡功能来访问不同端口的实例。
+请求成功则表示我们已经成功通过Ribbon + RestTemplate实现了负载均衡访问不同端口的实例。
 
 
 

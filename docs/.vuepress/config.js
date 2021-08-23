@@ -393,6 +393,7 @@ function getSpringCloudNetflixSidebar(groupA) {
           ['spring-cloud-eureka','服务注册与发现'],
           ['spring-cloud-service-provider','服务提供者'],
           ['spring-cloud-service-consumer-ribbon','服务消费者-Ribbon'],
+          ['spring-cloud-service-consumer-feign','服务消费者-Feign']
         ]
       }
     ]
