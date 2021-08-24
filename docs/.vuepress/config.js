@@ -1,6 +1,6 @@
 module.exports = {
     base: '/',
-    title: '万隆的博客',
+    title: '万隆的笔记',
     description: '小小码农',
     head: [
         ['link', {rel: 'icon', href: `/favicon.png`}]
@@ -25,7 +25,7 @@ module.exports = {
             '/thought/': getThoughtBaseSidebar("思想"),   
             '/spring/': getSpringSidebar("Spring"),
             '/springboot/': getSpringBootSidebar("SpringBoot"),
-            '/springcloud-netflix/': getSpringCloudNetflixSidebar("Spring Cloud Netflix"),
+            '/springcloud-netflix/': getSpringCloudNetflixSidebar("快速开始", "服务熔断"),
             '/mybaits/': getMyBaitsSidebar("MyBaits"),
             '/junit/': getJUnitSidebar("JUnit"),
             '/log4j/': getLog4jSidebar("Log4j"),
@@ -382,18 +382,29 @@ function getSpringBootSidebar(groupA) {
 }
 
 /** SpringCloudNetflix */
-function getSpringCloudNetflixSidebar(groupA) {
+function getSpringCloudNetflixSidebar(groupA, groupB) {
   return [
       {
         title: groupA,
         collapsable: false,
         sidebarDepth: 3,
         children: [
+          ['','Spring Cloud Netflix'],
           ['dependency-management','Hello Spring Cloud Netflix'],
           ['spring-cloud-eureka','服务注册与发现'],
           ['spring-cloud-service-provider','服务提供者'],
           ['spring-cloud-service-consumer-ribbon','服务消费者-Ribbon'],
           ['spring-cloud-service-consumer-feign','服务消费者-Feign']
+        ]
+      },
+      {
+        title: groupB,
+        collapsable: false,
+        sidebarDepth: 3,
+        children: [
+          ['service-avalanche','服务雪崩效应'],
+          ['spring-cloud-hystrix','熔断器-Netflix Hystrix'],
+          ['spring-cloud-hystrix-principle','Netflix Hystrix工作原理']
         ]
       }
     ]

@@ -10,7 +10,7 @@ Spring Cloud 为开发人员提供了快速构建分布式系统中一些常见�
 
 **Spring Boot + Spring Cloud Netflix 是第一套微服务架构解决方案**。目前业界对 Spring Cloud 使用较为广泛。但随着项目宣布进入维护期(2018 年 12 月 12 日，Netflix 宣布 Spring Cloud Netflix 系列技术栈进入维护模式（不再添加新特性）)，意味着它再也没有新功能了；目前替代方案是**Spring Cloud Alibaba**。
 
-### Spring Cloud Netflix 项目进入维护模式
+## Spring Cloud Netflix 项目进入维护模式
 
 近日，Netflix[宣布](https://github.com/Netflix/Hystrix#hystrix-status)Hystrix 进入维护模式。Ribbon自 2016 年以来一直处于[类似状态](https://github.com/Netflix/ribbon#project-status-on-maintenance)。 虽然 Hystrix 和 Ribbon 现在处于维护模式，但它们仍然在 Netflix 大规模部署。
 

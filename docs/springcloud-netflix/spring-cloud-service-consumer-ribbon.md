@@ -228,8 +228,8 @@ public class ProviderService {
     @Autowired
     private RestTemplate restTemplate;
 
-    public String sayHi(String message) {
-        return restTemplate.getForObject("http://hello-spring-cloud-netflix-provider/hi?msg=" + message, String.class);
+    public String sayHi(String msg) {
+        return restTemplate.getForObject("http://hello-spring-cloud-netflix-provider/hi?msg=" + msg, String.class);
     }
 
 }
