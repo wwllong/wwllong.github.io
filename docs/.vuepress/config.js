@@ -404,7 +404,9 @@ function getSpringCloudNetflixSidebar(groupA, groupB) {
         children: [
           ['service-avalanche','服务雪崩效应'],
           ['spring-cloud-hystrix','熔断器-Netflix Hystrix'],
-          ['spring-cloud-hystrix-principle','Netflix Hystrix工作原理']
+          ['spring-cloud-hystrix-principle','Netflix Hystrix工作原理'],
+          ['spring-cloud-hystrix-dashboard','熔断器仪表盘-Hystrix Dashboard'],
+          ['spring-cloud-hystrix-turbine','熔断器聚合仪表盘-Netflix Turbine'],
         ]
       }
     ]
