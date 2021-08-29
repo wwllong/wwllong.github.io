@@ -407,6 +407,7 @@ function getSpringCloudNetflixSidebar(groupA, groupB) {
           ['spring-cloud-hystrix-principle','Netflix Hystrix工作原理'],
           ['spring-cloud-hystrix-dashboard','熔断器仪表盘-Hystrix Dashboard'],
           ['spring-cloud-hystrix-turbine','熔断器聚合仪表盘-Netflix Turbine'],
+          ['spring-cloud-hystrix-other-desc','Hystrix 其他相关说明']
         ]
       }
     ]
