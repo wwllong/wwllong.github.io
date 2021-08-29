@@ -25,7 +25,7 @@ module.exports = {
             '/thought/': getThoughtBaseSidebar("思想"),   
             '/spring/': getSpringSidebar("Spring"),
             '/springboot/': getSpringBootSidebar("SpringBoot"),
-            '/springcloud-netflix/': getSpringCloudNetflixSidebar("快速开始", "服务熔断"),
+            '/springcloud-netflix/': getSpringCloudNetflixSidebar("快速开始", "服务注册与发现", "服务熔断", "服务网关"),
             '/mybaits/': getMyBaitsSidebar("MyBaits"),
             '/junit/': getJUnitSidebar("JUnit"),
             '/log4j/': getLog4jSidebar("Log4j"),
@@ -382,7 +382,7 @@ function getSpringBootSidebar(groupA) {
 }
 
 /** SpringCloudNetflix */
-function getSpringCloudNetflixSidebar(groupA, groupB) {
+function getSpringCloudNetflixSidebar(groupA, groupB, groupC, groupD) {
   return [
       {
         title: groupA,
@@ -390,7 +390,14 @@ function getSpringCloudNetflixSidebar(groupA, groupB) {
         sidebarDepth: 3,
         children: [
           ['','Spring Cloud Netflix'],
-          ['dependency-management','Hello Spring Cloud Netflix'],
+          ['dependency-management','Hello Spring Cloud Netflix']
+        ]
+      },
+      {
+        title: groupB,
+        collapsable: false,
+        sidebarDepth: 3,
+        children: [
           ['spring-cloud-eureka','服务注册与发现'],
           ['spring-cloud-service-provider','服务提供者'],
           ['spring-cloud-service-consumer-ribbon','服务消费者-Ribbon'],
@@ -398,7 +405,7 @@ function getSpringCloudNetflixSidebar(groupA, groupB) {
         ]
       },
       {
-        title: groupB,
+        title: groupC,
         collapsable: false,
         sidebarDepth: 3,
         children: [
@@ -408,6 +415,16 @@ function getSpringCloudNetflixSidebar(groupA, groupB) {
           ['spring-cloud-hystrix-dashboard','熔断器仪表盘-Hystrix Dashboard'],
           ['spring-cloud-hystrix-turbine','熔断器聚合仪表盘-Netflix Turbine'],
           ['spring-cloud-hystrix-other-desc','Hystrix 其他相关说明']
+        ]
+      },
+      {
+        title: groupD,
+        collapsable: false,
+        sidebarDepth: 3,
+        children: [
+          ['spring-cloud-hystrix-zuul','路由网关-Netflix Zuul'],
+          ['spring-cloud-hystrix-zuul-fallback','路由网关失败回调'],
+          ['spring-cloud-hystrix-zuul-filter','路由网关服务过滤']
         ]
       }
     ]
