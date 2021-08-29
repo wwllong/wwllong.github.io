@@ -99,7 +99,7 @@ Feign 是一个声明式的伪 HTTP 客户端，它使得编写Web服务客户�
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>hello.spring.cloud.netflix.consumer.feign.FeignConsumerApplication</mainClass>
+                    <mainClass>com.example.hello.spring.cloud.netflix.consumer.feign.FeignConsumerApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>
@@ -116,16 +116,18 @@ Feign 是一个声明式的伪 HTTP 客户端，它使得编写Web服务客户�
 由于是消费者，同样需要开启 `@EnableDiscoveryClient` 配置，让消费者去到Eureka Server发现服务。此外，还需要使用 `@EnableFeignClients` 配置开启 Feign 功能。
 
 ```java
-package hello.spring.cloud.netflix.consumer.feign;
+package com.example.hello.spring.cloud.netflix.consumer.feign;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients
+@EnableHystrixDashboard
 public class FeignConsumerApplication {
 
     public static void main(String[] args) {
@@ -174,7 +176,7 @@ eureka:
 2. 不需要将服务提供者提供的接口封装在一个Service，使用RestTemplate调用接口。
 
 ```java
-package hello.spring.cloud.netflix.consumer.feign.service;
+package com.example.hello.spring.cloud.netflix.consumer.feign.service;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -197,9 +199,9 @@ public interface ProviderClient {
 ### ControllerTest
 
 ```java
-package hello.spring.cloud.netflix.consumer.feign.ctrl;
+package com.example.hello.spring.cloud.netflix.consumer.feign.ctrl;
 
-import hello.spring.cloud.netflix.consumer.feign.service.ProviderClient;
+import com.example.hello.spring.cloud.netflix.consumer.feign.service.ProviderClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -234,5 +236,4 @@ Hi，your message is :"HelloFeign" i am from port：8763
 ```
 
 请求成功则表示我们已经成功通过Feign实现了负载均衡访问不同端口的实例。
-
 

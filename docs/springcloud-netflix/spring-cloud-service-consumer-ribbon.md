@@ -121,7 +121,7 @@ Ribbon的负载均衡主要是通过LoadBalancerClient来实现的，而LoadBala
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>hello.spring.cloud.netflix.consumer.ribbon.RibbonConsumerApplication</mainClass>
+                    <mainClass>com.example.hello.spring.cloud.netflix.consumer.ribbon.RibbonConsumerApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>
@@ -138,7 +138,7 @@ Ribbon的负载均衡主要是通过LoadBalancerClient来实现的，而LoadBala
 由于是消费者，需要开启 `@EnableDiscoveryClient` 配置，让消费者去到Eureka Server发现服务。是不需要`@EnableEurekaServer`和`@EnableEurekaClient`的，注意区分他们之间的作用。
 
 ```java
-package hello.spring.cloud.netflix.consumer.ribbon;
+package com.example.hello.spring.cloud.netflix.consumer.ribbon;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -189,7 +189,7 @@ eureka:
 编写ConfigurationBean，配置注入 `RestTemplate` 的 Bean，并通过 `@LoadBalanced` 注解表明开启负载均衡功能:
 
 ```java
-package hello.spring.cloud.netflix.consumer.ribbon.config;
+package com.example.hello.spring.cloud.netflix.consumer.ribbon.config;
 
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
@@ -216,7 +216,7 @@ public class RestTemplateConfiguration {
 在这里，我们将服务提供者提供的接口封装在一个Service，注意的是我们用的服务名`hello-spring-cloud-netflix-provider`替代了具体的 URL 地址，在 Ribbon 中它会根据服务名来选择具体的服务实例，在请求的时候会根据服务实例用具体的 URL 替换掉服务名去请求：
 
 ```java
-package hello.spring.cloud.netflix.consumer.ribbon.service;
+package com.example.hello.spring.cloud.netflix.consumer.ribbon.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -241,9 +241,9 @@ public class ProviderService {
 ### ControllerTest
 
 ```java
-package hello.spring.cloud.netflix.consumer.ribbon.ctrl;
+package com.example.hello.spring.cloud.netflix.consumer.ribbon.ctrl;
 
-import hello.spring.cloud.netflix.consumer.ribbon.service.ProviderService;
+import com.example.hello.spring.cloud.netflix.consumer.ribbon.service.ProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

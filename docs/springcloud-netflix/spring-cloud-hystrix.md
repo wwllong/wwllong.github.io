@@ -58,7 +58,7 @@ Hystrix 通过以下设计原则来运作:
 2. 在 Application 中增加 `@EnableHystrix` 注解
 
    ``` java
-   package hello.spring.cloud.netflix.consumer.ribbon;
+   package com.example.hello.spring.cloud.netflix.consumer.ribbon;
    
    import org.springframework.boot.SpringApplication;
    import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -82,7 +82,7 @@ Hystrix 通过以下设计原则来运作:
 3. 在 Service 中增加 `@HystrixCommand` 注解，并指定 `fallbackMethod` 熔断方法
 
    ``` java
-   package hello.spring.cloud.netflix.consumer.ribbon.service;
+   package com.example.hello.spring.cloud.netflix.consumer.ribbon.service;
    
    import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
    import org.springframework.beans.factory.annotation.Autowired;
@@ -130,7 +130,7 @@ Hystrix 通过以下设计原则来运作:
 2. 在 Feign 接口的 `@FeignClient`注解中指定 `fallback` 的熔断器类（注意加上注解`@Component`)，并实现对应的 Feign 接口。
 
    ``` java
-   package hello.spring.cloud.netflix.consumer.feign.service;
+   package com.example.hello.spring.cloud.netflix.consumer.feign.service;
    
    import org.springframework.cloud.openfeign.FeignClient;
    import org.springframework.web.bind.annotation.GetMapping;
