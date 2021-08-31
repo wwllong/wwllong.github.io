@@ -25,7 +25,7 @@ module.exports = {
             '/thought/': getThoughtBaseSidebar("思想"),   
             '/spring/': getSpringSidebar("Spring"),
             '/springboot/': getSpringBootSidebar("SpringBoot"),
-            '/springcloud-netflix/': getSpringCloudNetflixSidebar("快速开始", "服务注册与发现", "服务熔断", "服务网关"),
+            '/springcloud-netflix/': getSpringCloudNetflixSidebar("快速开始", "服务注册与发现", "服务熔断", "服务网关", "配置中心"),
             '/mybaits/': getMyBaitsSidebar("MyBaits"),
             '/junit/': getJUnitSidebar("JUnit"),
             '/log4j/': getLog4jSidebar("Log4j"),
@@ -382,7 +382,7 @@ function getSpringBootSidebar(groupA) {
 }
 
 /** SpringCloudNetflix */
-function getSpringCloudNetflixSidebar(groupA, groupB, groupC, groupD) {
+function getSpringCloudNetflixSidebar(groupA, groupB, groupC, groupD, groupE) {
   return [
       {
         title: groupA,
@@ -425,6 +425,15 @@ function getSpringCloudNetflixSidebar(groupA, groupB, groupC, groupD) {
           ['spring-cloud-hystrix-zuul','路由网关-Netflix Zuul'],
           ['spring-cloud-hystrix-zuul-fallback','路由网关失败回调'],
           ['spring-cloud-hystrix-zuul-filter','路由网关服务过滤']
+        ]
+      },
+      {
+        title: groupE,
+        collapsable: false,
+        sidebarDepth: 3,
+        children: [
+          ['spring-cloud-config','Spring Cloud Config'],
+          ['spring-cloud-config-refresh','动态刷新配置']
         ]
       }
     ]
