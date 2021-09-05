@@ -442,8 +442,9 @@ function getSpringCloudNetflixSidebar(groupA, groupB, groupC, groupD, groupE, gr
         sidebarDepth: 3,
         children: [
           ['spring-cloud-zipkin','服务链路追踪-ZipKin'],
-          ['spring-cloud-zipkin-architecture','ZipKin架构']
-        ]
+          ['spring-cloud-zipkin-architecture','ZipKin架构'],
+          ['spring-boot-admin','Spring Boot Admin']
+        ] 
       }
     ]
 }
