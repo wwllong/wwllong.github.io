@@ -25,7 +25,7 @@ module.exports = {
             '/thought/': getThoughtBaseSidebar("思想"),   
             '/spring/': getSpringSidebar("Spring"),
             '/springboot/': getSpringBootSidebar("SpringBoot"),
-            '/springcloud-netflix/': getSpringCloudNetflixSidebar("快速开始", "服务注册与发现", "服务熔断", "服务网关", "配置中心"),
+            '/springcloud-netflix/': getSpringCloudNetflixSidebar("快速开始", "服务注册与发现", "服务熔断", "服务网关", "配置中心", "服务追踪"),
             '/mybaits/': getMyBaitsSidebar("MyBaits"),
             '/junit/': getJUnitSidebar("JUnit"),
             '/log4j/': getLog4jSidebar("Log4j"),
@@ -382,7 +382,7 @@ function getSpringBootSidebar(groupA) {
 }
 
 /** SpringCloudNetflix */
-function getSpringCloudNetflixSidebar(groupA, groupB, groupC, groupD, groupE) {
+function getSpringCloudNetflixSidebar(groupA, groupB, groupC, groupD, groupE, groupF) {
   return [
       {
         title: groupA,
@@ -434,6 +434,15 @@ function getSpringCloudNetflixSidebar(groupA, groupB, groupC, groupD, groupE) {
         children: [
           ['spring-cloud-config','Spring Cloud Config'],
           ['spring-cloud-config-refresh','动态刷新配置']
+        ]
+      },
+      {
+        title: groupF,
+        collapsable: false,
+        sidebarDepth: 3,
+        children: [
+          ['spring-cloud-zipkin','服务链路追踪-ZipKin'],
+          ['spring-cloud-zipkin-architecture','ZipKin架构']
         ]
       }
     ]
