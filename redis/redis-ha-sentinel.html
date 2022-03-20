@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Redis Sentinel 集群部署 | 万隆的笔记</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    <link rel="icon" href="/favicon.png">
+    <script>var _hmt = _hmt || [];
+            (function() {
+              var hm = document.createElement("script");
+              hm.src = "https://hm.baidu.com/hm.js?d8c4de0636e24ecd74e706a345ab8cc9";
+              var s = document.getElementsByTagName("script")[0]; 
+              s.parentNode.insertBefore(hm, s);
+            })();</script>
+    <meta name="description" content="小小码农">
+    
+    <link rel="preload" href="/assets/css/0.styles.e68661c4.css" as="style"><link rel="preload" href="/assets/js/app.bc037eca.js" as="script"><link rel="preload" href="/assets/js/3.a3373ef9.js" as="script"><link rel="preload" href="/assets/js/292.37a36b48.js" as="script"><link rel="prefetch" href="/assets/js/10.4df5c055.js"><link rel="prefetch" href="/assets/js/100.0d629d95.js"><link rel="prefetch" href="/assets/js/101.2db02bf9.js"><link rel="prefetch" href="/assets/js/102.d68c24bb.js"><link rel="prefetch" href="/assets/js/103.600018bb.js"><link rel="prefetch" href="/assets/js/104.c413414c.js"><link rel="prefetch" href="/assets/js/105.8c15211b.js"><link rel="prefetch" href="/assets/js/106.84e8ee9b.js"><link rel="prefetch" href="/assets/js/107.a9e7f4b2.js"><link rel="prefetch" href="/assets/js/108.f3285402.js"><link rel="prefetch" href="/assets/js/109.8cf78ec2.js"><link rel="prefetch" href="/assets/js/11.5acc5c3a.js"><link rel="prefetch" href="/assets/js/110.1822bed3.js"><link rel="prefetch" href="/assets/js/111.a9157b2f.js"><link rel="prefetch" href="/assets/js/112.f9617caf.js"><link rel="prefetch" href="/assets/js/113.2cf20d85.js"><link rel="prefetch" href="/assets/js/114.690001dc.js"><link rel="prefetch" href="/assets/js/115.01270cf8.js"><link rel="prefetch" href="/assets/js/116.f58bd27d.js"><link rel="prefetch" href="/assets/js/117.a7d22187.js"><link rel="prefetch" href="/assets/js/118.9b13fb7e.js"><link rel="prefetch" href="/assets/js/119.e56d4413.js"><link rel="prefetch" href="/assets/js/12.944e78c3.js"><link rel="prefetch" href="/assets/js/120.6a373e09.js"><link rel="prefetch" href="/assets/js/121.f05c8ac8.js"><link rel="prefetch" href="/assets/js/122.b23768d7.js"><link rel="prefetch" href="/assets/js/123.274a1455.js"><link rel="prefetch" href="/assets/js/124.1672408d.js"><link rel="prefetch" href="/assets/js/125.7fb88ab5.js"><link rel="prefetch" href="/assets/js/126.5db859c8.js"><link rel="prefetch" href="/assets/js/127.a34ecf8a.js"><link rel="prefetch" href="/assets/js/128.54e15d3c.js"><link rel="prefetch" href="/assets/js/129.6e2cae17.js"><link rel="prefetch" href="/assets/js/13.1d4ba2e8.js"><link rel="prefetch" href="/assets/js/130.6ad457a8.js"><link rel="prefetch" href="/assets/js/131.aeedef23.js"><link rel="prefetch" href="/assets/js/132.443d76bf.js"><link rel="prefetch" href="/assets/js/133.641d77af.js"><link rel="prefetch" href="/assets/js/134.1824a48c.js"><link rel="prefetch" href="/assets/js/135.bf659059.js"><link rel="prefetch" href="/assets/js/136.185d1de5.js"><link rel="prefetch" href="/assets/js/137.5bcb50d7.js"><link rel="prefetch" href="/assets/js/138.5b56d765.js"><link rel="prefetch" href="/assets/js/139.4f07d83f.js"><link rel="prefetch" href="/assets/js/14.78c03a65.js"><link rel="prefetch" href="/assets/js/140.b14458e8.js"><link rel="prefetch" href="/assets/js/141.16eba01d.js"><link rel="prefetch" href="/assets/js/142.67697a4e.js"><link rel="prefetch" href="/assets/js/143.b1ee0e16.js"><link rel="prefetch" href="/assets/js/144.9800e31a.js"><link rel="prefetch" href="/assets/js/145.cdd7e47e.js"><link rel="prefetch" href="/assets/js/146.4d8b9cf6.js"><link rel="prefetch" href="/assets/js/147.1ce23cab.js"><link rel="prefetch" href="/assets/js/148.854fb1e4.js"><link rel="prefetch" href="/assets/js/149.da169cf3.js"><link rel="prefetch" href="/assets/js/15.a60df2b4.js"><link rel="prefetch" href="/assets/js/150.b3d06f97.js"><link rel="prefetch" href="/assets/js/151.16f22697.js"><link rel="prefetch" href="/assets/js/152.e39ae535.js"><link rel="prefetch" href="/assets/js/153.81ecd116.js"><link rel="prefetch" href="/assets/js/154.cbc5938f.js"><link rel="prefetch" href="/assets/js/155.00385d0c.js"><link rel="prefetch" href="/assets/js/156.4517568a.js"><link rel="prefetch" href="/assets/js/157.f1433c46.js"><link rel="prefetch" href="/assets/js/158.5352cd07.js"><link rel="prefetch" href="/assets/js/159.c4f81687.js"><link rel="prefetch" href="/assets/js/16.da7f7410.js"><link rel="prefetch" href="/assets/js/160.3778e817.js"><link rel="prefetch" href="/assets/js/161.4ecebe00.js"><link rel="prefetch" href="/assets/js/162.261c214f.js"><link rel="prefetch" href="/assets/js/163.e7abb47f.js"><link rel="prefetch" href="/assets/js/164.570dd314.js"><link rel="prefetch" href="/assets/js/165.f904d36e.js"><link rel="prefetch" href="/assets/js/166.be1e5538.js"><link rel="prefetch" href="/assets/js/167.eca75917.js"><link rel="prefetch" href="/assets/js/168.5ede7a24.js"><link rel="prefetch" href="/assets/js/169.8f030b14.js"><link rel="prefetch" href="/assets/js/17.ba9ee66f.js"><link rel="prefetch" href="/assets/js/170.5b3d76ad.js"><link rel="prefetch" href="/assets/js/171.d6534d74.js"><link rel="prefetch" href="/assets/js/172.8cfd94b9.js"><link rel="prefetch" href="/assets/js/173.fb4f0904.js"><link rel="prefetch" href="/assets/js/174.7dba6bb9.js"><link rel="prefetch" href="/assets/js/175.c6c8980d.js"><link rel="prefetch" href="/assets/js/176.5c8bee1e.js"><link rel="prefetch" href="/assets/js/177.7d9b6b50.js"><link rel="prefetch" href="/assets/js/178.9b0f6d6b.js"><link rel="prefetch" href="/assets/js/179.851f4874.js"><link rel="prefetch" href="/assets/js/18.68e82e56.js"><link rel="prefetch" href="/assets/js/180.d4946561.js"><link rel="prefetch" href="/assets/js/181.dddb9217.js"><link rel="prefetch" href="/assets/js/182.179b516a.js"><link rel="prefetch" href="/assets/js/183.f6c78374.js"><link rel="prefetch" href="/assets/js/184.1dde444f.js"><link rel="prefetch" href="/assets/js/185.3db3afc3.js"><link rel="prefetch" href="/assets/js/186.2c0f07eb.js"><link rel="prefetch" href="/assets/js/187.5f6f57ff.js"><link rel="prefetch" href="/assets/js/188.97586f9f.js"><link rel="prefetch" href="/assets/js/189.8a39dde2.js"><link rel="prefetch" href="/assets/js/19.9aa6dcce.js"><link rel="prefetch" href="/assets/js/190.96731259.js"><link rel="prefetch" href="/assets/js/191.d096d222.js"><link rel="prefetch" href="/assets/js/192.a921d348.js"><link rel="prefetch" href="/assets/js/193.a3e07c61.js"><link rel="prefetch" href="/assets/js/194.8934403d.js"><link rel="prefetch" href="/assets/js/195.13b302ff.js"><link rel="prefetch" href="/assets/js/196.4ad81cf9.js"><link rel="prefetch" href="/assets/js/197.8a23e1be.js"><link rel="prefetch" href="/assets/js/198.a1bf2bc3.js"><link rel="prefetch" href="/assets/js/199.c6abf07d.js"><link rel="prefetch" href="/assets/js/2.98bbb7f5.js"><link rel="prefetch" href="/assets/js/20.513c8e9b.js"><link rel="prefetch" href="/assets/js/200.f5a2f491.js"><link rel="prefetch" href="/assets/js/201.03671056.js"><link rel="prefetch" href="/assets/js/202.f94ec544.js"><link rel="prefetch" href="/assets/js/203.2a09fec0.js"><link rel="prefetch" href="/assets/js/204.e56dddcb.js"><link rel="prefetch" href="/assets/js/205.f48c8602.js"><link rel="prefetch" href="/assets/js/206.a8d9bcc4.js"><link rel="prefetch" href="/assets/js/207.e4016538.js"><link rel="prefetch" href="/assets/js/208.be8af315.js"><link rel="prefetch" href="/assets/js/209.4cfde3a6.js"><link rel="prefetch" href="/assets/js/21.1e72e195.js"><link rel="prefetch" href="/assets/js/210.f4936cb6.js"><link rel="prefetch" href="/assets/js/211.063bdacd.js"><link rel="prefetch" href="/assets/js/212.353d50f2.js"><link rel="prefetch" href="/assets/js/213.094a5cfc.js"><link rel="prefetch" href="/assets/js/214.d16aa2d2.js"><link rel="prefetch" href="/assets/js/215.bc88e375.js"><link rel="prefetch" href="/assets/js/216.45511649.js"><link rel="prefetch" href="/assets/js/217.99946f6f.js"><link rel="prefetch" href="/assets/js/218.43a39089.js"><link rel="prefetch" href="/assets/js/219.d14424be.js"><link rel="prefetch" href="/assets/js/22.324c39b4.js"><link rel="prefetch" href="/assets/js/220.882e9a86.js"><link rel="prefetch" href="/assets/js/221.40e3d13e.js"><link rel="prefetch" href="/assets/js/222.23004b98.js"><link rel="prefetch" href="/assets/js/223.5130614a.js"><link rel="prefetch" href="/assets/js/224.2a560c15.js"><link rel="prefetch" href="/assets/js/225.92cc9d19.js"><link rel="prefetch" href="/assets/js/226.38630a69.js"><link rel="prefetch" href="/assets/js/227.ddd1a6d3.js"><link rel="prefetch" href="/assets/js/228.2d4cf247.js"><link rel="prefetch" href="/assets/js/229.458c49c4.js"><link rel="prefetch" href="/assets/js/23.beabd1c9.js"><link rel="prefetch" href="/assets/js/230.1530afe6.js"><link rel="prefetch" href="/assets/js/231.26875105.js"><link rel="prefetch" href="/assets/js/232.3c906b6a.js"><link rel="prefetch" href="/assets/js/233.d633d2c5.js"><link rel="prefetch" href="/assets/js/234.841291f0.js"><link rel="prefetch" href="/assets/js/235.de892702.js"><link rel="prefetch" href="/assets/js/236.a0ff8c56.js"><link rel="prefetch" href="/assets/js/237.bbc7b6ef.js"><link rel="prefetch" href="/assets/js/238.b53d8e52.js"><link rel="prefetch" href="/assets/js/239.ae488c24.js"><link rel="prefetch" href="/assets/js/24.a2f1a1cf.js"><link rel="prefetch" href="/assets/js/240.06d1aa99.js"><link rel="prefetch" href="/assets/js/241.e782f534.js"><link rel="prefetch" href="/assets/js/242.cae48a9d.js"><link rel="prefetch" href="/assets/js/243.4eea58f3.js"><link rel="prefetch" href="/assets/js/244.b3cfbb67.js"><link rel="prefetch" href="/assets/js/245.734f2b40.js"><link rel="prefetch" href="/assets/js/246.83ba6a01.js"><link rel="prefetch" href="/assets/js/247.bee3fa17.js"><link rel="prefetch" href="/assets/js/248.633a3a01.js"><link rel="prefetch" href="/assets/js/249.cbcc1465.js"><link rel="prefetch" href="/assets/js/25.1598a580.js"><link rel="prefetch" href="/assets/js/250.7b21393b.js"><link rel="prefetch" href="/assets/js/251.2fb1b244.js"><link rel="prefetch" href="/assets/js/252.c0e95582.js"><link rel="prefetch" href="/assets/js/253.42d96179.js"><link rel="prefetch" href="/assets/js/254.2f556423.js"><link rel="prefetch" href="/assets/js/255.5c518629.js"><link rel="prefetch" href="/assets/js/256.6c37f138.js"><link rel="prefetch" href="/assets/js/257.bfaf2b90.js"><link rel="prefetch" href="/assets/js/258.501c8dec.js"><link rel="prefetch" href="/assets/js/259.433c5a35.js"><link rel="prefetch" href="/assets/js/26.14532494.js"><link rel="prefetch" href="/assets/js/260.7133674c.js"><link rel="prefetch" href="/assets/js/261.7c497a98.js"><link rel="prefetch" href="/assets/js/262.ef906292.js"><link rel="prefetch" href="/assets/js/263.7b1b901f.js"><link rel="prefetch" href="/assets/js/264.36ebfc79.js"><link rel="prefetch" href="/assets/js/265.33897322.js"><link rel="prefetch" href="/assets/js/266.8670f739.js"><link rel="prefetch" href="/assets/js/267.ec8f4c6a.js"><link rel="prefetch" href="/assets/js/268.487e3ecf.js"><link rel="prefetch" href="/assets/js/269.dd269c27.js"><link rel="prefetch" href="/assets/js/27.182ae611.js"><link rel="prefetch" href="/assets/js/270.bfc37c9e.js"><link rel="prefetch" href="/assets/js/271.b1193de2.js"><link rel="prefetch" href="/assets/js/272.4d22dbda.js"><link rel="prefetch" href="/assets/js/273.f76b57ca.js"><link rel="prefetch" href="/assets/js/274.8aa70460.js"><link rel="prefetch" href="/assets/js/275.f8a4d784.js"><link rel="prefetch" href="/assets/js/276.73193b56.js"><link rel="prefetch" href="/assets/js/277.eb11f3ab.js"><link rel="prefetch" href="/assets/js/278.bbbd0f67.js"><link rel="prefetch" href="/assets/js/279.0d5be41f.js"><link rel="prefetch" href="/assets/js/28.cc74fb69.js"><link rel="prefetch" href="/assets/js/280.e937fced.js"><link rel="prefetch" href="/assets/js/281.3e4a2290.js"><link rel="prefetch" href="/assets/js/282.927224e7.js"><link rel="prefetch" href="/assets/js/283.11981dd7.js"><link rel="prefetch" href="/assets/js/284.f51d8c6d.js"><link rel="prefetch" href="/assets/js/285.36e1d9fd.js"><link rel="prefetch" href="/assets/js/286.6ae62cc1.js"><link rel="prefetch" href="/assets/js/287.83708e55.js"><link rel="prefetch" href="/assets/js/288.bae95807.js"><link rel="prefetch" href="/assets/js/289.96cf6017.js"><link rel="prefetch" href="/assets/js/29.e3df47e0.js"><link rel="prefetch" href="/assets/js/290.c8bbd938.js"><link rel="prefetch" href="/assets/js/291.ee2a4137.js"><link rel="prefetch" href="/assets/js/293.6589f01f.js"><link rel="prefetch" href="/assets/js/294.9e2c7ac2.js"><link rel="prefetch" href="/assets/js/295.54f91c63.js"><link rel="prefetch" href="/assets/js/296.437948b8.js"><link rel="prefetch" href="/assets/js/297.77b67b30.js"><link rel="prefetch" href="/assets/js/298.847026f8.js"><link rel="prefetch" href="/assets/js/299.f7987fa5.js"><link rel="prefetch" href="/assets/js/30.d956a42b.js"><link rel="prefetch" href="/assets/js/300.fb926d10.js"><link rel="prefetch" href="/assets/js/301.39be1acb.js"><link rel="prefetch" href="/assets/js/302.0d4b2462.js"><link rel="prefetch" href="/assets/js/303.797685f0.js"><link rel="prefetch" href="/assets/js/304.953dd6d8.js"><link rel="prefetch" href="/assets/js/305.45a68780.js"><link rel="prefetch" href="/assets/js/306.9436c9f7.js"><link rel="prefetch" href="/assets/js/307.c8da713f.js"><link rel="prefetch" href="/assets/js/308.42164c3a.js"><link rel="prefetch" href="/assets/js/309.08138204.js"><link rel="prefetch" href="/assets/js/31.b08efb45.js"><link rel="prefetch" href="/assets/js/310.3bdab8a3.js"><link rel="prefetch" href="/assets/js/311.6cb6bc2c.js"><link rel="prefetch" href="/assets/js/312.b2211997.js"><link rel="prefetch" href="/assets/js/313.27e5d88b.js"><link rel="prefetch" href="/assets/js/314.4345463c.js"><link rel="prefetch" href="/assets/js/315.cfd666b9.js"><link rel="prefetch" href="/assets/js/316.744f1ea3.js"><link rel="prefetch" href="/assets/js/317.0a990397.js"><link rel="prefetch" href="/assets/js/318.49bfe4f7.js"><link rel="prefetch" href="/assets/js/319.0e9f0404.js"><link rel="prefetch" href="/assets/js/32.42eb6c80.js"><link rel="prefetch" href="/assets/js/320.95c40fa6.js"><link rel="prefetch" href="/assets/js/321.d3557402.js"><link rel="prefetch" href="/assets/js/322.381f65d0.js"><link rel="prefetch" href="/assets/js/323.883198dc.js"><link rel="prefetch" href="/assets/js/324.cad6119f.js"><link rel="prefetch" href="/assets/js/325.90509c04.js"><link rel="prefetch" href="/assets/js/33.cba29bcc.js"><link rel="prefetch" href="/assets/js/34.60629bfe.js"><link rel="prefetch" href="/assets/js/35.a60b566c.js"><link rel="prefetch" href="/assets/js/36.099489dc.js"><link rel="prefetch" href="/assets/js/37.a40ed816.js"><link rel="prefetch" href="/assets/js/38.7e946531.js"><link rel="prefetch" href="/assets/js/39.1e9449ed.js"><link rel="prefetch" href="/assets/js/4.0893bcb9.js"><link rel="prefetch" href="/assets/js/40.a68e55dd.js"><link rel="prefetch" href="/assets/js/41.c2410ec6.js"><link rel="prefetch" href="/assets/js/42.6059e0a0.js"><link rel="prefetch" href="/assets/js/43.666eab60.js"><link rel="prefetch" href="/assets/js/44.6d2bc28e.js"><link rel="prefetch" href="/assets/js/45.23095742.js"><link rel="prefetch" href="/assets/js/46.2c644d05.js"><link rel="prefetch" href="/assets/js/47.0c53d023.js"><link rel="prefetch" href="/assets/js/48.6763315e.js"><link rel="prefetch" href="/assets/js/49.5df08a8b.js"><link rel="prefetch" href="/assets/js/5.0c8b00ed.js"><link rel="prefetch" href="/assets/js/50.21bed711.js"><link rel="prefetch" href="/assets/js/51.cc283ef4.js"><link rel="prefetch" href="/assets/js/52.448e1e19.js"><link rel="prefetch" href="/assets/js/53.8d139bfe.js"><link rel="prefetch" href="/assets/js/54.ab823596.js"><link rel="prefetch" href="/assets/js/55.28d6b882.js"><link rel="prefetch" href="/assets/js/56.799dfc32.js"><link rel="prefetch" href="/assets/js/57.47844017.js"><link rel="prefetch" href="/assets/js/58.a3636228.js"><link rel="prefetch" href="/assets/js/59.b88e34c1.js"><link rel="prefetch" href="/assets/js/6.a436075e.js"><link rel="prefetch" href="/assets/js/60.08d9b769.js"><link rel="prefetch" href="/assets/js/61.62eaaae6.js"><link rel="prefetch" href="/assets/js/62.2e8a878d.js"><link rel="prefetch" href="/assets/js/63.498c3cfe.js"><link rel="prefetch" href="/assets/js/64.32bf8090.js"><link rel="prefetch" href="/assets/js/65.0f690d46.js"><link rel="prefetch" href="/assets/js/66.90352622.js"><link rel="prefetch" href="/assets/js/67.480bdaa6.js"><link rel="prefetch" href="/assets/js/68.9979d713.js"><link rel="prefetch" href="/assets/js/69.780f4d95.js"><link rel="prefetch" href="/assets/js/7.4d9f4e60.js"><link rel="prefetch" href="/assets/js/70.c2ca172c.js"><link rel="prefetch" href="/assets/js/71.ae3f1c72.js"><link rel="prefetch" href="/assets/js/72.93cde0ad.js"><link rel="prefetch" href="/assets/js/73.8ee7e6cc.js"><link rel="prefetch" href="/assets/js/74.cde76b4d.js"><link rel="prefetch" href="/assets/js/75.1f2c3f1d.js"><link rel="prefetch" href="/assets/js/76.960c7d73.js"><link rel="prefetch" href="/assets/js/77.9d4b9659.js"><link rel="prefetch" href="/assets/js/78.310cf545.js"><link rel="prefetch" href="/assets/js/79.bd667333.js"><link rel="prefetch" href="/assets/js/8.7541ba14.js"><link rel="prefetch" href="/assets/js/80.f42edee8.js"><link rel="prefetch" href="/assets/js/81.dda99508.js"><link rel="prefetch" href="/assets/js/82.ec338e99.js"><link rel="prefetch" href="/assets/js/83.66b1f5b4.js"><link rel="prefetch" href="/assets/js/84.2173e568.js"><link rel="prefetch" href="/assets/js/85.3b5e4e47.js"><link rel="prefetch" href="/assets/js/86.3c179528.js"><link rel="prefetch" href="/assets/js/87.28691828.js"><link rel="prefetch" href="/assets/js/88.5830058a.js"><link rel="prefetch" href="/assets/js/89.2e630253.js"><link rel="prefetch" href="/assets/js/9.038ee2be.js"><link rel="prefetch" href="/assets/js/90.05aa65c3.js"><link rel="prefetch" href="/assets/js/91.99ac4500.js"><link rel="prefetch" href="/assets/js/92.f1bd8f70.js"><link rel="prefetch" href="/assets/js/93.f35f7adf.js"><link rel="prefetch" href="/assets/js/94.f6780083.js"><link rel="prefetch" href="/assets/js/95.be362a29.js"><link rel="prefetch" href="/assets/js/96.f8368d2d.js"><link rel="prefetch" href="/assets/js/97.745204bf.js"><link rel="prefetch" href="/assets/js/98.58c8fcaa.js"><link rel="prefetch" href="/assets/js/99.d4d25887.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.e68661c4.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/favicon.png" alt="万隆的笔记" class="logo"> <span class="site-name can-hide">万隆的笔记</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/notes-guide/" class="nav-link">
+  博文索引
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="在线资源" class="dropdown-title"><span class="title">在线资源</span> <span class="arrow down"></span></button> <button type="button" aria-label="在线资源" class="mobile-dropdown-title"><span class="title">在线资源</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          在线学站
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="http://www.runoob.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  菜鸟教程
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.w3cschool.cn/tutorial" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  入门教程
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.coursera.org/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Coursera
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4>
+          在线文档
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="http://www.w3school.com.cn/index.html" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  w3school
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="http://www.bootcss.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Bootstrap
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://cn.vuejs.org/v2/api/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Vue
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4>
+          在线工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://tool.lu/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  tool 工具集
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.bejson.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  bejson 工具集
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://smallpdf.com/cn" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  文档转换
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><!----> <a href="/online/" class="nav-link">
+  更多在线资源
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="了解更多" class="dropdown-title"><span class="title">了解更多</span> <span class="arrow down"></span></button> <button type="button" aria-label="了解更多" class="mobile-dropdown-title"><span class="title">了解更多</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/change-logs/" class="nav-link">
+  Changlog
+</a></li><li class="dropdown-item"><!----> <a href="/more/about-me.html" class="nav-link">
+  Aboutme
+</a></li></ul></div></div><div class="nav-item"><a href="https://github.com/wwllong" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/notes-guide/" class="nav-link">
+  博文索引
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="在线资源" class="dropdown-title"><span class="title">在线资源</span> <span class="arrow down"></span></button> <button type="button" aria-label="在线资源" class="mobile-dropdown-title"><span class="title">在线资源</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          在线学站
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="http://www.runoob.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  菜鸟教程
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.w3cschool.cn/tutorial" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  入门教程
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.coursera.org/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Coursera
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4>
+          在线文档
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="http://www.w3school.com.cn/index.html" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  w3school
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="http://www.bootcss.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Bootstrap
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://cn.vuejs.org/v2/api/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Vue
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4>
+          在线工具
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://tool.lu/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  tool 工具集
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.bejson.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  bejson 工具集
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://smallpdf.com/cn" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  文档转换
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><!----> <a href="/online/" class="nav-link">
+  更多在线资源
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="了解更多" class="dropdown-title"><span class="title">了解更多</span> <span class="arrow down"></span></button> <button type="button" aria-label="了解更多" class="mobile-dropdown-title"><span class="title">了解更多</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/change-logs/" class="nav-link">
+  Changlog
+</a></li><li class="dropdown-item"><!----> <a href="/more/about-me.html" class="nav-link">
+  Aboutme
+</a></li></ul></div></div><div class="nav-item"><a href="https://github.com/wwllong" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Redis</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/redis/redis-introduce.html" class="sidebar-link">Redis简介</a></li><li><a href="/redis/redis-ha-sentinel.html" aria-current="page" class="active sidebar-link">Redis Sentinel 集群部署</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/redis/redis-ha-sentinel.html#概述" class="sidebar-link">概述</a></li><li class="sidebar-sub-header"><a href="/redis/redis-ha-sentinel.html#redis-ha-方案" class="sidebar-link">Redis HA 方案</a></li><li class="sidebar-sub-header"><a href="/redis/redis-ha-sentinel.html#sentinel-概述" class="sidebar-link">Sentinel 概述</a></li><li class="sidebar-sub-header"><a href="/redis/redis-ha-sentinel.html#搭建redis集群" class="sidebar-link">搭建Redis集群</a></li><li class="sidebar-sub-header"><a href="/redis/redis-ha-sentinel.html#搭建-sentinel-集群" class="sidebar-link">搭建 Sentinel 集群</a></li><li class="sidebar-sub-header"><a href="/redis/redis-ha-sentinel.html#sentinel-配置文件" class="sidebar-link">Sentinel 配置文件</a></li><li class="sidebar-sub-header"><a href="/redis/redis-ha-sentinel.html#查看sentinel集群是否生效" class="sidebar-link">查看Sentinel集群是否生效</a></li><li class="sidebar-sub-header"><a href="/redis/redis-ha-sentinel.html#spring-boot-2-x-配置" class="sidebar-link">Spring Boot 2.x 配置</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/redis/redis-ha-sentinel.html#yml-参考" class="sidebar-link">yml 参考</a></li></ul></li><li class="sidebar-sub-header"><a href="/redis/redis-ha-sentinel.html#附-redis-sentinel-核心配置说明" class="sidebar-link">附：Redis Sentinel 核心配置说明</a></li><li class="sidebar-sub-header"><a href="/redis/redis-ha-sentinel.html#参考" class="sidebar-link">参考</a></li></ul></li><li><a href="/redis/redis-command.html" class="sidebar-link">Redis 常用命令</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="redis-sentinel-集群部署"><a href="#redis-sentinel-集群部署" class="header-anchor">#</a> Redis Sentinel 集群部署</h1> <h2 id="概述"><a href="#概述" class="header-anchor">#</a> 概述</h2> <p>Redis 集群可以在一组 redis 节点之间实现高可用性和 sharding。在集群中会有 1 个 master 和多个 slave 节点。当 master 节点失效时，应选举出一个 slave 节点作为新的 master。然而 Redis 本身（包括它的很多客户端）没有实现自动故障发现并进行主备切换的能力，需要外部的监控方案来实现自动故障恢复，实现 Redis HA 的方案有很多，其中Sentinel是官方推荐的方案。</p> <h2 id="redis-ha-方案"><a href="#redis-ha-方案" class="header-anchor">#</a> Redis HA 方案</h2> <p>HA（High Available），高可用性群集系统简称，是保证业务连续性的有效解决方案，一般有两个或两个以上的节点，且分为<strong>活动节点</strong>及<strong>备用节点</strong>。通常把正在执行业务的称为活动节点，而作为活动节点的一个备份的则称为备用节点。当活动节点出现问题，导致正在运行的业务不能正常运行时，备用节点此时就会侦测到，并立即接续活动节点来执行业务。从而实现业务的不中断或短暂中断。</p> <p>Redis 一般以<strong>主-从</strong>方式部署（主实例提供读写，从实例主要用于备份），要实现 该方式的 HA 主要有如下几种方案：</p> <ul><li><strong>keepalived：</strong> 通过 keepalived 的虚拟 IP，提供主从的统一访问，在主出现问题时， 通过 keepalived 运行脚本将从提升为主，待主恢复后，先同步后自动变为主，该方案的好处是主从切换后，客户端是无感知的（因为访问的虚拟 IP 不变），坏处是引入 keepalived 增加部署复杂性，在有些情况下会导致数据丢失。</li> <li><strong>zookeeper：</strong> 通过 zookeeper 来监控主从实例， 维护最新有效的 IP， 应用通过 zookeeper 取得 IP，对 Redis 进行访问，该方案需要编写大量的监控代码。</li> <li><strong>sentinel：</strong> 通过 Sentinel 监控主从实例，自动进行故障恢复，该方案有个缺陷：因为主从实例地址( IP &amp; PORT )是不同的，当故障发生进行主从切换后，应用程序无法知道新地址，故在 Jedis 2.2.2 中新增了对 Sentinel 的支持，应用通过 <code>redis.clients.jedis.JedisSentinelPool.getResource()</code> 取得的 Jedis 实例会及时更新到新的主实例地址。</li></ul> <p><img src="https://qiniu.wenwl.site/notes/redis-ha-sentinel.jpg" alt="redis-ha-sentinel"></p> <p>PS：</p> <ul><li>sentinel 是解决 HA 问题的，cluster 是解决主从复制问题的，本身不具备主/从切换问题。</li> <li>从Spring Boot 2.x 以后Redis客户端已经默认使用Lettuce，而不是Jedis。</li></ul> <h2 id="sentinel-概述"><a href="#sentinel-概述" class="header-anchor">#</a> Sentinel 概述</h2> <p>Redis Sentinel 是官方推荐的高可用性解决方案（Redis HA方案）。它是 Redis 集群的监控管理工具，可以提供节点监控、通知、自动故障恢复和客户端配置发现服务。</p> <p><img src="https://qiniu.wenwl.site/notes/redis-sentinel.jpg" alt="redis-sentinel"></p> <p>简单来说，Redis Sentinel提供的主要功能有：</p> <ul><li>当主节点发生故障时，它将自动选择一个备用节点并将其升级为主节点。</li> <li>充当客户端发现的中心授权来源，客户端连接到Sentinel以获取主节点的地址。</li></ul> <p>此次搭建使用<code>docker-compose</code>实现，搭建简单的Sentinel 模型（1-master; 2-slave; 3-sentinel）。<code>Redis</code>版本为<code>lasted-(6.2.6)</code></p> <h2 id="搭建redis集群"><a href="#搭建redis集群" class="header-anchor">#</a> 搭建Redis集群</h2> <p>搭建Redis一主两从环境，创建<code>redis</code>文件夹，<code>docker-compose.yml</code>配置如下：</p> <div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">'3.1'</span>
+<span class="token key atrule">services</span><span class="token punctuation">:</span>
+  <span class="token key atrule">master</span><span class="token punctuation">:</span>
+    <span class="token key atrule">environment</span><span class="token punctuation">:</span> 
+      <span class="token punctuation">-</span> TZ=Asia/Shanghai
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> redis
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> redis<span class="token punctuation">-</span>master
+    <span class="token key atrule">command</span><span class="token punctuation">:</span> redis<span class="token punctuation">-</span>server <span class="token punctuation">-</span><span class="token punctuation">-</span>replica<span class="token punctuation">-</span>announce<span class="token punctuation">-</span>ip 192.168.0.111 <span class="token punctuation">-</span><span class="token punctuation">-</span>replica<span class="token punctuation">-</span>announce<span class="token punctuation">-</span>port 6379 <span class="token punctuation">-</span><span class="token punctuation">-</span>requirepass 123456 <span class="token punctuation">-</span><span class="token punctuation">-</span>masterauth 123456 <span class="token punctuation">-</span><span class="token punctuation">-</span>appendonly yes
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> 6379<span class="token punctuation">:</span><span class="token number">6379</span>
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> ./master<span class="token punctuation">-</span>data<span class="token punctuation">:</span>/data  
+
+  <span class="token key atrule">slave1</span><span class="token punctuation">:</span>
+    <span class="token key atrule">environment</span><span class="token punctuation">:</span> 
+      <span class="token punctuation">-</span> TZ=Asia/Shanghai
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> redis
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> redis<span class="token punctuation">-</span>slave1
+    <span class="token key atrule">command</span><span class="token punctuation">:</span> redis<span class="token punctuation">-</span>server <span class="token punctuation">-</span><span class="token punctuation">-</span>slaveof redis<span class="token punctuation">-</span>master 6379 <span class="token punctuation">-</span><span class="token punctuation">-</span>requirepass 123456 <span class="token punctuation">-</span><span class="token punctuation">-</span>replica<span class="token punctuation">-</span>announce<span class="token punctuation">-</span>ip 192.168.0.111 <span class="token punctuation">-</span><span class="token punctuation">-</span>replica<span class="token punctuation">-</span>announce<span class="token punctuation">-</span>port 6380 <span class="token punctuation">-</span><span class="token punctuation">-</span>masterauth 123456 <span class="token punctuation">-</span><span class="token punctuation">-</span>appendonly yes
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> 6380<span class="token punctuation">:</span><span class="token number">6379</span>
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> ./slave1<span class="token punctuation">-</span>data<span class="token punctuation">:</span>/data
+    
+  <span class="token key atrule">slave2</span><span class="token punctuation">:</span>
+    <span class="token key atrule">environment</span><span class="token punctuation">:</span> 
+      <span class="token punctuation">-</span> TZ=Asia/Shanghai
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> redis
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> redis<span class="token punctuation">-</span>slave2
+    <span class="token key atrule">command</span><span class="token punctuation">:</span> redis<span class="token punctuation">-</span>server <span class="token punctuation">-</span><span class="token punctuation">-</span>slaveof redis<span class="token punctuation">-</span>master 6379 <span class="token punctuation">-</span><span class="token punctuation">-</span>requirepass 123456 <span class="token punctuation">-</span><span class="token punctuation">-</span>replica<span class="token punctuation">-</span>announce<span class="token punctuation">-</span>ip 192.168.0.111 <span class="token punctuation">-</span><span class="token punctuation">-</span>replica<span class="token punctuation">-</span>announce<span class="token punctuation">-</span>port 6381 <span class="token punctuation">-</span><span class="token punctuation">-</span>masterauth 123456 <span class="token punctuation">-</span><span class="token punctuation">-</span>appendonly yes
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> 6381<span class="token punctuation">:</span><span class="token number">6379</span>
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> ./slave2<span class="token punctuation">-</span>data<span class="token punctuation">:</span>/data
+
+wenwl@ubuntu<span class="token punctuation">-</span>saas<span class="token punctuation">:</span>/usr/local/docker/redis<span class="token punctuation">-</span>sentinel/redis$ cat docker<span class="token punctuation">-</span>compose.yml 
+<span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">'3.1'</span>
+<span class="token key atrule">services</span><span class="token punctuation">:</span>
+  <span class="token key atrule">master</span><span class="token punctuation">:</span>
+    <span class="token key atrule">environment</span><span class="token punctuation">:</span> 
+      <span class="token punctuation">-</span> TZ=Asia/Shanghai
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> redis
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> redis<span class="token punctuation">-</span>master
+    <span class="token key atrule">command</span><span class="token punctuation">:</span> redis<span class="token punctuation">-</span>server <span class="token punctuation">-</span><span class="token punctuation">-</span>replica<span class="token punctuation">-</span>announce<span class="token punctuation">-</span>ip 192.168.0.111 <span class="token punctuation">-</span><span class="token punctuation">-</span>replica<span class="token punctuation">-</span>announce<span class="token punctuation">-</span>port 6379 <span class="token punctuation">-</span><span class="token punctuation">-</span>requirepass 123456 <span class="token punctuation">-</span><span class="token punctuation">-</span>masterauth 123456 <span class="token punctuation">-</span><span class="token punctuation">-</span>appendonly yes
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> 6379<span class="token punctuation">:</span><span class="token number">6379</span>
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> ./master<span class="token punctuation">-</span>data<span class="token punctuation">:</span>/data  
+
+  <span class="token key atrule">slave1</span><span class="token punctuation">:</span>
+    <span class="token key atrule">environment</span><span class="token punctuation">:</span> 
+      <span class="token punctuation">-</span> TZ=Asia/Shanghai
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> redis
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> redis<span class="token punctuation">-</span>slave1
+    <span class="token key atrule">command</span><span class="token punctuation">:</span> redis<span class="token punctuation">-</span>server <span class="token punctuation">-</span><span class="token punctuation">-</span>slaveof redis<span class="token punctuation">-</span>master 6379 <span class="token punctuation">-</span><span class="token punctuation">-</span>requirepass 123456 <span class="token punctuation">-</span><span class="token punctuation">-</span>replica<span class="token punctuation">-</span>announce<span class="token punctuation">-</span>ip 192.168.0.111 <span class="token punctuation">-</span><span class="token punctuation">-</span>replica<span class="token punctuation">-</span>announce<span class="token punctuation">-</span>port 6380 <span class="token punctuation">-</span><span class="token punctuation">-</span>masterauth 123456 <span class="token punctuation">-</span><span class="token punctuation">-</span>appendonly yes
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> 6380<span class="token punctuation">:</span><span class="token number">6379</span>
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> ./slave1<span class="token punctuation">-</span>data<span class="token punctuation">:</span>/data
+    
+  <span class="token key atrule">slave2</span><span class="token punctuation">:</span>
+    <span class="token key atrule">environment</span><span class="token punctuation">:</span> 
+      <span class="token punctuation">-</span> TZ=Asia/Shanghai
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> redis
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> redis<span class="token punctuation">-</span>slave2
+    <span class="token key atrule">command</span><span class="token punctuation">:</span> redis<span class="token punctuation">-</span>server <span class="token punctuation">-</span><span class="token punctuation">-</span>slaveof redis<span class="token punctuation">-</span>master 6379 <span class="token punctuation">-</span><span class="token punctuation">-</span>requirepass 123456 <span class="token punctuation">-</span><span class="token punctuation">-</span>replica<span class="token punctuation">-</span>announce<span class="token punctuation">-</span>ip 192.168.0.111 <span class="token punctuation">-</span><span class="token punctuation">-</span>replica<span class="token punctuation">-</span>announce<span class="token punctuation">-</span>port 6381 <span class="token punctuation">-</span><span class="token punctuation">-</span>masterauth 123456 <span class="token punctuation">-</span><span class="token punctuation">-</span>appendonly yes
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> 6381<span class="token punctuation">:</span><span class="token number">6379</span>
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> ./slave2<span class="token punctuation">-</span>data<span class="token punctuation">:</span>/data
+
+wenwl@ubuntu<span class="token punctuation">-</span>saas<span class="token punctuation">:</span>/usr/local/docker/redis<span class="token punctuation">-</span>sentinel/redis$ sudo vi docker<span class="token punctuation">-</span>compose.yml 
+wenwl@ubuntu<span class="token punctuation">-</span>saas<span class="token punctuation">:</span>/usr/local/docker/redis<span class="token punctuation">-</span>sentinel/redis$ cat docker<span class="token punctuation">-</span>compose.yml 
+<span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">'3.1'</span>
+<span class="token key atrule">services</span><span class="token punctuation">:</span>
+  <span class="token key atrule">master</span><span class="token punctuation">:</span>
+    <span class="token key atrule">environment</span><span class="token punctuation">:</span> 
+      <span class="token punctuation">-</span> TZ=Asia/Shanghai
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> redis
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> redis<span class="token punctuation">-</span>master
+    <span class="token key atrule">command</span><span class="token punctuation">:</span> redis<span class="token punctuation">-</span>server <span class="token punctuation">-</span><span class="token punctuation">-</span>replica<span class="token punctuation">-</span>announce<span class="token punctuation">-</span>ip 192.168.0.111 <span class="token punctuation">-</span><span class="token punctuation">-</span>replica<span class="token punctuation">-</span>announce<span class="token punctuation">-</span>port 6379 <span class="token punctuation">-</span><span class="token punctuation">-</span>requirepass 123456 <span class="token punctuation">-</span><span class="token punctuation">-</span>masterauth 123456 <span class="token punctuation">-</span><span class="token punctuation">-</span>appendonly yes
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> 6379<span class="token punctuation">:</span><span class="token number">6379</span>
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> ./master<span class="token punctuation">-</span>data<span class="token punctuation">:</span>/data  
+
+  <span class="token key atrule">slave1</span><span class="token punctuation">:</span>
+    <span class="token key atrule">environment</span><span class="token punctuation">:</span> 
+      <span class="token punctuation">-</span> TZ=Asia/Shanghai
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> redis
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> redis<span class="token punctuation">-</span>slave1
+    <span class="token key atrule">command</span><span class="token punctuation">:</span> redis<span class="token punctuation">-</span>server <span class="token punctuation">-</span><span class="token punctuation">-</span>slaveof redis<span class="token punctuation">-</span>master 6379 <span class="token punctuation">-</span><span class="token punctuation">-</span>requirepass 123456 <span class="token punctuation">-</span><span class="token punctuation">-</span>replica<span class="token punctuation">-</span>announce<span class="token punctuation">-</span>ip 192.168.0.111 <span class="token punctuation">-</span><span class="token punctuation">-</span>replica<span class="token punctuation">-</span>announce<span class="token punctuation">-</span>port 6380 <span class="token punctuation">-</span><span class="token punctuation">-</span>masterauth 123456 <span class="token punctuation">-</span><span class="token punctuation">-</span>appendonly yes
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> 6380<span class="token punctuation">:</span><span class="token number">6379</span>
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> ./slave1<span class="token punctuation">-</span>data<span class="token punctuation">:</span>/data
+    
+  <span class="token key atrule">slave2</span><span class="token punctuation">:</span>
+    <span class="token key atrule">environment</span><span class="token punctuation">:</span> 
+      <span class="token punctuation">-</span> TZ=Asia/Shanghai
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> redis
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> redis<span class="token punctuation">-</span>slave2
+    <span class="token key atrule">command</span><span class="token punctuation">:</span> redis<span class="token punctuation">-</span>server <span class="token punctuation">-</span><span class="token punctuation">-</span>slaveof redis<span class="token punctuation">-</span>master 6379 <span class="token punctuation">-</span><span class="token punctuation">-</span>requirepass 123456 <span class="token punctuation">-</span><span class="token punctuation">-</span>replica<span class="token punctuation">-</span>announce<span class="token punctuation">-</span>ip 192.168.0.111 <span class="token punctuation">-</span><span class="token punctuation">-</span>replica<span class="token punctuation">-</span>announce<span class="token punctuation">-</span>port 6381 <span class="token punctuation">-</span><span class="token punctuation">-</span>masterauth 123456 <span class="token punctuation">-</span><span class="token punctuation">-</span>appendonly yes
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> 6381<span class="token punctuation">:</span><span class="token number">6379</span>
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> ./slave2<span class="token punctuation">-</span>data<span class="token punctuation">:</span>/data
+</code></pre></div><p>注意：</p> <ul><li><code>--requirepass</code>:  redis密码。如果主从服务器设置密码，需主从服务器密码保持一致，否则哨兵机制会失败！</li> <li><code>masterauth</code>：主服务的授权密码。注意，由于哨兵模式能够完成主从切换，现有的 Master 可能会变成 Slave，故在当前 Master 容器中也要携带<code>masterauth</code>参数。</li> <li><code>replica-announce-ip</code>：该指令用于指定当在端口转发或NAT网络环境中，当redis有多个ip地址，可以使用该选项指定redis的ip地址。上面的<code>192.168.0.111</code>为本人虚拟机的地址，请根据实际情况填写自己机器的IP。如果单纯使用容器内的IP，会导致一些不必要的麻烦：例如处理<code>sentinel</code>容器的访问、<code>sentinel</code>故障转移失败等等。</li> <li><code>replica-announce-port</code>：该指令用于指定当在端口转发或NAT网络环境中，指定redis的端口。这里应该是映射到宿主机的端口，而不是容器默认端口。</li></ul> <p>可执行以下命令，查看主从是否生效：</p> <div class="language-shell extra-class"><pre class="language-shell"><code>$ <span class="token function">docker</span> <span class="token builtin class-name">exec</span> redis-master redis-cli -a <span class="token number">123456</span> info replication
+Warning: Using a password with <span class="token string">'-a'</span> or <span class="token string">'-u'</span> option on the <span class="token builtin class-name">command</span> line interface may not be safe.
+<span class="token comment"># Replication</span>
+role:master
+connected_slaves:2
+slave0:ip<span class="token operator">=</span><span class="token number">192.168</span>.0.111,port<span class="token operator">=</span><span class="token number">6380</span>,state<span class="token operator">=</span>online,offset<span class="token operator">=</span><span class="token number">1055</span>,lag<span class="token operator">=</span><span class="token number">0</span>
+slave1:ip<span class="token operator">=</span><span class="token number">192.168</span>.0.111,port<span class="token operator">=</span><span class="token number">6381</span>,state<span class="token operator">=</span>online,offset<span class="token operator">=</span><span class="token number">1055</span>,lag<span class="token operator">=</span><span class="token number">0</span>
+master_failover_state:no-failover
+master_replid:81fc0e8be130cbd11fb9236fe86c0dc43f326f8d
+master_replid2:0000000000000000000000000000000000000000
+master_repl_offset:1055
+second_repl_offset:-1
+repl_backlog_active:1
+repl_backlog_size:1048576
+repl_backlog_first_byte_offset:1
+repl_backlog_histlen:1055
+</code></pre></div><h2 id="搭建-sentinel-集群"><a href="#搭建-sentinel-集群" class="header-anchor">#</a> 搭建 Sentinel 集群</h2> <p>创建三个 Sentinel 服务，<code>docker-compose.yml</code> 配置如下：</p> <div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">'3.1'</span>
+<span class="token key atrule">services</span><span class="token punctuation">:</span>
+  <span class="token key atrule">sentinel1</span><span class="token punctuation">:</span>
+    <span class="token key atrule">environment</span><span class="token punctuation">:</span> 
+      <span class="token punctuation">-</span> TZ=Asia/Shanghai
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> redis
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> redis<span class="token punctuation">-</span>sentinel1
+    <span class="token key atrule">command</span><span class="token punctuation">:</span> redis<span class="token punctuation">-</span>sentinel /usr/local/etc/redis/conf/sentinel.conf
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> 26379<span class="token punctuation">:</span><span class="token number">26379</span>
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> ./s1<span class="token punctuation">:</span>/usr/local/etc/redis/conf
+
+  <span class="token key atrule">sentinel2</span><span class="token punctuation">:</span>
+    <span class="token key atrule">environment</span><span class="token punctuation">:</span> 
+      <span class="token punctuation">-</span> TZ=Asia/Shanghai
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> redis
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> redis<span class="token punctuation">-</span>sentinel2
+    <span class="token key atrule">command</span><span class="token punctuation">:</span> redis<span class="token punctuation">-</span>sentinel /usr/local/etc/redis/conf/sentinel.conf
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> 26380<span class="token punctuation">:</span><span class="token number">26379</span>
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> ./s2<span class="token punctuation">:</span>/usr/local/etc/redis/conf
+
+  <span class="token key atrule">sentinel3</span><span class="token punctuation">:</span>
+    <span class="token key atrule">environment</span><span class="token punctuation">:</span> 
+      <span class="token punctuation">-</span> TZ=Asia/Shanghai
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> redis
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> redis<span class="token punctuation">-</span>sentinel3
+    <span class="token key atrule">command</span><span class="token punctuation">:</span> redis<span class="token punctuation">-</span>sentinel /usr/local/etc/redis/conf/sentinel.conf
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> 26381<span class="token punctuation">:</span><span class="token number">26379</span>
+    volumes
+      <span class="token punctuation">-</span> ./s3<span class="token punctuation">:</span>/usr/local/etc/redis/conf
+</code></pre></div><p>注意：</p> <ul><li><p>如果直接使用文件映射指定<code>sentinel.conf</code>到容器内，这么做有可能导致哨兵没有写入配置文件的权限，logs表现为<code>WARNING: Sentinel was not able to save the new configuration on disk!!!: Device or resource busy</code>。解决方案：使用文件夹映射。</p></li> <li><p>提示，<code>Sentinel</code>容器如果想要能访问到自分配IP的Redis主从模式的容器，可以使用该命令可查看Redis主的IP，后面Sentinel配置可以用到，这里我们固定了IP（192.168.0.111），所以直接配置即可。</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token function">docker</span> inspect redis-master <span class="token operator">|</span><span class="token function">grep</span> Networks -A <span class="token number">15</span>
+</code></pre></div></li></ul> <h2 id="sentinel-配置文件"><a href="#sentinel-配置文件" class="header-anchor">#</a> Sentinel 配置文件</h2> <p>在启动容器前需要编写一份通用的 <code>sentinel.conf</code> 配置文件，然后分别创建目录 <code>s1</code>，<code>s2</code>，<code>s3</code>，并且分别复制一份到这三个目录下：</p> <div class="language-shell extra-class"><pre class="language-shell"><code>port <span class="token number">26379</span>
+<span class="token comment">#sentinel announce-ip 192.168.0.111（可选）</span>
+<span class="token comment">#sentinel announce-port 26379 （可选）如果加此配置，需要将起改为对容器映射到宿主机的端口</span>
+<span class="token function">dir</span> /tmp
+<span class="token comment"># 自定义集群名为mymaster，其中 192.168.0.111 为 redis-master 的 ip，6379 为 redis-master 的端口，2 为最小投票数（因为官方建议取值为哨兵数量的一半加1，我们有 3 台 Sentinel，所以可以设置成 2）</span>
+sentinel monitor mymaster <span class="token number">192.168</span>.0.111 <span class="token number">6379</span> <span class="token number">2</span>
+sentinel auth-pass mymaster <span class="token number">123456</span>
+<span class="token comment">#requirepass 123456 redis5.x之后才支持Sentinel配置密码，可以不设置，否则在使用lettuce会遇到Error： NOAUTH Authentication required，个人水平有限，发现处理起来比较麻烦。</span>
+sentinel down-after-milliseconds mymaster <span class="token number">30000</span>
+sentinel parallel-syncs mymaster <span class="token number">1</span>
+sentinel failover-timeout mymaster <span class="token number">180000</span>
+sentinel deny-scripts-reconfig <span class="token function">yes</span>
+</code></pre></div><p>更详细的配置说明，见下文的附录。创建完成后就可以启动容器了。</p> <h2 id="查看sentinel集群是否生效"><a href="#查看sentinel集群是否生效" class="header-anchor">#</a> 查看Sentinel集群是否生效</h2> <p>进入 Sentinel 容器，使用 Sentinel API 查看监控情况：</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token function">docker</span> <span class="token builtin class-name">exec</span> -it redis-sentinel1 /bin/bash
+redis-cli -p <span class="token number">26379</span>
+sentinel master mymaster <span class="token comment"># 查看redis主信息</span>
+sentinel slaves mymaster <span class="token comment"># 查看从redis信息</span>
+</code></pre></div><p>执行上述指令，当看到以下的信息，即集群已经生效：</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+<span class="token number">31</span><span class="token punctuation">)</span> <span class="token string">&quot;num-slaves&quot;</span>
+<span class="token number">32</span><span class="token punctuation">)</span> <span class="token string">&quot;2&quot;</span>
+<span class="token number">33</span><span class="token punctuation">)</span> <span class="token string">&quot;num-other-sentinels&quot;</span>
+<span class="token number">34</span><span class="token punctuation">)</span> <span class="token string">&quot;2&quot;</span>
+<span class="token number">35</span><span class="token punctuation">)</span> <span class="token string">&quot;quorum&quot;</span>
+<span class="token number">36</span><span class="token punctuation">)</span> <span class="token string">&quot;2&quot;</span>
+<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>.
+</code></pre></div><p>注意尝试证明使用哨兵模式能够完成故障转移，网上很多教程是有问题的（主要是无法访问到Redis主从模式的容器），即建议尝试手动停掉Redis主服务，通过查看<code>redis-sentinel</code>日志，看其将哪个redis选为主，然后这个升为主的redis此时是具备写的能力的。</p> <div class="language-shell extra-class"><pre class="language-shell"><code>$ <span class="token function">docker</span> logs -f redis-sentinel1
+<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+<span class="token number">1</span>:X <span class="token number">11</span> Dec <span class="token number">2021</span> <span class="token number">19</span>:29:22.329 <span class="token comment"># +monitor master mymaster 192.168.0.111 6379 quorum 2</span>
+<span class="token number">1</span>:X <span class="token number">11</span> Dec <span class="token number">2021</span> <span class="token number">19</span>:29:22.331 * +slave slave <span class="token number">192.168</span>.0.111:6380 <span class="token number">192.168</span>.0.111 <span class="token number">6380</span> @ mymaster <span class="token number">192.168</span>.0.111 <span class="token number">6379</span>
+<span class="token number">1</span>:X <span class="token number">11</span> Dec <span class="token number">2021</span> <span class="token number">19</span>:29:22.333 * +slave slave <span class="token number">192.168</span>.0.111:6381 <span class="token number">192.168</span>.0.111 <span class="token number">6381</span> @ mymaster <span class="token number">192.168</span>.0.111 <span class="token number">6379</span>
+<span class="token number">1</span>:X <span class="token number">11</span> Dec <span class="token number">2021</span> <span class="token number">19</span>:29:24.211 * +sentinel sentinel bf68f0c1d648053a5db608ae56b2d6adb879fbc4 <span class="token number">172.21</span>.0.2 <span class="token number">26379</span> @ mymaster <span class="token number">192.168</span>.0.111 <span class="token number">6379</span>
+<span class="token number">1</span>:X <span class="token number">11</span> Dec <span class="token number">2021</span> <span class="token number">19</span>:29:24.277 * +sentinel sentinel 4dc7e383eb36346c880bc42536b2ebfd19b7caaf <span class="token number">172.21</span>.0.3 <span class="token number">26379</span> @ mymaster <span class="token number">192.168</span>.0.111 <span class="token number">6379</span>
+<span class="token comment"># ===此处我down掉了redis-master，sentinel将redis-slave1作为了主</span>
+<span class="token number">1</span>:X <span class="token number">11</span> Dec <span class="token number">2021</span> <span class="token number">19</span>:33:07.835 <span class="token comment"># -odown master mymaster 192.168.0.111 6379</span>
+<span class="token number">1</span>:X <span class="token number">11</span> Dec <span class="token number">2021</span> <span class="token number">19</span>:33:07.836 * +slave-reconf-inprog slave <span class="token number">192.168</span>.0.111:6381 <span class="token number">192.168</span>.0.111 <span class="token number">6381</span> @ mymaster <span class="token number">192.168</span>.0.111 <span class="token number">6379</span>
+<span class="token number">1</span>:X <span class="token number">11</span> Dec <span class="token number">2021</span> <span class="token number">19</span>:33:07.836 * +slave-reconf-done slave <span class="token number">192.168</span>.0.111:6381 <span class="token number">192.168</span>.0.111 <span class="token number">6381</span> @ mymaster <span class="token number">192.168</span>.0.111 <span class="token number">6379</span>
+<span class="token number">1</span>:X <span class="token number">11</span> Dec <span class="token number">2021</span> <span class="token number">19</span>:33:07.912 <span class="token comment"># +failover-end master mymaster 192.168.0.111 6379</span>
+<span class="token number">1</span>:X <span class="token number">11</span> Dec <span class="token number">2021</span> <span class="token number">19</span>:33:07.912 <span class="token comment"># +switch-master mymaster 192.168.0.111 6379 192.168.0.111 6380</span>
+<span class="token number">1</span>:X <span class="token number">11</span> Dec <span class="token number">2021</span> <span class="token number">19</span>:33:07.913 * +slave slave <span class="token number">192.168</span>.0.111:6381 <span class="token number">192.168</span>.0.111 <span class="token number">6381</span> @ mymaster <span class="token number">192.168</span>.0.111 <span class="token number">6380</span>
+<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+</code></pre></div><h2 id="spring-boot-2-x-配置"><a href="#spring-boot-2-x-配置" class="header-anchor">#</a> Spring Boot 2.x 配置</h2> <h3 id="yml-参考"><a href="#yml-参考" class="header-anchor">#</a> yml 参考</h3> <div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">spring</span><span class="token punctuation">:</span>  
+  <span class="token key atrule">redis</span><span class="token punctuation">:</span>
+    <span class="token key atrule">password</span><span class="token punctuation">:</span> <span class="token number">123456</span>
+    <span class="token key atrule">lettuce</span><span class="token punctuation">:</span>
+      <span class="token key atrule">pool</span><span class="token punctuation">:</span>
+        <span class="token key atrule">max-active</span><span class="token punctuation">:</span> <span class="token number">10</span> <span class="token comment"># 连接池最大连接数（使用负值表示没有限制）</span>
+        <span class="token key atrule">max-idle</span><span class="token punctuation">:</span> <span class="token number">8</span> <span class="token comment"># 连接池中的最大空闲连接</span>
+        <span class="token key atrule">min-idle</span><span class="token punctuation">:</span> <span class="token number">2</span> <span class="token comment"># 连接池中的最小空闲连接</span>
+        <span class="token key atrule">max-wait</span><span class="token punctuation">:</span> <span class="token punctuation">-</span>1ms
+    <span class="token key atrule">sentinel</span><span class="token punctuation">:</span>
+      <span class="token key atrule">master</span><span class="token punctuation">:</span> mymaster
+      <span class="token key atrule">nodes</span><span class="token punctuation">:</span> 192.168.0.111<span class="token punctuation">:</span><span class="token number">26379</span><span class="token punctuation">,</span>192.168.0.111<span class="token punctuation">:</span><span class="token number">26380</span><span class="token punctuation">,</span>192.168.0.111<span class="token punctuation">:</span><span class="token number">26381</span>
+</code></pre></div><h2 id="附-redis-sentinel-核心配置说明"><a href="#附-redis-sentinel-核心配置说明" class="header-anchor">#</a> 附：Redis Sentinel 核心配置说明</h2> <p>以下为官方Redis Sentinel的<a href="https://github.com/redis/redis/blob/6.0/sentinel.conf" target="_blank" rel="noopener noreferrer">配置模版文件-sentinel.conf<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>，更多的说明可以参考<a href="https://github.com/redis/redis-doc/blob/master/topics/sentinel.md" target="_blank" rel="noopener noreferrer">官方文档<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>：</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token comment"># Example sentinel.conf</span>
+
+<span class="token comment"># *** IMPORTANT ***</span>
+<span class="token comment">#</span>
+<span class="token comment"># By default Sentinel will not be reachable from interfaces different than</span>
+<span class="token comment"># localhost, either use the 'bind' directive to bind to a list of network</span>
+<span class="token comment"># interfaces, or disable protected mode with &quot;protected-mode no&quot; by</span>
+<span class="token comment"># adding it to this configuration file.</span>
+<span class="token comment">#</span>
+<span class="token comment"># Before doing that MAKE SURE the instance is protected from the outside</span>
+<span class="token comment"># world via firewalling or other means.</span>
+<span class="token comment">#</span>
+<span class="token comment"># For example you may use one of the following:</span>
+<span class="token comment"># 指定可以连接的ip</span>
+<span class="token comment"># bind 127.0.0.1 192.168.1.1</span>
+
+<span class="token comment"># 是否开启保护模式</span>
+<span class="token comment"># protected-mode no</span>
+
+<span class="token comment"># port &lt;sentinel-port&gt;</span>
+<span class="token comment"># The port that this sentinel instance will run on</span>
+<span class="token comment"># 哨兵sentinel实例运行的端口 默认26379  </span>
+port <span class="token number">26379</span>
+
+<span class="token comment"># By default Redis Sentinel does not run as a daemon. Use 'yes' if you need it.</span>
+<span class="token comment"># Note that Redis will write a pid file in /var/run/redis-sentinel.pid when</span>
+<span class="token comment"># daemonized.</span>
+<span class="token comment"># 是否已守护进程模式运行</span>
+daemonize no
+
+<span class="token comment"># When running daemonized, Redis Sentinel writes a pid file in</span>
+<span class="token comment"># /var/run/redis-sentinel.pid by default. You can specify a custom pid file</span>
+<span class="token comment"># location here.</span>
+pidfile /var/run/redis-sentinel.pid
+
+<span class="token comment"># Specify the log file name. Also the empty string can be used to force</span>
+<span class="token comment"># Sentinel to log on the standard output. Note that if you use standard</span>
+<span class="token comment"># output for logging but daemonize, logs will be sent to /dev/null</span>
+<span class="token comment"># 指定日志文件</span>
+logfile <span class="token string">&quot;&quot;</span>
+
+<span class="token comment"># sentinel announce-ip &lt;ip&gt;</span>
+<span class="token comment"># sentinel announce-port &lt;port&gt;</span>
+<span class="token comment">#</span>
+<span class="token comment"># The above two configuration directives are useful in environments where,</span>
+<span class="token comment"># because of NAT, Sentinel is reachable from outside via a non-local address.</span>
+<span class="token comment">#</span>
+<span class="token comment"># When announce-ip is provided, the Sentinel will claim the specified IP address</span>
+<span class="token comment"># in HELLO messages used to gossip its presence, instead of auto-detecting the</span>
+<span class="token comment"># local address as it usually does.</span>
+<span class="token comment">#</span>
+<span class="token comment"># Similarly when announce-port is provided and is valid and non-zero, Sentinel</span>
+<span class="token comment"># will announce the specified TCP port.</span>
+<span class="token comment">#</span>
+<span class="token comment"># The two options don't need to be used together, if only announce-ip is</span>
+<span class="token comment"># provided, the Sentinel will announce the specified IP and the server port</span>
+<span class="token comment"># as specified by the &quot;port&quot; option. If only announce-port is provided, the</span>
+<span class="token comment"># Sentinel will announce the auto-detected local IP and the specified port.</span>
+<span class="token comment">#</span>
+<span class="token comment"># Example:</span>
+<span class="token comment">#</span>
+<span class="token comment"># sentinel announce-ip 1.2.3.4</span>
+
+<span class="token comment"># dir &lt;working-directory&gt;</span>
+<span class="token comment"># Every long running process should have a well-defined working directory.</span>
+<span class="token comment"># For Redis Sentinel to chdir to /tmp at startup is the simplest thing</span>
+<span class="token comment"># for the process to don't interfere with administrative tasks such as</span>
+<span class="token comment"># unmounting filesystems.</span>
+<span class="token comment"># 哨兵sentinel的工作目录  </span>
+<span class="token function">dir</span> /tmp
+
+<span class="token comment"># sentinel monitor &lt;master-name&gt; &lt;ip&gt; &lt;redis-port&gt; &lt;quorum&gt;</span>
+<span class="token comment">#</span>
+<span class="token comment"># Tells Sentinel to monitor this master, and to consider it in O_DOWN</span>
+<span class="token comment"># (Objectively Down) state only if at least &lt;quorum&gt; sentinels agree.</span>
+<span class="token comment">#</span>
+<span class="token comment"># Note that whatever is the ODOWN quorum, a Sentinel will require to</span>
+<span class="token comment"># be elected by the majority of the known Sentinels in order to</span>
+<span class="token comment"># start a failover, so no failover can be performed in minority.</span>
+<span class="token comment">#</span>
+<span class="token comment"># Replicas are auto-discovered, so you don't need to specify replicas in</span>
+<span class="token comment"># any way. Sentinel itself will rewrite this configuration file adding</span>
+<span class="token comment"># the replicas using additional configuration options.</span>
+<span class="token comment"># Also note that the configuration file is rewritten when a</span>
+<span class="token comment"># replica is promoted to master.</span>
+<span class="token comment">#</span>
+<span class="token comment"># Note: master name should not include special characters or spaces.</span>
+<span class="token comment"># The valid charset is A-z 0-9 and the three characters &quot;.-_&quot;.</span>
+<span class="token comment">#  </span>
+<span class="token comment"># sentinel monitor是哨兵最核心的配置，其中：</span>
+<span class="token comment"># masterName指定了主节点名称，</span>
+<span class="token comment"># masterIp和masterPort指定了主节点地址，</span>
+<span class="token comment"># quorum是判断主节点客观下线的哨兵数量阈值：当判定主节点下线的哨兵数量达到quorum时，对主节点进行客观下线。</span>
+<span class="token comment"># 建议取值为哨兵数量的一半加1。</span>
+sentinel monitor mymaster <span class="token number">127.0</span>.0.1 <span class="token number">6379</span> <span class="token number">2</span>
+
+<span class="token comment"># sentinel auth-pass &lt;master-name&gt; &lt;password&gt;</span>
+<span class="token comment">#</span>
+<span class="token comment"># Set the password to use to authenticate with the master and replicas.</span>
+<span class="token comment"># Useful if there is a password set in the Redis instances to monitor.</span>
+<span class="token comment">#</span>
+<span class="token comment"># Note that the master password is also used for replicas, so it is not</span>
+<span class="token comment"># possible to set a different password in masters and replicas instances</span>
+<span class="token comment"># if you want to be able to monitor these instances with Sentinel.</span>
+<span class="token comment">#</span>
+<span class="token comment"># However you can have Redis instances without the authentication enabled</span>
+<span class="token comment"># mixed with Redis instances requiring the authentication (as long as the</span>
+<span class="token comment"># password set is the same for all the instances requiring the password) as</span>
+<span class="token comment"># the AUTH command will have no effect in Redis instances with authentication</span>
+<span class="token comment"># switched off.</span>
+<span class="token comment"># </span>
+<span class="token comment"># 当在Redis实例中开启了requirepass foobared 授权密码 这样所有连接Redis实例的客户端都要提供密码  </span>
+<span class="token comment"># 设置哨兵sentinel 连接主从的密码 注意必须为主从设置一样的验证密码 </span>
+<span class="token comment"># Example:</span>
+<span class="token comment">#</span>
+<span class="token comment"># sentinel auth-pass mymaster MySUPER--secret-0123passw0rd</span>
+
+<span class="token comment"># sentinel auth-user &lt;master-name&gt; &lt;username&gt;</span>
+<span class="token comment">#</span>
+<span class="token comment"># This is useful in order to authenticate to instances having ACL capabilities,</span>
+<span class="token comment"># that is, running Redis 6.0 or greater. When just auth-pass is provided the</span>
+<span class="token comment"># Sentinel instance will authenticate to Redis using the old &quot;AUTH &lt;pass&gt;&quot;</span>
+<span class="token comment"># method. When also an username is provided, it will use &quot;AUTH &lt;user&gt; &lt;pass&gt;&quot;.</span>
+<span class="token comment"># In the Redis servers side, the ACL to provide just minimal access to</span>
+<span class="token comment"># Sentinel instances, should be configured along the following lines:</span>
+<span class="token comment">#</span>
+<span class="token comment">#     user sentinel-user &gt;somepassword +client +subscribe +publish \</span>
+<span class="token comment">#                        +ping +info +multi +slaveof +config +client +exec on</span>
+
+<span class="token comment"># sentinel down-after-milliseconds &lt;master-name&gt; &lt;milliseconds&gt;</span>
+<span class="token comment">#</span>
+<span class="token comment"># Number of milliseconds the master (or any attached replica or sentinel) should</span>
+<span class="token comment"># be unreachable (as in, not acceptable reply to PING, continuously, for the</span>
+<span class="token comment"># specified period) in order to consider it in S_DOWN state (Subjectively</span>
+<span class="token comment"># Down).</span>
+<span class="token comment">#</span>
+<span class="token comment"># Default is 30 seconds.</span>
+<span class="token comment">#</span>
+<span class="token comment"># 主观下线的判断配置：哨兵使用ping命令对其他节点进行心跳检测，如果其他节点超过down-after-milliseconds配置的时间没有回复，哨兵就会将其进行主观下线。该配置对主节点、从节点和哨兵节点的主观下线判定都有效。</span>
+<span class="token comment"># down-after-milliseconds的默认值是30000，即30s；</span>
+<span class="token comment"># 可以根据不同的网络环境和应用要求来调整：值越大，对主观下线的判定会越宽松，好处是误判的可能性小，坏处是故障发现和故障转移的时间变长，客户端等待的时间也会变长。</span>
+<span class="token comment"># 例如，如果应用对可用性要求较高，则可以将值适当调小，当故障发生时尽快完成转移；如果网络环境相对较差，可以适当提高该阈值，避免频繁误判</span>
+sentinel down-after-milliseconds mymaster <span class="token number">30000</span>
+
+<span class="token comment"># requirepass &lt;password&gt;</span>
+<span class="token comment">#</span>
+<span class="token comment"># You can configure Sentinel itself to require a password, however when doing</span>
+<span class="token comment"># so Sentinel will try to authenticate with the same password to all the</span>
+<span class="token comment"># other Sentinels. So you need to configure all your Sentinels in a given</span>
+<span class="token comment"># group with the same &quot;requirepass&quot; password. Check the following documentation</span>
+<span class="token comment"># for more info: https://redis.io/topics/sentinel</span>
+
+<span class="token comment"># sentinel parallel-syncs &lt;master-name&gt; &lt;numreplicas&gt;</span>
+<span class="token comment">#</span>
+<span class="token comment"># How many replicas we can reconfigure to point to the new replica simultaneously</span>
+<span class="token comment"># during the failover. Use a low number if you use the replicas to serve query</span>
+<span class="token comment"># to avoid that all the replicas will be unreachable at about the same</span>
+<span class="token comment"># time while performing the synchronization with the master.</span>
+<span class="token comment"># </span>
+<span class="token comment"># 故障转移之后从节点的复制有关配置：它规定了每次向新的主节点发起复制操作的从节点个数。</span>
+<span class="token comment"># 例如，假设主节点切换完成之后，有3个从节点要向新的主节点发起复制；</span>
+<span class="token comment">#  如果parallel-syncs=1，则从节点会一个一个开始复制；</span>
+<span class="token comment">#  如果parallel-syncs=3，则3个从节点会一起开始复制。</span>
+<span class="token comment"># parallel-syncs取值越大，从节点完成复制的时间越快，但是对主节点的网络负载、硬盘负载造成的压力也越大；应根据实际情况设置。</span>
+<span class="token comment"># 例如，如果主节点的负载较低，而从节点对服务可用的要求较高，可以适量增加parallel-syncs取值。parallel-syncs的默认值是1</span>
+sentinel parallel-syncs mymaster <span class="token number">1</span>
+
+<span class="token comment"># sentinel failover-timeout &lt;master-name&gt; &lt;milliseconds&gt;</span>
+<span class="token comment">#</span>
+<span class="token comment"># Specifies the failover timeout in milliseconds. It is used in many ways:</span>
+<span class="token comment">#</span>
+<span class="token comment"># - The time needed to re-start a failover after a previous failover was</span>
+<span class="token comment">#   already tried against the same master by a given Sentinel, is two</span>
+<span class="token comment">#   times the failover timeout.</span>
+<span class="token comment">#</span>
+<span class="token comment"># - The time needed for a replica replicating to a wrong master according</span>
+<span class="token comment">#   to a Sentinel current configuration, to be forced to replicate</span>
+<span class="token comment">#   with the right master, is exactly the failover timeout (counting since</span>
+<span class="token comment">#   the moment a Sentinel detected the misconfiguration).</span>
+<span class="token comment">#</span>
+<span class="token comment"># - The time needed to cancel a failover that is already in progress but</span>
+<span class="token comment">#   did not produced any configuration change (SLAVEOF NO ONE yet not</span>
+<span class="token comment">#   acknowledged by the promoted replica).</span>
+<span class="token comment">#</span>
+<span class="token comment"># - The maximum time a failover in progress waits for all the replicas to be</span>
+<span class="token comment">#   reconfigured as replicas of the new master. However even after this time</span>
+<span class="token comment">#   the replicas will be reconfigured by the Sentinels anyway, but not with</span>
+<span class="token comment">#   the exact parallel-syncs progression as specified.</span>
+<span class="token comment">#</span>
+<span class="token comment"># Default is 3 minutes.</span>
+<span class="token comment"># </span>
+<span class="token comment"># 故障转移超时的判断有关配置，但是该参数不是用来判断整个故障转移阶段的超时，而是其几个子阶段的超时。</span>
+<span class="token comment"># 例如如果主节点晋升从节点时间超过timeout，或从节点向新的主节点发起复制操作的时间（不包括复制数据的时间）超过timeout，都会导致故障转移超时失败。</span>
+<span class="token comment"># failover-timeout的默认值是180000，即180s；如果超时，则下一次该值会变为原来的2倍。</span>
+sentinel failover-timeout mymaster <span class="token number">180000</span>
+
+<span class="token comment"># SCRIPTS EXECUTION</span>
+<span class="token comment">#</span>
+<span class="token comment"># sentinel notification-script and sentinel reconfig-script are used in order</span>
+<span class="token comment"># to configure scripts that are called to notify the system administrator</span>
+<span class="token comment"># or to reconfigure clients after a failover. The scripts are executed</span>
+<span class="token comment"># with the following rules for error handling:</span>
+<span class="token comment">#</span>
+<span class="token comment"># If script exits with &quot;1&quot; the execution is retried later (up to a maximum</span>
+<span class="token comment"># number of times currently set to 10).</span>
+<span class="token comment">#</span>
+<span class="token comment"># If script exits with &quot;2&quot; (or an higher value) the script execution is</span>
+<span class="token comment"># not retried.</span>
+<span class="token comment">#</span>
+<span class="token comment"># If script terminates because it receives a signal the behavior is the same</span>
+<span class="token comment"># as exit code 1.</span>
+<span class="token comment">#</span>
+<span class="token comment"># A script has a maximum running time of 60 seconds. After this limit is</span>
+<span class="token comment"># reached the script is terminated with a SIGKILL and the execution retried.</span>
+
+<span class="token comment"># NOTIFICATION SCRIPT</span>
+<span class="token comment">#</span>
+<span class="token comment"># sentinel notification-script &lt;master-name&gt; &lt;script-path&gt;</span>
+<span class="token comment"># </span>
+<span class="token comment"># Call the specified notification script for any sentinel event that is</span>
+<span class="token comment"># generated in the WARNING level (for instance -sdown, -odown, and so forth).</span>
+<span class="token comment"># This script should notify the system administrator via email, SMS, or any</span>
+<span class="token comment"># other messaging system, that there is something wrong with the monitored</span>
+<span class="token comment"># Redis systems.</span>
+<span class="token comment">#</span>
+<span class="token comment"># The script is called with just two arguments: the first is the event type</span>
+<span class="token comment"># and the second the event description.</span>
+<span class="token comment">#</span>
+<span class="token comment"># The script must exist and be executable in order for sentinel to start if</span>
+<span class="token comment"># this option is provided.</span>
+<span class="token comment">#</span>
+<span class="token comment"># Example:</span>
+<span class="token comment">#</span>
+<span class="token comment"># sentinel notification-script mymaster /var/redis/notify.sh</span>
+<span class="token comment"># </span>
+<span class="token comment"># 通知型脚本:当sentinel有任何警告级别的事件发生时（比如说redis实例的主观失效和客观失效等等），将会去调用这个脚本。</span>
+<span class="token comment"># 这时这个脚本应该通过邮件，SMS等方式去通知系统管理员关于系统不正常运行的信息。调用该脚本时，将传给脚本两个参数：第一个是事件的类型，第二个是事件的描述。  </span>
+<span class="token comment"># 如果sentinel.conf配置文件中配置了这个脚本路径，那么必须保证这个脚本存在于这个路径，并且是可执行的，否则sentinel无法正常启动成功。</span>
+<span class="token comment"># </span>
+<span class="token comment"># 对于脚本的运行结果有以下规则：  </span>
+<span class="token comment">#   若脚本执行后返回1，那么该脚本稍后将会被再次执行，重复次数目前默认为10  </span>
+<span class="token comment">#   若脚本执行后返回2，或者比2更高的一个返回值，脚本将不会重复执行。  </span>
+<span class="token comment">#   如果脚本在执行过程中由于收到系统中断信号被终止了，则同返回值为1时的行为相同。  </span>
+<span class="token comment">#   一个脚本的最大执行时间为60s，如果超过这个时间，脚本将会被一个SIGKILL信号终止，之后重新执行。  </span>
+  
+<span class="token comment"># CLIENTS RECONFIGURATION SCRIPT</span>
+<span class="token comment"># sentinel client-reconfig-script &lt;master-name&gt; &lt;script-path&gt;</span>
+<span class="token comment">#</span>
+<span class="token comment"># When the master changed because of a failover a script can be called in</span>
+<span class="token comment"># order to perform application-specific tasks to notify the clients that the</span>
+<span class="token comment"># configuration has changed and the master is at a different address.</span>
+<span class="token comment"># </span>
+<span class="token comment"># The following arguments are passed to the script:</span>
+<span class="token comment">#</span>
+<span class="token comment"># &lt;master-name&gt; &lt;role&gt; &lt;state&gt; &lt;from-ip&gt; &lt;from-port&gt; &lt;to-ip&gt; &lt;to-port&gt;</span>
+<span class="token comment">#</span>
+<span class="token comment"># &lt;state&gt; is currently always &quot;failover&quot;</span>
+<span class="token comment"># &lt;role&gt; is either &quot;leader&quot; or &quot;observer&quot;</span>
+<span class="token comment"># </span>
+<span class="token comment"># The arguments from-ip, from-port, to-ip, to-port are used to communicate</span>
+<span class="token comment"># the old address of the master and the new address of the elected replica</span>
+<span class="token comment"># (now a master).</span>
+<span class="token comment">#</span>
+<span class="token comment"># This script should be resistant to multiple invocations.</span>
+<span class="token comment">#</span>
+<span class="token comment"># Example:</span>
+<span class="token comment">#</span>
+<span class="token comment"># sentinel client-reconfig-script mymaster /var/redis/reconfig.sh</span>
+
+<span class="token comment"># SECURITY</span>
+<span class="token comment">#</span>
+<span class="token comment"># By default SENTINEL SET will not be able to change the notification-script</span>
+<span class="token comment"># and client-reconfig-script at runtime. This avoids a trivial security issue</span>
+<span class="token comment"># where clients can set the script to anything and trigger a failover in order</span>
+<span class="token comment"># to get the program executed.</span>
+
+sentinel deny-scripts-reconfig <span class="token function">yes</span>
+
+<span class="token comment"># REDIS COMMANDS RENAMING</span>
+<span class="token comment">#</span>
+<span class="token comment"># Sometimes the Redis server has certain commands, that are needed for Sentinel</span>
+<span class="token comment"># to work correctly, renamed to unguessable strings. This is often the case</span>
+<span class="token comment"># of CONFIG and SLAVEOF in the context of providers that provide Redis as</span>
+<span class="token comment"># a service, and don't want the customers to reconfigure the instances outside</span>
+<span class="token comment"># of the administration console.</span>
+<span class="token comment">#</span>
+<span class="token comment"># In such case it is possible to tell Sentinel to use different command names</span>
+<span class="token comment"># instead of the normal ones. For example if the master &quot;mymaster&quot;, and the</span>
+<span class="token comment"># associated replicas, have &quot;CONFIG&quot; all renamed to &quot;GUESSME&quot;, I could use:</span>
+<span class="token comment">#</span>
+<span class="token comment"># SENTINEL rename-command mymaster CONFIG GUESSME</span>
+<span class="token comment">#</span>
+<span class="token comment"># After such configuration is set, every time Sentinel would use CONFIG it will</span>
+<span class="token comment"># use GUESSME instead. Note that there is no actual need to respect the command</span>
+<span class="token comment"># case, so writing &quot;config guessme&quot; is the same in the example above.</span>
+<span class="token comment">#</span>
+<span class="token comment"># SENTINEL SET can also be used in order to perform this configuration at runtime.</span>
+<span class="token comment">#</span>
+<span class="token comment"># In order to set a command back to its original name (undo the renaming), it</span>
+<span class="token comment"># is possible to just rename a command to itsef:</span>
+<span class="token comment">#</span>
+<span class="token comment"># SENTINEL rename-command mymaster CONFIG CONFIG</span>
+</code></pre></div><h2 id="参考"><a href="#参考" class="header-anchor">#</a> 参考</h2> <ul><li><a href="https://blog.csdn.net/gaobinzhan/article/details/106866813" target="_blank" rel="noopener noreferrer">docker-compose搭建redis-sentinel<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://www.cnblogs.com/JulianHuang/p/12650721.html" target="_blank" rel="noopener noreferrer">docker-compose搭建redis哨兵集群<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://www.cxyzjd.com/article/lushuaiyin/105516690" target="_blank" rel="noopener noreferrer">springboot使用Lettuce配置多数据源（单实例-集群-哨兵）<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">12/11/2021, 11:30:45 PM</span></div></footer> <div class="page-nav"><p class="inner"><!----> <span class="next"><a href="/redis/redis-command.html">
+        Redis 常用命令
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.bc037eca.js" defer></script><script src="/assets/js/3.a3373ef9.js" defer></script><script src="/assets/js/292.37a36b48.js" defer></script>
+  </body>
+</html>
